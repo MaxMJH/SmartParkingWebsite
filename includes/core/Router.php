@@ -1,17 +1,23 @@
 <?php
 class Router {
-	protected $routes = [
-		'GET' => [],
-		'POST' => []
-	];
+	private $routes;
 
-	public static function load($file) {
+	public function __construct() {
+		$this->routes = [
+			'GET' => [],
+			'POST' => []
+		];
+	}
+
+	public function __destruct() {}
+
+	public static function loadRoutes($routesFile) {
 		$router = new static;
 		require $file;
 		return $router;
 	}
 
-	public function direct($uri, $requestType) {
+	public function redirectToRoute($uri, $requestType) {
 		if(array_key_exists($uri, $this->routes[$requestType])) {
 			$route = $this->routes[$requestType][$uri];
 			switch($route) {

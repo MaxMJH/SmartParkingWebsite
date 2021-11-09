@@ -10,6 +10,8 @@ class PageTemplateView {
 		$this->htmlContent = '';
 	}
 
+	public function __destruct() {}
+
 	public function createPageHeader() {
 		$htmlOutput = <<<HTML
 <!DOCTYPE html>
