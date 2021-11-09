@@ -13,7 +13,7 @@ class Router {
 
 	public static function loadRoutes($routesFile) {
 		$router = new static;
-		require $file;
+		require $routesFile;
 		return $router;
 	}
 
