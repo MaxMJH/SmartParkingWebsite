@@ -1,13 +1,10 @@
 <?php
+session_start();
+
 class Router {
 	private $routes;
 
-	public function __construct() {
-		$this->routes = [
-			'GET' => [],
-			'POST' => []
-		];
-	}
+	public function __construct() {}
 
 	public function __destruct() {}
 
@@ -17,9 +14,9 @@ class Router {
 		return $router;
 	}
 
-	public function redirectToRoute($uri, $requestType) {
-		if(array_key_exists($uri, $this->routes[$requestType])) {
-			$route = $this->routes[$requestType][$uri];
+	public function redirectToRoute($uri) {
+		if(array_key_exists($uri, $this->routes)) {
+			$route = $this->routes[$uri];
 			switch($route) {
 				case 'controller/LoginController.php':
                                 	require 'controller/LoginController.php';
@@ -38,13 +35,16 @@ class Router {
 					$controller = new ErrorController;
 					break;
 			}
-
 			return $controller->getHtmlOutput();
 		} else {
 			require 'controller/LoginController.php';
                         $controller = new LoginController;
                         return $controller->getHtmlOutput();
 		}
+	}
+
+	public function defineRoute($uri, $controller) {
+		$this->routes[$uri] = $controller;
 	}
 
 	public function get($uri, $controller) {

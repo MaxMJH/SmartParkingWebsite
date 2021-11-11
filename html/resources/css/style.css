@@ -6,7 +6,7 @@ body {
 div#loginPanel {
 	background-image: linear-gradient(#0075A2, #005874);
 	width: calc(600px - 120px);
-	height: calc(400px - 80px);
+	height: calc(500px - 100px);
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -121,6 +121,17 @@ input#password {
         color: #003B51;
 }
 
+div#loginError {
+	width: calc(525px - 105px);
+	height: calc(70px - 14px);
+	position: fixed;
+	top: calc(293px - 58.6px);
+	left: calc(40px - 8px);
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 20px;
+}
+
 input#loginButton:focus {
         outline: none;
 }
@@ -130,7 +141,7 @@ input#loginButton {
         width: calc(260px - 52px);
         height: calc(70px - 14px);
         position: fixed;
-        top: calc(293px - 58.6px);
+        top: calc(400px - 80px);
         left: calc(170px - 34px);
         border-radius: 45px;
 	border: none;

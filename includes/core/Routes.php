@@ -1,7 +1,7 @@
 <?php
-$router->get('', 'controller/LoginController.php');
-$router->get('index', 'controller/LoginController.php');
-$router->post('search', 'controller/SearchController.php');
-$router->get('error', 'controller/ErrorController.php');
-$router->post('results', 'controller/ResultsController.php');
+$router->defineRoute('', 'controller/LoginController.php');
+$router->defineRoute('index', 'controller/LoginController.php');
+$router->defineRoute('search', 'controller/SearchController.php');
+$router->defineRoute('error', 'controller/ErrorController.php');
+$router->defineRoute('results', 'controller/ResultsController.php');
 

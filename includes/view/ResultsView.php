@@ -10,6 +10,7 @@ class ResultsView extends PageTemplateView {
 	public function __destruct() {}
 
 	public function createResultsViewPage() {
+		$this->htmlTitle = 'Smarter Parking Admin Panel';
 		$this->createPageHeader();
 		$this->createPageContent();
 		$this->createPageFooter();
