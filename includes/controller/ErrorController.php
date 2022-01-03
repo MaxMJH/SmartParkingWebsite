@@ -2,13 +2,16 @@
 require 'view/ErrorView.php';
 
 class ErrorController {
-	public function __construct() {}
+        private $view;
+
+        public function __construct() {
+                $this->view = new ErrorView;
+        }
 
 	public function __destruct() {}
 
 	public function getHtmlOutput() {
-		$view = new ErrorView;
-		$view->createErrorViewPage();
-		return $view->getHtmlOutput();
+		$this->view->createErrorViewPage();
+		return $this->view->getHtmlOutput();
 	}
 }

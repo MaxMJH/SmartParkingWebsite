@@ -5,7 +5,7 @@ class Queries {
 	public function __destruct() {}
 
 	public static function getUser() {
-		$query = 'SELECT users.emailAddress, users.password FROM users WHERE users.emailAddress = :emailAddress AND users.password = :password';
+		$query = 'SELECT User.userId, User.emailAddress, User.password, User.isAdmin FROM User WHERE User.emailAddress = :emailAddress AND User.password = :password';
 		return $query;
 	}
 }

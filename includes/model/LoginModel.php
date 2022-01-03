@@ -3,10 +3,12 @@ require 'core/Database.php';
 require 'core/Queries.php';
 
 class LoginModel {
+	private $database;
 	private $emailAddress;
 	private $password;
 
 	public function __construct() {
+		$this->database = new Database;
 		$this->emailAddress = '';
 		$this->password = '';
 	}
@@ -19,15 +21,13 @@ class LoginModel {
 	}
 
 	public function getUser() {
-		$database = new Database;
-
 		$parameters = [
 			':emailAddress' => $this->emailAddress,
 			':password' => $this->password
 		];
 
-		$database->executePreparedStatement(Queries::getUser(), $parameters);
-		return $database->getResult();
+		$this->database->executePreparedStatement(Queries::getUser(), $parameters);
+		return $this->database->getResult();
 	}
 
 }

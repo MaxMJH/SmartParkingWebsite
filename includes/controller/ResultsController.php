@@ -2,13 +2,16 @@
 require 'view/ResultsView.php';
 
 class ResultsController {
-	public function __construct() {}
+	private $view;
+
+	public function __construct() {
+		$this->view = new ResultsView;
+	}
 
 	public function __destruct() {}
 
 	public function getHtmlOutput() {
-		$view = new ResultsView;
-		$view->createResultsViewPage();
-		return $view->getHtmlOutput();
+		$this->view->createResultsViewPage();
+		return $this->view->getHtmlOutput();
 	}
 }

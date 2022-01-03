@@ -7,11 +7,15 @@ class LoginController {
 	private $validatedInputs;
 	private $isError;
 	private $errorMessage;
+	private $view;
+	private $model;
 
 	public function __construct() {
 		$this->validatedInputs = array();
 		$this->isError = false;
 		$this->errorMessage = '';
+		$this->view = new LoginView;
+		$this->model = new LoginModel;
 
 		if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {
 			if(isset($_POST['username']) && isset($_POST['password'])) {
@@ -41,33 +45,33 @@ class LoginController {
 	}
 
 	public function process() {
-		$model = new LoginModel;
-		$model->populateModel($this->validatedInputs);
+		$this->model->populateModel($this->validatedInputs);
 
-		$user = $model->getUser();
-
+		$user = $this->model->getUser();
 		if($user['queryOK'] === true) {
-			$_SESSION['emailAddress'] = $this->validatedInputs['emailAddress'];
-			$_SESSION['password'] = $this->validatedInputs['password'];
-			header('Location: search');
-			exit;
+			if($user['result'][0]['isAdmin'] === '1') {
+				$_SESSION['userId'] = $user['result'][0]['userId'];
+				$_SESSION['emailAddress'] = $user['result'][0]['emailAddress'];
+				$_SESSION['password'] = $user['result'][0]['password'];
+				header('Location: search');
+				exit;
+			} else {
+				$this->isError = true;
+				$this->errorMessage = 'This user is not an admin!';
+			}
 		} else {
 			$this->isError = true;
 			$this->errorMessage = $user['result'];
 		}
-		//header('Location: search');
-		//exit;
 	}
 
 	public function getHtmlOutput() {
-		$view = new LoginView;
-
 		if($this->isError) {
-			$view->setErrorMessage($this->errorMessage);
+			$this->view->setErrorMessage($this->errorMessage);
 		}
 
-		$view->createLoginViewPage();
-		return $view->getHtmlOutput();
+		$this->view->createLoginViewPage();
+		return $this->view->getHtmlOutput();
 	}
 }
 

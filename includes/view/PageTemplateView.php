@@ -23,7 +23,7 @@ class PageTemplateView {
   <body>
   <div id="header">
     <div id="headerTitle">Smarter Parking Admin Panel</div>
-      <form action="index" method="post">
+      <form action="" method="post">
         <input id="logoutButton" type="submit" value="Logout"/>
       </form>
     </div>
