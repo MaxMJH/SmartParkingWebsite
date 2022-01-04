@@ -1,6 +1,6 @@
 <?php
-require 'core/Database.php';
-require 'core/Queries.php';
+require_once 'core/Database.php';
+require_once 'core/Queries.php';
 
 class LoginModel {
 	private $database;

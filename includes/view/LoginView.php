@@ -1,7 +1,7 @@
 <?php
-class LoginView {
-	private $htmlTitle;
-	private $htmlOutput;
+require 'PageTemplateView.php';
+
+class LoginView extends PageTemplateView {
 	private $errorMessage;
 
 	public function __construct() {
@@ -18,7 +18,12 @@ class LoginView {
 
 	public function createLoginViewPage() {
 		$this->htmlTitle = 'Smarter Parking Admin Panel';
-		$this->htmlOutput = <<<HTML
+		$this->createLoginViewContent();
+		$this->createPageFooter();
+	}
+
+	public function createLoginViewContent() {
+                $this->htmlOutput = <<<HTML
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,8 +48,6 @@ class LoginView {
         <input id="loginButton" type="submit" name="submit" value="Login"/>
       </form>
     </div>
-  </body>
-</html>
 HTML;
 	}
 

@@ -38,7 +38,12 @@ class Database {
 				$this->result['result'] = $this->preparedStatement->fetchall();
 			} else {
 				$this->result['queryOK'] = false;
-				$this->result['result'] = 'Details entered are incorrect!';
+
+				if($this->preparedStatement->errorCode() == 00000) {
+					$this->result['result'] = 'The value you entered does not exist!';
+				} else {
+					$this->result['result'] = $this->preparedStatement->errorCode();
+				}
 			}
 		} catch(PDOException $exception) {
 			$_SESSION['error'] = $exception->getMessage();

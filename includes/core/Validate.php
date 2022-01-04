@@ -23,4 +23,14 @@ class Validate {
 
                 return $sanitisedPassword;
 	}
+
+	public function validateCity($city) {
+		$sanitisedCityName = false;
+
+		if(strlen($city) >= 3 && strlen($city) <= 30) {
+			$sanitisedCityName = filter_var($city, FILTER_SANITIZE_STRING);
+		}
+
+		return $sanitisedCityName;
+	}
 }

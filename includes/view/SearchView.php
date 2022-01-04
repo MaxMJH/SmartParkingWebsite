@@ -5,7 +5,7 @@ class SearchView extends PageTemplateView {
 	public function __construct() {
 		parent::__construct();
 		$this->createSearchViewContent();
-		unset($_SESSION['error']);
+		//unset($_SESSION['error']);
 	}
 
 	public function __destruct() {}
@@ -22,11 +22,11 @@ class SearchView extends PageTemplateView {
 <div id="container">
   <div id="search">
     <div id="searchBarLine"></div>
-    <form action="results" method="post">
+    <form action="search" method="post">
       <div id="searchBar">
-        <input id="searchBar" type="text" name="search" placeholder="Enter a City"/>
+        <input id="searchBar" type="text" name="city" placeholder="Enter a City"/>
         <img id="searchBarImage" src="/resources/images/searchIcon.png">
-        <input id="searchButton" type="submit" value="Search"/>
+        <input id="searchButton" type="submit" name="searchPressed" value="Search"/>
       </div>
     </form>
   </div>
