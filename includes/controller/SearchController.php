@@ -1,7 +1,11 @@
 <?php
-require 'view/SearchView.php';
-require 'model/SearchModel.php';
-require 'core/Validate.php';
+namespace app\includes\controller;
+
+use app\includes\view\SearchView;
+use app\includes\model\SearchModel;
+use app\includes\core\Validate;
+use app\includes\core\Database;
+use app\includes\core\Queries;
 
 class SearchController {
 	private $view;
@@ -77,6 +81,7 @@ class SearchController {
 				$this->errorMessage .= ' This city does not exist!';
 			}
 		} else {
+			var_dump("BBB");
 			$this->isError = true;
 			$this->errorMessage .= ' ' . $city['result'];
 		}

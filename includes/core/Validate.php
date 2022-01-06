@@ -1,4 +1,6 @@
 <?php
+namespace app\includes\core;
+
 class Validate {
 	public function __construct() {}
 

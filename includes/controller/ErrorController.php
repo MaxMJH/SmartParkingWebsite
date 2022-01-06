@@ -1,5 +1,7 @@
 <?php
-require 'view/ErrorView.php';
+namespace app\includes\controller;
+
+use app\includes\view\ErrorView;
 
 class ErrorController {
         private $view;

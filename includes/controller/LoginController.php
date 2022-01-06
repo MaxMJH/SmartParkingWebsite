@@ -1,7 +1,9 @@
 <?php
-require 'view/LoginView.php';
-require 'core/Validate.php';
-require 'model/LoginModel.php';
+namespace app\includes\controller;
+
+use app\includes\view\LoginView;
+use app\includes\core\Validate;
+use app\includes\model\LoginModel;
 
 class LoginController {
 	private $validatedInputs;

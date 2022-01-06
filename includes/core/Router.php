@@ -1,5 +1,13 @@
 <?php
+namespace app\includes\core;
+
 session_start();
+
+use app\includes\controller\LoginController;
+use app\includes\controller\SearchController;
+use app\includes\controller\ErrorController;
+use app\includes\controller\ResultsController;
+use app\includes\controller\AddController;
 
 class Router {
 	private $routes;

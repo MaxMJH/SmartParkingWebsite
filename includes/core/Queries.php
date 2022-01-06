@@ -1,4 +1,6 @@
 <?php
+namespace app\includes\core;
+
 class Queries {
 	public function __construct() {}
 

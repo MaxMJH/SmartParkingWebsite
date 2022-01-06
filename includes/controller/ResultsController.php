@@ -1,8 +1,10 @@
 <?php
-require 'model/ResultsModel.php';
-require 'model/SearchModel.php';
-require 'view/ResultsView.php';
-require 'core/Validate.php';
+namespace app\includes\controller;
+
+use app\includes\model\ResultsModel;
+use app\includes\model\SearchModel;
+use app\includes\view\ResultsView;
+use app\includes\core\Validate;
 
 class ResultsController {
 	private $view;

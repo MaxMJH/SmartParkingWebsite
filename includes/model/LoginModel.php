@@ -1,6 +1,8 @@
 <?php
-require_once 'core/Database.php';
-require_once 'core/Queries.php';
+namespace app\includes\model;
+
+use app\includes\core\Database;
+use app\includes\core\Queries;
 
 class LoginModel {
 	private $database;

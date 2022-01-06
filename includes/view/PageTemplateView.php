@@ -1,4 +1,6 @@
 <?php
+namespace app\includes\view;
+
 class PageTemplateView {
 	protected $htmlOutput;
 	protected $htmlTitle;

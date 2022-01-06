@@ -1,6 +1,8 @@
 <?php
-require 'view/AddView.php';
-require 'core/Validate.php';
+namespace app\includes\controller;
+
+use app\includes\view\AddView;
+use app\includes\core\Validate;
 
 class AddController {
 	private $view;

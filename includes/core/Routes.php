@@ -1,4 +1,6 @@
 <?php
+namespace app\includes\core;
+
 $router->defineRoute('/', 'controller/LoginController.php');
 $router->defineRoute('search', 'controller/SearchController.php');
 $router->defineRoute('add', 'controller/AddController.php');

@@ -1,4 +1,6 @@
 <?php
+namespace app\includes\view;
+
 require 'PageTemplateView.php';
 
 class ResultsView extends PageTemplateView {

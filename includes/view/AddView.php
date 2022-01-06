@@ -1,5 +1,7 @@
 <?php
-require 'PageTemplateView.php';
+namespace app\includes\view;
+
+//use app\includes\view\PageTemplateView;
 
 class AddView extends PageTemplateView {
 	public function __construct() {
