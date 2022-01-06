@@ -58,9 +58,9 @@ class AddController {
 	}
 
 	public function process() {
-		$execString = "java -jar ../../../home/pi/Test/xmlscraper-0.0.1-SNAPSHOT.jar \"{$this->validatedInputs['city']}\" \"carpark\" \"{$_POST['xml']}\" {$_POST['tags']} > /dev/null &";
+		$execString = "java -jar /home/pi/Test/xmlscraper-0.0.1-SNAPSHOT.jar \"{$this->validatedInputs['city']}\" \"carpark\" \"{$_POST['xml']}\" {$_POST['tags']} > /dev/null &";
 
-		exec($execString);
+		system($execString);
 	}
 
 	public function getHtmlOutput() {

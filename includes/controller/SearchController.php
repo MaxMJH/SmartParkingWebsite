@@ -66,9 +66,10 @@ class SearchController {
 
 		$city = $this->model->getCity();
 		if($city['queryOK'] === true) {
-			if($city['result'][0]['cityName'] === $this->validatedInput) {
+			if($city['result'][0]['cityName'] == $this->validatedInput) {
 				$_SESSION['cityID'] = $city['result'][0]['cityID'];
 				$_SESSION['cityName'] = $city['result'][0]['cityName'];
+
 				header('Location: results');
 				exit();
 			} else {

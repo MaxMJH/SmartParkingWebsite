@@ -51,9 +51,6 @@ class ResultsController {
 				array_push($fiveArray, $fiveMinutes['result'][$i]);
 			}
 			$_SESSION['fiveMinutes'] = $fiveArray;
-		} else {
-			$this->isError = true;
-			$this->errorMessage .= ' ' . $fiveMinutes['result'];
 		}
 
 		$hourly = $this->resultsModel->getHourly();
@@ -63,9 +60,6 @@ class ResultsController {
                                 array_push($hourlyArray, $hourly['result'][$i]);
                         }
                         $_SESSION['hourly'] = $hourlyArray;
-                } else {
-                        $this->isError = true;
-                        $this->errorMessage .= ' ' . $hourly['result'];
                 }
 
 		$daily = $this->resultsModel->getDaily();
@@ -75,9 +69,6 @@ class ResultsController {
                                 array_push($dailyArray, $daily['result'][$i]);
                         }
                         $_SESSION['daily'] = $dailyArray;
-                } else {
-                        $this->isError = true;
-                        $this->errorMessage .= ' ' . $daily['result'];
                 }
 	}
 
@@ -118,11 +109,11 @@ class ResultsController {
         }
 
 	public function getHtmlOutput() {
-		if($this->isError) {
-                        $_SESSION['error'] = $this->errorMessage;
-                        header('Location: error');
-                        exit();
-		}
+		//if($this->isError) {
+                //        $_SESSION['error'] = $this->errorMessage;
+                //        header('Location: error');
+                //        exit();
+		//}
 
 		$this->view->createResultsViewPage();
 		return $this->view->getHtmlOutput();

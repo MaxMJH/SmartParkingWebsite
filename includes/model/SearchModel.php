@@ -18,7 +18,7 @@ class SearchModel {
 	}
 
 	public function getCity() {
-		$parameters = [':cityName' => $this->cityName];
+		$parameters = [':cityName' => 'Leicester'];
 
 		$this->database->executePreparedStatement(Queries::getCity(), $parameters);
 		return $this->database->getResult();

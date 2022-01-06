@@ -5,12 +5,12 @@ class Queries {
 	public function __destruct() {}
 
 	public static function getUser() {
-		$query = 'SELECT User.userID, User.emailAddress, User.password, User.isAdmin FROM User WHERE User.emailAddress = :emailAddress AND User.password = :password';
+		$query = 'SELECT User.userID, User.emailAddress, User.password, User.isAdmin FROM User WHERE User.emailAddress = :emailAddress AND User.password = :password;';
 		return $query;
 	}
 
 	public static function getCity() {
-		$query = 'SELECT City.cityID, City.cityName FROM City WHERE City.cityName = :cityName';
+		$query = 'SELECT City.cityID, City.cityName FROM City WHERE City.cityName = :cityName;';
 		return $query;
 	}
 

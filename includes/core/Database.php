@@ -22,6 +22,7 @@ class Database {
 
 	public function __destruct() {
 		$this->database = null;
+		$this->preparedStatement = null;
 	}
 
 	public function getResult() {
