@@ -1,12 +1,12 @@
 <?php
-require 'view/SearchView.php';
-require 'model/SearchModel.php';
-require 'core/Validate.php';
+require 'view/AddView.php';
+//require 'model/SearchModel.php';
+//require 'core/Validate.php';
 
-class SearchController {
+class AddController {
 	private $view;
-	private $model;
-	private $validatedInput;
+	//private $model;
+	//private $validatedInput;
 	private $errorMessage;
 	private $isError;
 
@@ -20,25 +20,23 @@ class SearchController {
 			exit;
 		}
 
-		$this->view = new SearchView;
-		$this->model = new SearchModel;
+		$this->view = new AddView;
+		//$this->model = new SearchModel;
 		$this->errorMessage = '';
 		$this->isError = false;
 
-		if(isset($_POST['searchPressed']) && $_POST['searchPressed'] == "Search") {
+		if(isset($_POST['addCityPressed']) && $_POST['addCityPressed'] == "Add City") {
 			if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-				$this->validate();
-				$this->process();
-			} else {
-				$this->isError = true;
-				$this->errorMessage .= ' Fields cannot be empty!';
-			}
-		}
-
-		if(isset($_POST['addPressed']) && $_POST['addPressed'] == "Add") {
-			if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-				header('Location: add');
-				exit;
+				if(isset($_POST['xml']) && !empty(trim($_POST['xml'], " "))) {
+					if(isset($_POST['tags']) && !empty(trim($_POST['tags'], " "))) {
+						$output = null;
+						$retval = null;
+						exec('pwd', $output, $retval);
+						var_dump($output);
+						//$this->validate();
+						//$this->process();
+					}
+				}
 			} else {
 				$this->isError = true;
 				$this->errorMessage .= ' Fields cannot be empty!';
@@ -48,6 +46,7 @@ class SearchController {
 
 	public function __destruct() {}
 
+	/*
 	public function validate() {
 		$validator = new Validate();
 
@@ -80,7 +79,7 @@ class SearchController {
 			$this->errorMessage .= ' ' . $city['result'];
 		}
 	}
-
+	*/
 	public function getHtmlOutput() {
 		if($this->isError) {
                         $_SESSION['error'] = $this->errorMessage;

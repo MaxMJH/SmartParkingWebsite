@@ -1,12 +1,10 @@
 <?php
-require 'view/SearchView.php';
-require 'model/SearchModel.php';
+require 'view/AddView.php';
 require 'core/Validate.php';
 
-class SearchController {
+class AddController {
 	private $view;
-	private $model;
-	private $validatedInput;
+	private $validatedInputs;
 	private $errorMessage;
 	private $isError;
 
@@ -20,25 +18,19 @@ class SearchController {
 			exit;
 		}
 
-		$this->view = new SearchView;
-		$this->model = new SearchModel;
+		$this->view = new AddView;
+		//$this->model = new SearchModel;
 		$this->errorMessage = '';
 		$this->isError = false;
 
-		if(isset($_POST['searchPressed']) && $_POST['searchPressed'] == "Search") {
+		if(isset($_POST['addCityPressed']) && $_POST['addCityPressed'] == "Add City") {
 			if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-				$this->validate();
-				$this->process();
-			} else {
-				$this->isError = true;
-				$this->errorMessage .= ' Fields cannot be empty!';
-			}
-		}
-
-		if(isset($_POST['addPressed']) && $_POST['addPressed'] == "Add") {
-			if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-				header('Location: add');
-				exit;
+				if(isset($_POST['xml']) && !empty(trim($_POST['xml'], " "))) {
+					if(isset($_POST['tags']) && !empty(trim($_POST['tags'], " "))) {
+						$this->validate();
+						$this->process();
+					}
+				}
 			} else {
 				$this->isError = true;
 				$this->errorMessage .= ' Fields cannot be empty!';
@@ -52,9 +44,13 @@ class SearchController {
 		$validator = new Validate();
 
 		$validatedCityName = $validator->validateCity($_POST['city']);
+		//$validatedXML = $validator->validateXML($_POST['xml'});
+		//$validatedTags = $validator->validateTags($_POST['tags']);
 
 		if($validatedCityName !== false) {
-			$this->validatedInput = $validatedCityName;
+			$this->validatedInputs['city'] = $validatedCityName;
+			//$this->validatedInputs['xml'] = $validatedXML;
+			//$this->validatedInputs['tags'] = $validatedTags;
 		} else {
 			$this->isError = true;
 			$this->errorMessage .= ' The city you entered must be within 3 and 30 characters!';
@@ -62,23 +58,9 @@ class SearchController {
 	}
 
 	public function process() {
-		$this->model->populateModel($this->validatedInput);
+		$execString = "java -jar ../../../home/pi/Test/xmlscraper-0.0.1-SNAPSHOT.jar \"{$this->validatedInputs['city']}\" \"carpark\" \"{$_POST['xml']}\" {$_POST['tags']} > /dev/null &";
 
-		$city = $this->model->getCity();
-		if($city['queryOK'] === true) {
-			if($city['result'][0]['cityName'] === $this->validatedInput) {
-				$_SESSION['cityID'] = $city['result'][0]['cityID'];
-				$_SESSION['cityName'] = $city['result'][0]['cityName'];
-				header('Location: results');
-				exit();
-			} else {
-				$this->isError = true;
-				$this->errorMessage .= ' This city does not exist!';
-			}
-		} else {
-			$this->isError = true;
-			$this->errorMessage .= ' ' . $city['result'];
-		}
+		exec($execString);
 	}
 
 	public function getHtmlOutput() {

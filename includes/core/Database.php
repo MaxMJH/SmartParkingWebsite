@@ -8,7 +8,7 @@ class Database {
 		$this->preparedStatement = '';
 		$this->result = array();
 
-		$pdoDestination = 'mysql:host=192.168.0.69;port=3306;dbname=smartpark;charset=utf8mb4';
+		$pdoDestination = 'mysql:host=192.168.0.69;port=3306;dbname=test_smartpark;charset=utf8mb4';
 		$pdoUsername = 'test';
 		$pdoPassword = 'test';
 		try {

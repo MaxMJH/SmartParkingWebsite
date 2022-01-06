@@ -26,6 +26,10 @@ class Router {
 					require 'controller/SearchController.php';
 					$controller = new SearchController;
 					break;
+				case 'controller/AddController.php':
+					require 'controller/AddController.php';
+					$controller = new AddController;
+					break;
 				case 'controller/ResultsController.php':
 					require 'controller/ResultsController.php';
 					$controller = new ResultsController;

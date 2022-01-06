@@ -1,7 +1,7 @@
 <?php
 require 'PageTemplateView.php';
 
-class SearchView extends PageTemplateView {
+class AddView extends PageTemplateView {
 	public function __construct() {
 		parent::__construct();
 		$this->createSearchViewContent();
@@ -20,15 +20,12 @@ class SearchView extends PageTemplateView {
 	private function createSearchViewContent() {
 		$this->htmlContent = <<<HTML
 <div id="container">
-  <div id="search">
-    <div id="searchBarLine"></div>
-    <form action="search" method="post">
-      <div id="searchBar">
-        <input id="searchBar" type="text" name="city" placeholder="Enter a City"/>
-        <img id="searchBarImage" src="/resources/images/searchIcon.png">
-        <input id="searchButton" type="submit" name="searchPressed" value="Search"/>
-        <input id="addButton" type="submit" name="addPressed" value="Add"/>
-      </div>
+  <div id="add">
+    <form action="add" method="post">
+      <input id="enterCityBar" type="text" name="city" placeholder="Enter a City"/>
+      <input id="enterXMLBar" type="text" name="xml" placeholder="Enter XML URL"/>
+      <input id="enterTagsBar" type="text" name="tags" placeholder="Enter Tags"/>
+      <input id="addCityButton" type="submit" name="addCityPressed" value="Add City"/>
     </form>
   </div>
 </div>

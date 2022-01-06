@@ -254,7 +254,81 @@ input#searchButton {
         height: calc(47px - 9.4px);
         position: fixed;
         top: calc(87px - 17.4px);
-        left: calc(118px - 23.6px);
+        left: 0px;
+        border-radius: 24px;
+        border: none;
+        font-size: 20px;
+        color: #003B51;
+}
+
+input#addButton {
+	background-color: #FFFFFF;
+	width: calc(239px - 47.8px);
+	height: calc(47px - 9.4px);
+	position: fixed;
+	top: calc(87px - 17.4px);
+	right: 0px;
+	border-radius: 24px;
+	border: none;
+	font-size: 20px;
+	color: #003B51;
+}
+
+div#add {
+        width: calc(478px - 95.6px);
+        height: calc(600px);
+        position: fixed;
+        top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+input#enterCityBar {
+        background-color: #FFFFFF;
+        width: calc(478px - 95.6px);
+        height: calc(47px - 9.4px);
+        position: fixed;
+        top: calc(12px - 2.4px);
+        left: 0px;
+        border-radius: 24px;
+	border: none;
+        font-size: 20px;
+        color: #003B51;
+}
+
+input#enterXMLBar {
+        background-color: #FFFFFF;
+        width: calc(478px - 95.6px);
+        height: calc(47px - 9.4px);
+        position: fixed;
+        top: calc(52px);
+        left: 0px;
+        border-radius: 24px;
+	border: none;
+        font-size: 20px;
+        color: #003B51;
+}
+
+input#enterTagsBar {
+        background-color: #FFFFFF;
+        width: calc(478px - 95.6px);
+        height: calc(478px - 95.6px);
+        position: fixed;
+        top: calc(94.4px);
+        left: 0px;
+        border-radius: 24px;
+	border: none;
+        font-size: 20px;
+        color: #003B51;
+}
+
+input#addCityButton {
+        background-color: #FFFFFF;
+        width: calc(239px - 47.8px);
+        height: calc(47px - 9.4px);
+        position: fixed;
+        top: calc(490px);
+        right: 0px;
         border-radius: 24px;
         border: none;
         font-size: 20px;
