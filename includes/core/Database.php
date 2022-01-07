@@ -8,13 +8,10 @@ class Database {
 	private $preparedStatement;
 	private $result;
 
-	public function __construct() {
+	public function __construct($pdoDestination, $pdoUsername, $pdoPassword) {
 		$this->preparedStatement = '';
 		$this->result = array();
 
-		$pdoDestination = 'mysql:host=192.168.0.69;port=3306;dbname=smartpark;charset=utf8mb4';
-		$pdoUsername = 'test';
-		$pdoPassword = 'test';
 		try {
 			$this->database = new PDO($pdoDestination, $pdoUsername, $pdoPassword);
 		} catch(PDOException $exception) {
@@ -51,6 +48,8 @@ class Database {
 				}
 			}
 		} catch(PDOException $exception) {
+			$this->result['queryOK'] = false;
+			$this->result['result'] = $exception->getMessage();
 			$_SESSION['error'] = $exception->getMessage();
 			header('Location: error');
 			exit;
@@ -59,5 +58,11 @@ class Database {
 
 	private function getRowCount() {
 		return $this->preparedStatement->rowCount();
+	}
+
+	public function isConnected() {
+		$connection = $this->database->query('SELECT 1;');
+
+		return $connection === false ? false : true;
 	}
 }

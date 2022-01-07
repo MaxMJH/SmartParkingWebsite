@@ -9,8 +9,8 @@ class Validate {
 	public function validateUsername($username) {
 		$sanitisedUsername = false;
 
-		if(strlen($username) >= 4 && strlen($username) <= 25) {
-			$sanitisedUsername = filter_var($username, FILTER_SANITIZE_STRING);
+		if(strlen($username) >= 4 && strlen($username) <= 35) {
+			$sanitisedUsername = filter_var($username, FILTER_SANITIZE_EMAIL);
 		}
 
 		return $sanitisedUsername;

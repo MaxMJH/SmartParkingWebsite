@@ -9,7 +9,7 @@ class ResultsModel {
         private $cityID;
 
         public function __construct() {
-                $this->database = new Database;
+                $this->database = new Database("mysql:host=192.168.0.69;port=3306;dbname=smartpark;charset=utf8mb4", "test", "test");
                 $this->cityID = -1;
         }
 

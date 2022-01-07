@@ -1,7 +1,7 @@
 <?php
 namespace app\includes\core;
 
-session_start();
+//session_start();
 
 use app\includes\controller\LoginController;
 use app\includes\controller\SearchController;
@@ -12,7 +12,9 @@ use app\includes\controller\AddController;
 class Router {
 	private $routes;
 
-	public function __construct() {}
+	public function __construct() {
+		$this->routes = array();
+	}
 
 	public function __destruct() {}
 
@@ -65,5 +67,9 @@ class Router {
 
 	public function post($uri, $controller) {
 		$this->routes['POST'][$uri] = $controller;
+	}
+
+	public function getRoutes() {
+		return $this->routes;
 	}
 }
