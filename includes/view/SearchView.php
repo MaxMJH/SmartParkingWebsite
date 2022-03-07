@@ -1,26 +1,23 @@
 <?php
 namespace app\includes\view;
 
-require 'PageTemplateView.php';
-
 class SearchView extends PageTemplateView {
-	public function __construct() {
-		parent::__construct();
-		$this->createSearchViewContent();
-		//unset($_SESSION['error']);
-	}
+	  public function __construct() {
+		    parent::__construct();
+		    $this->createSearchViewContent();
+	  }
 
-	public function __destruct() {}
+	  public function __destruct() {}
 
-	public function createSearchViewPage() {
-		$this->htmlTitle = 'Smarter Parking Admin Panel';
-		$this->createPageHeader();
-		$this->createPageContent();
-		$this->createPageFooter();
-	}
+	  public function createSearchViewPage() {
+		    $this->htmlTitle = 'Smarter Parking Admin Panel';
+		    $this->createPageHeader();
+		    $this->createPageContent();
+		    $this->createPageFooter();
+	  }
 
-	private function createSearchViewContent() {
-		$this->htmlContent = <<<HTML
+	  private function createSearchViewContent() {
+		   $this->htmlContent = <<<HTML
 <div id="container">
   <div id="search">
     <div id="searchBarLine"></div>
@@ -35,9 +32,9 @@ class SearchView extends PageTemplateView {
   </div>
 </div>
 HTML;
-	}
+	  }
 
-	public function getHtmlOutput() {
-		return $this->htmlOutput;
-	}
+	  public function getHtmlOutput() {
+		  return $this->htmlOutput;
+	  }
 }

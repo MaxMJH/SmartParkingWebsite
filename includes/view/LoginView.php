@@ -1,31 +1,29 @@
 <?php
 namespace app\includes\view;
 
-require 'PageTemplateView.php';
-
 class LoginView extends PageTemplateView {
-	private $errorMessage;
+    private $errorMessage;
 
-	public function __construct() {
-		$this->htmlTitle = '';
-		$this->htmlOutput = '';
-		$this->errorMessage = '';
-	}
+    public function __construct() {
+        $this->htmlTitle = '';
+        $this->htmlOutput = '';
+        $this->errorMessage = '';
+    }
 
-	public function __destruct() {}
+    public function __destruct() {}
 
-	public function setErrorMessage($errorMessage) {
-		$this->errorMessage = $errorMessage;
-	}
+    public function setErrorMessage($errorMessage) {
+        $this->errorMessage = $errorMessage;
+    }
 
-	public function createLoginViewPage() {
-		$this->htmlTitle = 'Smarter Parking Admin Panel';
-		$this->createLoginViewContent();
-		$this->createPageFooter();
-	}
+    public function createLoginViewPage() {
+        $this->htmlTitle = 'Smarter Parking Admin Panel';
+        $this->createLoginViewContent();
+        $this->createPageFooter();
+    }
 
-	public function createLoginViewContent() {
-                $this->htmlOutput = <<<HTML
+    public function createLoginViewContent() {
+        $this->htmlOutput = <<<HTML
 <!DOCTYPE html>
 <html>
   <head>
@@ -51,9 +49,9 @@ class LoginView extends PageTemplateView {
       </form>
     </div>
 HTML;
-	}
+    }
 
-	public function getHtmlOutput() {
-		return $this->htmlOutput;
-	}
+    public function getHtmlOutput() {
+        return $this->htmlOutput;
+    }
 }

@@ -1,26 +1,23 @@
 <?php
 namespace app\includes\view;
 
-//use app\includes\view\PageTemplateView;
-
 class AddView extends PageTemplateView {
-	public function __construct() {
-		parent::__construct();
-		$this->createSearchViewContent();
-		//unset($_SESSION['error']);
-	}
+    public function __construct() {
+        parent::__construct();
+        $this->createSearchViewContent();
+    }
 
-	public function __destruct() {}
+    public function __destruct() {}
 
-	public function createSearchViewPage() {
-		$this->htmlTitle = 'Smarter Parking Admin Panel';
-		$this->createPageHeader();
-		$this->createPageContent();
-		$this->createPageFooter();
-	}
+    public function createSearchViewPage() {
+        $this->htmlTitle = 'Smarter Parking Admin Panel';
+        $this->createPageHeader();
+        $this->createPageContent();
+        $this->createPageFooter();
+    }
 
-	private function createSearchViewContent() {
-		$this->htmlContent = <<<HTML
+    private function createSearchViewContent() {
+        $this->htmlContent = <<<HTML
 <div id="container">
   <div id="add">
     <form action="add" method="post">
@@ -32,9 +29,9 @@ class AddView extends PageTemplateView {
   </div>
 </div>
 HTML;
-	}
+    }
 
-	public function getHtmlOutput() {
-		return $this->htmlOutput;
-	}
+    public function getHtmlOutput() {
+        return $this->htmlOutput;
+    }
 }

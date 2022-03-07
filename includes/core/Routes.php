@@ -8,4 +8,3 @@ $router->defineRoute('search', 'controller/SearchController.php');
 $router->defineRoute('add', 'controller/AddController.php');
 $router->defineRoute('error', 'controller/ErrorController.php');
 $router->defineRoute('results', 'controller/ResultsController.php');
-

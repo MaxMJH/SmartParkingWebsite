@@ -2,20 +2,20 @@
 namespace app\includes\view;
 
 class PageTemplateView {
-	protected $htmlOutput;
-	protected $htmlTitle;
-	protected $htmlContent;
+    protected $htmlOutput;
+    protected $htmlTitle;
+    protected $htmlContent;
 
-	public function __construct() {
-		$this->htmlOutput = '';
-		$this->htmlTitle = '';
-		$this->htmlContent = '';
-	}
+    public function __construct() {
+        $this->htmlOutput = '';
+        $this->htmlTitle = '';
+        $this->htmlContent = '';
+    }
 
-	public function __destruct() {}
+    public function __destruct() {}
 
-	public function createPageHeader() {
-		$htmlOutput = <<<HTML
+    public function createPageHeader() {
+        $htmlOutput = <<<HTML
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,18 +30,18 @@ class PageTemplateView {
       </form>
     </div>
 HTML;
-		$this->htmlOutput .= $htmlOutput;
-	}
+        $this->htmlOutput .= $htmlOutput;
+    }
 
-	public function createPageContent() {
-		$this->htmlOutput .= $this->htmlContent;
-	}
+    public function createPageContent() {
+        $this->htmlOutput .= $this->htmlContent;
+    }
 
-	public function createPageFooter() {
-		$htmlOutput = <<<HTML
+    public function createPageFooter() {
+        $htmlOutput = <<<HTML
 </body>
 </html>
 HTML;
-		$this->htmlOutput .= $htmlOutput;
-	}
+        $this->htmlOutput .= $htmlOutput;
+    }
 }
