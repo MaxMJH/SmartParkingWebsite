@@ -4,6 +4,7 @@ namespace app\includes\controller;
 use app\includes\view\LoginView;
 use app\includes\core\Validate;
 use app\includes\model\LoginModel;
+use app\includes\core\Encryption;
 
 class LoginController {
 	private $validatedInputs;
@@ -48,6 +49,16 @@ class LoginController {
 
 	public function process() {
 		$this->model->populateModel($this->validatedInputs);
+
+		$saltAndPepper = $this->model->getSaltAndPepper();
+		if($saltAndPepper['queryOK'] === true) {
+			$salt = $saltAndPepper['result'][0]['salt'];
+			$pepper = $saltAndPepper['result'][0]['pepper'];
+			$password = Encryption::hashPassword($salt, $this->validatedInputs['password'], $pepper);
+
+			$this->validatedInputs['password'] = $password;
+			$this->model->populateModel($this->validatedInputs);
+		}
 
 		$user = $this->model->getUser();
 		if($user['queryOK'] === true) {
