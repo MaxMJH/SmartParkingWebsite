@@ -63,7 +63,7 @@ class LoginController {
 
         $user = $this->model->getUser();
 
-				if($user['queryOK'] === true) {
+	if($user['queryOK'] === true) {
             if($user['result'][0]['isAdmin'] === '1') {
                 $_SESSION['userID'] = $user['result'][0]['userID'];
                 $_SESSION['emailAddress'] = $user['result'][0]['emailAddress'];

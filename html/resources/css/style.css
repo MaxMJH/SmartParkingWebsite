@@ -42,7 +42,7 @@ section#loginPanel form {
 
 div.line {
   background-color: #707070;
-  width: 0.1rem;
+  width: 0.156vw;
 }
 
 img#userImage, img#passwordImage {
