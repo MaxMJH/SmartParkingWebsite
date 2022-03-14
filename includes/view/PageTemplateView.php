@@ -17,18 +17,21 @@ class PageTemplateView {
     public function createPageHeader() {
         $htmlOutput = <<<HTML
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{$this->htmlTitle}</title>
-    <link href="/resources/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/style.css" rel="stylesheet">
   </head>
   <body>
-  <div id="header">
-    <div id="headerTitle">Smarter Parking Admin Panel</div>
-      <form action="" method="post">
-        <input id="logoutButton" type="submit" name="logout" value="Logout"/>
-      </form>
-    </div>
+    <header>
+        <h1>Smarter Parking Admin Panel</h1>
+        <form method="post">
+          <input id="logoutButton" type="submit" name="logout" value="Logout"/>
+        </form>
+    </header>
+
 HTML;
         $this->htmlOutput .= $htmlOutput;
     }
@@ -39,7 +42,7 @@ HTML;
 
     public function createPageFooter() {
         $htmlOutput = <<<HTML
-</body>
+  </body>
 </html>
 HTML;
         $this->htmlOutput .= $htmlOutput;

@@ -31,6 +31,7 @@ class SearchView extends PageTemplateView {
     </form>
   </div>
 </div>
+
 HTML;
 	  }
 

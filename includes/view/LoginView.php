@@ -25,29 +25,34 @@ class LoginView extends PageTemplateView {
     public function createLoginViewContent() {
         $this->htmlOutput = <<<HTML
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{$this->htmlTitle}</title>
-    <link href="/resources/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/css/style.css" rel="stylesheet"/>
   </head>
   <body>
-    <div id="loginPanel">
-      <div id="loginPanelName">Admin Panel Login</div>
-      <form action="" method="post">
-        <div id="loginLine"></div>
-        <div id="username">
-          <input id="username" type="text" name="username" placeholder=" Email Address"/>
-          <img id="usernameImage" src="/resources/images/userIcon.png">
-        </div>
-        <div id="passwordLine"></div>
-        <div id="password">
-          <input id="password" type="password" name="password" placeholder=" Password"/>
-          <img id="passwordImage" src="/resources/images/passwordIcon.png">
-        </div>
-        <div id="loginError">{$this->errorMessage}</div>
-        <input id="loginButton" type="submit" name="submit" value="Login"/>
-      </form>
-    </div>
+    <main>
+      <section id="loginPanel">
+        <h1>Admin Panel Login</h1>
+        <form method="post">
+          <div id="usernameSection">
+            <img id="userImage" src="/resources/images/userIcon.png" alt="User Icon">
+            <div class="line"></div>
+            <input id="username" type="text" name="username" placeholder="Email Address"/>
+          </div>
+          <div id="passwordSection">
+            <img id="passwordImage" src="/resources/images/passwordIcon.png" alt="Password Icon">
+            <div class="line"></div>
+            <input id="password" type="password" name="password" placeholder="Password"/>
+          </div>
+          <div id="loginError">{$this->errorMessage}</div>
+          <input id="loginButton" type="submit" name="submit" value="Login"/>
+        </form>
+      </section>
+    </main>
+
 HTML;
     }
 
