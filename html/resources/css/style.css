@@ -37,7 +37,7 @@ section#loginPanel h1 {
 section#loginPanel form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 2.778vh;
 }
 
 div.line {
