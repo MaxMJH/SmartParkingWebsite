@@ -40,13 +40,8 @@ class SearchController {
         }
 
         if(isset($_POST['addPressed']) && $_POST['addPressed'] == "Add") {
-            if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-                header('Location: add');
-                exit;
-            } else {
-                $this->isError = true;
-                $this->errorMessage .= ' Fields cannot be empty!';
-            }
+            header('Location: add');
+            exit;
         }
     }
 

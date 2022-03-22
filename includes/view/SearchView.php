@@ -18,19 +18,16 @@ class SearchView extends PageTemplateView {
 
 	  private function createSearchViewContent() {
 		   $this->htmlContent = <<<HTML
-<div id="container">
-  <div id="search">
-    <div id="searchBarLine"></div>
-    <form action="search" method="post">
-      <div id="searchBar">
-        <input id="searchBar" type="text" name="city" placeholder="Enter a City"/>
-        <img id="searchBarImage" src="/resources/images/searchIcon.png">
-        <input id="searchButton" type="submit" name="searchPressed" value="Search"/>
-        <input id="addButton" type="submit" name="addPressed" value="Add"/>
-      </div>
-    </form>
-  </div>
-</div>
+<main>
+  <form id="search" action="search" method="post">
+    <div id="searchBar">
+      <img id="searchBarImage" src="/resources/images/searchIcon.png">
+      <div id="searchBarLine"></div>
+      <input id="searchInput" type="text" name="city" placeholder="Enter a City"/>
+    </div>
+    <input id="searchButton" type="submit" name="searchPressed" value="Search"/>
+  </form>
+</main>
 
 HTML;
 	  }

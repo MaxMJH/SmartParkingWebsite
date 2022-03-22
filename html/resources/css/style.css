@@ -1,14 +1,17 @@
 body {
+  display: flex;
+  flex-direction: row;
   background-image: linear-gradient(#012837, #061920);
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
 }
 
 main {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 /* Login Section */
@@ -106,130 +109,118 @@ input#loginButton {
   margin-bottom: 5px;
 }
 
-/* Page Header */
-header {
+/* Page Aside */
+aside {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  width: 100vw;
-  height: 10vh;
-  background-image: linear-gradient(#0075A2, #005874);
-  box-shadow: 0px 10px 4px #0000002b;
+  width: 13.385vw;
+  height: 100vh;
+  background-color: #303030;
 }
 
-header h1 {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 1vw;
-  font-size: 20px;
-  font-weight: normal;
+div.welcome {
+  display: flex;
+  margin-top: 1.481vh;
+  justify-content: center;
+  flex-direction: column;
+}
+
+div.welcome img {
+  width: 4.479vw;
+  height: 7.973vh;
+  margin: auto;
+}
+
+div.welcome h1, div.welcome h2 {
+  margin: 0;
+  font-size: 1.563em;
   color: #FFFFFF;
+  font-weight: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
-header form {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 1vw;
+aside form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.481vh;
 }
 
-input#logoutButton {
+input#addButton, input#logoutButton {
   border: none;
   padding: 0;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 1.563rem;
   color: #FFFFFF;
 }
 
 /* Search Section */
-div#container {
-	width: 100%;
-  height: calc(100% - 105.6px);
-  position: fixed;
-  top: 105.6px;
-  left: 0px;
+form#search {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  margin: auto;
+  gap: 10px;
 }
 
-div#search {
-  width: calc(478px - 95.6px);
-  height: calc(134px - 26.8px);
-  position: fixed;
-  top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-div#searchBarLine {
-	background-color: #707070;
-  width: 2px;
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(12px - 2.4px);
-  left: calc(59px - 11.8px);
-  z-index: 1;
+form#searchResults {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 20%;
+  margin: auto;
+  margin-top: 10px;
+  gap: 10px;
 }
 
 div#searchBar {
-  background-color: #FFFFFF;
-  width: calc(478px - 95.6px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(12px - 2.4px);
-  left: 0px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 25vw;
+  height: 5vh;
   border-radius: 24px;
-}
-
-input#searchBar:focus {
-  outline: none;
-}
-
-input#searchBar:-webkit-autofill {
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-input#searchBar {
-  background-color: transparent;
-  width: calc(417px - 83.4px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(12px - 2.4px);
-  left: calc(61px - 12.2px);
-  border: none;
-  font-size: 20px;
-  color: #003B51;
+  background-color: #FFFFFF;
 }
 
 img#searchBarImage {
-  width: calc(69px - 13.8px);
-  height: calc(69px - 13.8px);
-  position: fixed;
-  top: 0px;
-  left: 0px;
+  width: 12%;
+  height: 100%;
 }
 
-input#searchButton {
-  background-color: #FFFFFF;
-  width: calc(239px - 47.8px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(87px - 17.4px);
-  left: 0px;
-  border-radius: 24px;
+div#searchBarLine {
+  background-color: #707070;
+  width: 2px;
+}
+
+input#searchInput {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
   border: none;
   font-size: 20px;
   color: #003B51;
 }
 
-input#addButton {
-	background-color: #FFFFFF;
-	width: calc(239px - 47.8px);
-	height: calc(47px - 9.4px);
-	position: fixed;
-	top: calc(87px - 17.4px);
-	right: 0px;
-	border-radius: 24px;
-	border: none;
-	font-size: 20px;
-	color: #003B51;
+input#searchInput:focus {
+  outline: none;
+}
+
+input#searchInput:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input#searchButton {
+  width: 10vw;
+  height: 5vh;
+  margin: auto;
+  border: none;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  font-size: 20px;
+  color: #003B51;
 }
 
 div#add {
@@ -348,33 +339,20 @@ input#returnButton {
 }
 
 div#search2 {
-  width: calc(769px - 153.8px);
-  height: calc(48px - 9.6px);
-  position: fixed;
-  top: 125.6px;
-  left: 50%;
-  transform: translate(-50%);
+  width: 100%;
 }
 
 div#searchBarLine2 {
-	background-color: #707070;
+  background-color: #707070;
   width: 2px;
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: 0px;
-  left: 62px;
-  z-index: 1;
 }
 
 div#searchBar2 {
   background-color: #FFFFFF;
   width: calc(478px - 95.6px);
   height: calc(47px - 9.4px);
-  position: fixed;
-  top: 0px;
-  left: 0px;
   border-radius: 24px;
-	margin: auto;
+  margin: auto;
 }
 
 input#searchBar2:focus {
@@ -389,9 +367,6 @@ input#searchBar2 {
   background-color: transparent;
   width: calc(417px - 104.4px);
   height: calc(47px - 9.4px);
-  position: fixed;
-  top: 0px;
-  left: 63px;
   border: none;
   font-size: 20px;
   color: #003B51;
@@ -400,18 +375,12 @@ input#searchBar2 {
 img#searchBarImage2 {
   width: calc(49px - 9.8px);
   height: calc(48px - 9.6px);
-  position: fixed;
-  top: 0px;
-  left: 15px;
 }
 
 input#searchButton2 {
   background-color: #FFFFFF;
   width: calc(239px - 47.8px);
   height: calc(47px - 9.4px);
-  position: fixed;
-  top: 0px;
-  left: 530px;
   border-radius: 24px;
   border: none;
   font-size: 20px;
@@ -419,59 +388,26 @@ input#searchButton2 {
 }
 
 div#results {
-	width: 100%;
-	height: calc(100% - 94px);
-	position: relative;
-  top: 80px;
-  left: 50%;
-  transform: translate(-50%);	
-	display: flex;
-	gap: 15px;
+  width: 100%;
+  height: 80%;	
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap: 10px;
 }
 
-div#fiveMinutes {
-	background-color: #FFFFFF;
-	flex: 1 1 0px;
-	margin-left: 15px;
-	box-shadow: 0px 5px 6px #0000002b;
-}
-
-div#hourly {
+div#fiveMinutes, div#hourly, div#daily {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   background-color: #FFFFFF;
-  flex: 1 1 0px;
-	box-shadow: 0px 5px 6px #0000002b;
+  box-shadow: 0px 5px 6px #0000002b;
 }
 
-div#daily {
-	background-color: #FFFFFF;
-	flex: 1 1 0px;
-	margin-right: 15px;
-	box-shadow: 0px 5px 6px #0000002b;
-}
-
-div#fiveMinutesTitle {
-	width: 141px;
-	height: 33px;
-	position: relative;
-  left: calc(50% - 70.5px);
-  font-size: 20px;
-  color: #003B51;	
-}
-
-div#hourlyTitle {
-  width: 74px;
-  height: 33px;
-  position: relative;
-  left: calc(50% - 37px);
-  font-size: 20px;
-  color: #003B51;
-}
-
-div#dailyTitle {
-  width: 56px;
-  height: 33px;
-  position: relative;
-  left: calc(50% - 28px);
+div#fiveMinutesTitle, div#hourlyTitle, div#dailyTitle {
   font-size: 20px;
   color: #003B51;
 }
@@ -485,26 +421,21 @@ div#fiveMinutesLine, div#hourlyLine, div#dailyLine {
   border-radius: 3px;
 }
 
-div#table {
-	position: relative;
-	height: 100%;
+table {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-div#table table {
-	overflow-y: scroll;
-	width: 100%;
-	height: 96.9%;
-	display: block;
+table th {
+  width: 10%;
 }
 
-div#table th {
-	width: 10%;
+table td {
+  text-align: center;
 }
 
-div#table td {
-	text-align: center;
-}
-
-div#table tbody {
-	height: 100%;
+table tbody {
+  height: 100%;
 }

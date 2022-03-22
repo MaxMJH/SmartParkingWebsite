@@ -23,20 +23,21 @@ class ResultsController {
             exit;
         }
 
-        $isError = false;
-        $errorMessage = '';
+        $this->isError = false;
+        $this->errorMessage = '';
         $this->resultsModel = new ResultsModel;
-        $this->processResultsTable();
+	$this->processResultsTable();
         $this->view = new ResultsView;
 
         if(isset($_POST['resultsSearch']) && $_POST['resultsSearch'] == "Search") {
-            if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-                $this->searchModel = new SearchModel;
+	    if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
+		$this->searchModel = new SearchModel;
                 $this->validate();
                 $this->processSearch();
+		$this->processResultsTable();
             } else {
                 $this->isError = true;
-                $this->errorMesssage .= ' Fields cannot be empty!';
+                $this->errorMessage .= ' Fields cannot be empty!';
             }
         }
     }
@@ -44,6 +45,10 @@ class ResultsController {
     public function __destruct() {}
 
     public function processResultsTable() {
+	$_SESSION['fiveMinutes'] = null;
+	$_SESSION['hourly'] = null;
+	$_SESSION['daily'] = null;
+
         $this->resultsModel->populateModel($_SESSION['cityID']);
 
         $fiveMinutes = $this->resultsModel->getFiveMinutes();
@@ -83,7 +88,7 @@ class ResultsController {
             $this->validatedInput = $validatedCityName;
         } else {
             $this->isError = true;
-            $this->erorrMessage .= ' The city you entered must be within 3 and 30 characters!';
+            $this->errorMessage .= ' The city you entered must be within 3 and 30 characters!';
         }
     }
 
@@ -112,12 +117,12 @@ class ResultsController {
     }
 
     public function getHtmlOutput() {
-        //if($this->isError) {
-        //    $_SESSION['error'] = $this->errorMessage;
-        //
-				//		header('Location: error');
-        //    exit();
-        //}
+        if($this->isError) {
+            $_SESSION['error'] = $this->errorMessage;
+
+            header('Location: error');
+            exit();
+        }
 
         $this->view->createResultsViewPage();
         return $this->view->getHtmlOutput();

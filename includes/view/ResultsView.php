@@ -18,74 +18,72 @@ class ResultsView extends PageTemplateView {
 
     public function createResultsViewContent() {
         $this->htmlContent = <<<HTML
-<div id="container">
-  <div id="search2">
-    <div id="searchBarLine2"></div>
-    <form action="results" method="post">
-      <div id="searchBar2">
-        <input id="searchBar2" type="text" name="city" placeholder="Enter a City"/>
-        <img id="searchBarImage2" src="/resources/images/searchIcon.png">
-        <input id="searchButton2" type="submit" name="resultsSearch" value="Search"/>
+  <main>
+    <form id="searchResults" action="results" method="post">
+      <div id="searchBar">
+        <img id="searchBarImage" src="/resources/images/searchIcon.png">
+        <div id="searchBarLine"></div>
+        <input id="searchInput" type="text" name="city" placeholder="Enter a City"/>
       </div>
+      <input id="searchButton" type="submit" name="resultsSearch" value="Search"/>
     </form>
-  </div>
-  <div id="results">
-    <div id="fiveMinutes">
-      <div id="fiveMinutesTitle">Five Minutes</div>
-      <div id="fiveMinutesLine"></div>
-      <div id="table">
-	<table>
-	  <tr>
-	    <th>ID</th>
-	    <th>Carpark ID</th>
-      <th>Record Time</th>
-	    <th>Occupied Spaces</th>
-      <th>Is Open</th>
-	  </tr>
-HTML;
-
-        $this->setFiveMinutesTable();
-        $this->htmlContent .= <<<HTML
-</table
-  </div>
-    </div>
-      </div>
-      <div id="hourly">
-      <div id="hourlyTitle">Hourly</div>
-      <div id="hourlyLine"></div>
-      <div id="table">
-        <table>
-	      <tr>
-	        <th>ID</th>
-	        <th>Carpark ID</th>
-	        <th>Record Time</th>
-          <th>Average Occupied Spaces</th>
-	      </tr>
-HTML;
-
-				$this->setHourlyTable();
-        $this->htmlContent .= <<<HTML
-</table>
-  </div>
-    </div>
-      <div id="daily">
-      <div id="dailyTitle">Daily</div>
-      <div id="dailyLine"></div>
-      <div id="table">
+    <div id="results">
+      <div id="fiveMinutes">
+        <div id="fiveMinutesTitle">Five Minutes</div>
+        <div id="fiveMinutesLine"></div>
         <table>
           <tr>
             <th>ID</th>
             <th>Carpark ID</th>
             <th>Record Time</th>
-            <th>Average Occupied Spaces</th>
+            <th>Occupied Spaces</th>
+            <th>Is Open</th>
           </tr>
+HTML;
+
+        $this->setFiveMinutesTable();
+        $this->htmlContent .= <<<HTML
+
+        </table
+      </div>
+    </div>
+    <div id="hourly">
+      <div id="hourlyTitle">Hourly</div>
+      <div id="hourlyLine"></div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Carpark ID</th>
+          <th>Record Time</th>
+          <th>Average Occupied Spaces</th>
+        </tr>
+HTML;
+
+        $this->setHourlyTable();
+        $this->htmlContent .= <<<HTML
+
+      </table>
+    </div>
+    <div id="daily">
+      <div id="dailyTitle">Daily</div>
+      <div id="dailyLine"></div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Carpark ID</th>
+          <th>Record Time</th>
+          <th>Average Occupied Spaces</th>
+        </tr>
 HTML;
 
         $this->setDailyTable();
         $this->htmlContent .= <<<HTML
+
+        </table>
+      </div>
     </div>
-  </div>
-</div>
+  </main>
+
 HTML;
     }
 
@@ -99,13 +97,14 @@ HTML;
                 $isOpen = $_SESSION['fiveMinutes'][$i]['isOpen'] == 1 ? 'True' : 'False'; // PHP is odd...
 
                 $this->htmlContent .= <<<HTML
-<tr>
-  <td>{$fiveMinutesID}</td>
-  <td>{$carparkID}</td>
-  <td>{$recordVersionTime}</td>
-  <td>{$occupiedSpaces}</td>
-  <td>{$isOpen}</td>
-</tr>
+
+          <tr>
+            <td>{$fiveMinutesID}</td>
+            <td>{$carparkID}</td>
+            <td>{$recordVersionTime}</td>
+            <td>{$occupiedSpaces}</td>
+            <td>{$isOpen}</td>
+          </tr>
 HTML;
             }
         }
@@ -120,12 +119,13 @@ HTML;
                 $averageOccupiedSpaces = $_SESSION['hourly'][$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
-<tr>
-  <td>{$hourlyID}</td>
-  <td>{$carparkID}</td>
-  <td>{$recordVersionTime}</td>
-  <td>{$averageOccupiedSpaces}</td>
-</tr>
+
+          <tr>
+            <td>{$hourlyID}</td>
+            <td>{$carparkID}</td>
+            <td>{$recordVersionTime}</td>
+            <td>{$averageOccupiedSpaces}</td>
+          </tr>
 HTML;
             }
         }
@@ -140,12 +140,13 @@ HTML;
                 $averageOccupiedSpaces = $_SESSION['daily'][$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
-<tr>
-  <td>{$dailyID}</td>
-  <td>{$carparkID}</td>
-  <td>{$recordVersionTime}</td>
-  <td>{$averageOccupiedSpaces}</td>
-</tr>
+
+          <tr>
+            <td>{$dailyID}</td>
+            <td>{$carparkID}</td>
+            <td>{$recordVersionTime}</td>
+            <td>{$averageOccupiedSpaces}</td>
+          </tr>
 HTML;
             }
         }
