@@ -7,7 +7,7 @@ body {
 }
 
 main {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -141,13 +141,21 @@ div.welcome h1, div.welcome h2 {
   text-align: center;
 }
 
+div.menuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 aside form {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1.481vh;
+  width: 75%;
+  text-align: center;
 }
 
-input#addButton, input#logoutButton {
+input#addButtonMenu, input#logoutButtonMenu, input#searchButtonMenu {
   border: none;
   padding: 0;
   background-color: transparent;
@@ -169,9 +177,8 @@ form#searchResults {
   display: flex;
   flex-direction: row;
   width: auto;
-  height: 20%;
-  margin: auto;
-  margin-top: 10px;
+  height: 6%;
+  margin: 0 auto;
   gap: 10px;
 }
 
@@ -228,8 +235,8 @@ div#add {
   height: calc(600px);
   position: fixed;
   top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 input#enterCityBar {
@@ -240,7 +247,7 @@ input#enterCityBar {
   top: calc(12px - 2.4px);
   left: 0px;
   border-radius: 24px;
-	border: none;
+  border: none;
   font-size: 20px;
   color: #003B51;
 }
@@ -253,7 +260,7 @@ input#enterXMLBar {
   top: calc(52px);
   left: 0px;
   border-radius: 24px;
-	border: none;
+  border: none;
   font-size: 20px;
   color: #003B51;
 }
@@ -266,7 +273,7 @@ input#enterTagsBar {
   top: calc(94.4px);
   left: 0px;
   border-radius: 24px;
-	border: none;
+  border: none;
   font-size: 20px;
   color: #003B51;
 }
@@ -285,18 +292,18 @@ input#addCityButton {
 }
 
 div#error {
-	background-color: #FFFFFF;
-	width: calc(600px - 120px);
-	height: calc(400px - 80px);
-	position: fixed;
-	top: 50%;
+  background-color: #FFFFFF;
+  width: calc(600px - 120px);
+  height: calc(400px - 80px);
+  position: fixed;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	box-shadow: 0px 10px 4px #0000002b;
+  box-shadow: 0px 10px 4px #0000002b;
 }
 
 div#errorTitle {
-	width: calc(58px - 11.6px);
+  width: calc(58px - 11.6px);
   height: calc(33px - 6.6px);
   position: fixed;
   top: calc(16px - 3.2px);
@@ -306,7 +313,7 @@ div#errorTitle {
 }
 
 div#errorLine {
-	background-color: #F0F0F0;
+  background-color: #F0F0F0;
   width: calc(437px - 87.4px);
   height: 1px;
   position: fixed;
@@ -316,84 +323,34 @@ div#errorLine {
 }
 
 div#errorBox {
-	background-color: #FFFFFF;
-	width: calc(564px - 112.8px);
-	height: calc(265px - 53px);
-	position: fixed;
-	top: calc(72px - 14.4px);
-	left: calc(18px - 3.6px);
+  background-color: #FFFFFF;
+  width: calc(564px - 112.8px);
+  height: calc(265px - 53px);
+  position: fixed;
+  top: calc(72px - 14.4px);
+  left: calc(18px - 3.6px);
 }
 
 input#returnButton {
-	background-color: #FFFFFF;
+  background-color: #FFFFFF;
   width: calc(239px - 47.8px);
   height: calc(47px - 9.4px);
   position: fixed;
   top: calc(337px - 67.4px);
   left: calc(181px - 36.2px);
   border-radius: 24px;
-	border: none;
-	box-shadow: 0px 3px 6px #0000002b;
-  font-size: 20px;
-  color: #003B51;
-}
-
-div#search2 {
-  width: 100%;
-}
-
-div#searchBarLine2 {
-  background-color: #707070;
-  width: 2px;
-}
-
-div#searchBar2 {
-  background-color: #FFFFFF;
-  width: calc(478px - 95.6px);
-  height: calc(47px - 9.4px);
-  border-radius: 24px;
-  margin: auto;
-}
-
-input#searchBar2:focus {
-  outline: none;
-}
-
-input#searchBar2:-webkit-autofill {
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-input#searchBar2 {
-  background-color: transparent;
-  width: calc(417px - 104.4px);
-  height: calc(47px - 9.4px);
   border: none;
-  font-size: 20px;
-  color: #003B51;
-}
-
-img#searchBarImage2 {
-  width: calc(49px - 9.8px);
-  height: calc(48px - 9.6px);
-}
-
-input#searchButton2 {
-  background-color: #FFFFFF;
-  width: calc(239px - 47.8px);
-  height: calc(47px - 9.4px);
-  border-radius: 24px;
-  border: none;
+  box-shadow: 0px 3px 6px #0000002b;
   font-size: 20px;
   color: #003B51;
 }
 
 div#results {
   width: 100%;
-  height: 80%;	
+  height: 90%;	
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
-  margin-bottom: 10px;
   gap: 10px;
 }
 
@@ -405,6 +362,14 @@ div#fiveMinutes, div#hourly, div#daily {
   height: 100%;
   background-color: #FFFFFF;
   box-shadow: 0px 5px 6px #0000002b;
+}
+
+div#fiveMinutes {
+  margin-left: 10px;
+}
+
+div#daily {
+  margin-right: 10px;
 }
 
 div#fiveMinutesTitle, div#hourlyTitle, div#dailyTitle {
