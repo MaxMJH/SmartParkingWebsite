@@ -68,6 +68,7 @@ class LoginController {
                 $_SESSION['userID'] = $user['result'][0]['userID'];
                 $_SESSION['emailAddress'] = $user['result'][0]['emailAddress'];
                 $_SESSION['firstName'] = $user['result'][0]['firstName'];
+                $_SESSION['lastName'] = $user['result'][0]['lastName'];
                 $_SESSION['profilePicture'] = $user['result'][0]['profilePicture'];
 
                 header('Location: search');

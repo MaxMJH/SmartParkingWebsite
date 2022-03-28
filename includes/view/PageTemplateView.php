@@ -28,22 +28,25 @@ class PageTemplateView {
   </head>
   <body>
     <aside>
-        <div class="welcome">
-            <img src={$this->image}>
-            <h1>Welcome back,</h1>
-            <h2>{$_SESSION['firstName']}</h2>
-        </div>
-        <div class="menuItems">
-          <form action="add" method="post">
-              <input id="addButtonMenu" type="submit" name="addPressed" value="Add">
-          </form>
-          <form action="search" method="post">
-              <input id="searchButtonMenu" type="submit" name="search" value="Search">
-          </form>
-        </div>
-        <form method="post">
-          <input id="logoutButtonMenu" type="submit" name="logout" value="Logout"/>
+      <div class="welcome">
+        <img src={$this->image} alt="Profile Picture">
+        <h1>Welcome back,</h1>
+        <h2>{$_SESSION['firstName']} {$_SESSION['lastName']}</h2>
+      </div>
+      <div class="menuItems">
+        <form action="add" method="post">
+          <input id="addButtonMenu" type="submit" name="addPressed" value="Add City">
         </form>
+        <form action="search" method="post">
+          <input id="searchButtonMenu" type="submit" name="search" value="City Search">
+        </form>
+        <form action="search" method="post">
+          <input id="settingsButtonMenu" type="submit" name="search" value="Settings">
+        </form>
+      </div>
+      <form method="post">
+        <input id="logoutButtonMenu" type="submit" name="logout" value="Logout"/>
+      </form>
     </aside>
 
 HTML;

@@ -156,7 +156,7 @@ aside form {
   text-align: center;
 }
 
-input#addButtonMenu, input#logoutButtonMenu, input#searchButtonMenu {
+input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu {
   border: none;
   padding: 0;
   background-color: transparent;
