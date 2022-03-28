@@ -52,7 +52,7 @@ class LoginController {
 
         $saltAndPepper = $this->model->getSaltAndPepper();
 
-				if($saltAndPepper['queryOK'] === true) {
+        if($saltAndPepper['queryOK'] === true) {
             $salt = $saltAndPepper['result'][0]['salt'];
             $pepper = $saltAndPepper['result'][0]['pepper'];
             $password = Encryption::hashPassword($salt, $this->validatedInputs['password'], $pepper);
@@ -67,7 +67,6 @@ class LoginController {
             if($user['result'][0]['isAdmin'] === '1') {
                 $_SESSION['userID'] = $user['result'][0]['userID'];
                 $_SESSION['emailAddress'] = $user['result'][0]['emailAddress'];
-                $_SESSION['password'] = $user['result'][0]['password'];
 
                 header('Location: search');
                 exit;
