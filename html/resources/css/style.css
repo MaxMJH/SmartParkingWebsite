@@ -127,9 +127,10 @@ div.welcome {
 }
 
 div.welcome img {
-  width: 4.479vw;
-  height: 7.973vh;
+  width: 100px;
+  height: 100px;
   margin: auto;
+  border-radius: 100px;
 }
 
 div.welcome h1, div.welcome h2 {

@@ -5,11 +5,13 @@ class PageTemplateView {
     protected $htmlOutput;
     protected $htmlTitle;
     protected $htmlContent;
+    private $image;
 
     public function __construct() {
         $this->htmlOutput = '';
         $this->htmlTitle = '';
         $this->htmlContent = '';
+        $this->image = 'data:' . 'image/jpg;base64,' . base64_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../includes/images/' . $_SESSION['profilePicture']));
     }
 
     public function __destruct() {}
@@ -27,9 +29,9 @@ class PageTemplateView {
   <body>
     <aside>
         <div class="welcome">
-            <img>
+            <img src={$this->image}>
             <h1>Welcome back,</h1>
-            <h2>{$_SESSION['emailAddress']}</h2>
+            <h2>{$_SESSION['firstName']}</h2>
         </div>
         <div class="menuItems">
           <form action="add" method="post">
