@@ -149,9 +149,7 @@ div.menuItems {
 }
 
 aside form {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.481vh;
+  margin: 1.481vh auto 1.481vh auto;
   width: 75%;
   text-align: center;
 }
@@ -162,6 +160,11 @@ input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#log
   background-color: transparent;
   font-size: 1.563rem;
   color: #FFFFFF;
+}
+
+hr {
+  margin: 0 auto;
+  width: 75%;
 }
 
 /* Search Section */
