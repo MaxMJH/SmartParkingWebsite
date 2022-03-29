@@ -24,24 +24,20 @@ class SearchController {
             exit;
         }
 
-        $this->view = new SearchView;
         $this->model = new SearchModel;
+        $this->setupCities();
+        $this->view = new SearchView;
+        $this->validatedInput = '';
         $this->errorMessage = '';
         $this->isError = false;
 
-        if(isset($_POST['searchPressed']) && $_POST['searchPressed'] == "Search") {
-            if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
-                $this->validate();
-                $this->process();
-            } else {
-                $this->isError = true;
-                $this->errorMessage .= ' Fields cannot be empty!';
-            }
-        }
+        if(isset($_POST['city'])) {
+            // Unset CityID and CityName.
+            unset($_SESSION['cityID']);
+            unset($_SESSION['cityName']);
 
-        if(isset($_POST['addPressed']) && $_POST['addPressed'] == "Add") {
-            header('Location: add');
-            exit;
+            $this->validate();
+            $this->process();
         }
     }
 
@@ -56,29 +52,24 @@ class SearchController {
             $this->validatedInput = $validatedCityName;
         } else {
             $this->isError = true;
-            $this->errorMessage .= ' The city you entered must be within 3 and 30 characters!';
+            $this->errorMessage .= ' The city entered does not exist!';
         }
     }
 
     public function process() {
-        $this->model->populateModel($this->validatedInput);
+        $this->model->setCityID($_POST['city']);
 
-        $city = $this->model->getCity();
-        if($city['queryOK'] === true) {
-            if($city['result'][0]['cityName'] == $this->validatedInput) {
-                $_SESSION['cityID'] = $city['result'][0]['cityID'];
-                $_SESSION['cityName'] = $city['result'][0]['cityName'];
+        $_SESSION['cityID'] = $this->model->getCityID();
+        $_SESSION['cityName'] = $_POST['city'];
 
-                header('Location: results');
-                exit();
-            } else {
-                $this->isError = true;
-                $this->errorMessage .= ' This city does not exist!';
-            }
-        } else {
-            $this->isError = true;
-            $this->errorMessage .= ' ' . $city['result'];
-        }
+        header('Location: results');
+        exit();
+    }
+
+    public function setupCities() {
+        $this->model->setCities();
+
+        $_SESSION['cities'] = $this->model->getCities();
     }
 
     public function getHtmlOutput() {

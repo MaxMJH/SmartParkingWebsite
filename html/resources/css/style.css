@@ -168,67 +168,17 @@ input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#log
 form#search {
   display: flex;
   flex-direction: column;
-  width: auto;
-  height: auto;
-  margin: auto;
-  gap: 10px;
-}
-
-form#searchResults {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: 6%;
-  margin: 0 auto;
-  gap: 10px;
-}
-
-div#searchBar {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  width: 25vw;
-  height: 5vh;
-  border-radius: 24px;
-  background-color: #FFFFFF;
-}
-
-img#searchBarImage {
-  width: 12%;
+  width: calc(100% - 114px);
   height: 100%;
+  margin: 113px 114px 0 114px;
+  gap: 267px;
 }
 
-div#searchBarLine {
-  background-color: #707070;
-  width: 2px;
-}
-
-input#searchInput {
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
+form#search input {
+  width: 300px;
+  height: 300px;
   border: none;
-  font-size: 20px;
-  color: #003B51;
-}
-
-input#searchInput:focus {
-  outline: none;
-}
-
-input#searchInput:-webkit-autofill {
-  transition: background-color 5000s ease-in-out 0s;
-}
-
-input#searchButton {
-  width: 10vw;
-  height: 5vh;
-  margin: auto;
-  border: none;
-  background-color: #FFFFFF;
-  border-radius: 24px;
-  font-size: 20px;
-  color: #003B51;
+  font-size: 1.563em;
 }
 
 div#add {
@@ -348,10 +298,10 @@ input#returnButton {
 
 div#results {
   width: 100%;
-  height: 90%;	
+  height: calc(100% - 20px);	
   display: flex;
   justify-content: space-around;
-  margin-top: 10px;
+  margin: 10px 0;
   gap: 10px;
 }
 

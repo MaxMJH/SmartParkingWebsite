@@ -20,17 +20,24 @@ class SearchView extends PageTemplateView {
 		   $this->htmlContent = <<<HTML
 <main>
   <form id="search" action="search" method="post">
-    <div id="searchBar">
-      <img id="searchBarImage" src="/resources/images/searchIcon.png">
-      <div id="searchBarLine"></div>
-      <input id="searchInput" type="text" name="city" placeholder="Enter a City"/>
-    </div>
-    <input id="searchButton" type="submit" name="searchPressed" value="Search"/>
+HTML;
+
+                   $this->listCities();
+
+                   $this->htmlContent .= <<<HTML
   </form>
 </main>
 
 HTML;
 	  }
+
+          private function listCities() {
+              for($i = 0; $i < count($_SESSION['cities']); $i++) {
+                  $this->htmlContent .= <<<HTML
+    <input type="submit" name="city" value="{$_SESSION['cities'][$i]}"/>
+HTML;
+              }
+          }
 
 	  public function getHtmlOutput() {
 		  return $this->htmlOutput;

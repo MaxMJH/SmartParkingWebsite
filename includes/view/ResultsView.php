@@ -19,14 +19,6 @@ class ResultsView extends PageTemplateView {
     public function createResultsViewContent() {
         $this->htmlContent = <<<HTML
   <main>
-    <form id="searchResults" action="results" method="post">
-      <div id="searchBar">
-        <img id="searchBarImage" src="/resources/images/searchIcon.png">
-        <div id="searchBarLine"></div>
-        <input id="searchInput" type="text" name="city" placeholder="Enter a City"/>
-      </div>
-      <input id="searchButton" type="submit" name="resultsSearch" value="Search"/>
-    </form>
     <div id="results">
       <div id="fiveMinutes">
         <div id="fiveMinutesTitle">Five Minutes</div>

@@ -21,6 +21,11 @@ class Queries {
         return $query;
     }
 
+    public static function getCities() {
+        $query = 'SELECT City.cityID, City.cityName FROM City;';
+        return $query;
+    }
+
     public static function getFiveMinutes() {
         $query = 'SELECT FiveMinutes.fiveMinutesID, FiveMinutes.carparkID, FiveMinutes.recordVersionTime, FiveMinutes.occupiedSpaces, FiveMinutes.isOpen FROM FiveMinutes INNER JOIN Carpark ON FiveMinutes.carparkID = Carpark.carparkID INNER JOIN City ON Carpark.cityID = City.cityID WHERE City.cityID = :cityID;';
         return $query;
