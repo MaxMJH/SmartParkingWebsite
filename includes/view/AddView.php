@@ -18,16 +18,29 @@ class AddView extends PageTemplateView {
 
     private function createSearchViewContent() {
         $this->htmlContent = <<<HTML
-<div id="container">
+<main>
+  <div id="addInfo">
+    <h1>Add a new city</h1>
+    <p>
+      If more data has been made available in XML form, you can
+      now add the city to the database.
+    </p>
+    <h2>To add the city, you must do the following steps:</h2>
+    <ul>
+      <li>Identify and enter the name of the city.</li>
+      <li>Identify the XML URL and enter it into the correct field. NOTE - THE URL MUST END IN .XML</li>
+      <li>Identify the appropriate elements within the XML. By default there are already pre-defined tags, however, if some tags are missing, you must contact the System Administrator.</li>
+    </ul>
+  </div>
   <div id="add">
-    <form action="add" method="post">
-      <input id="enterCityBar" type="text" name="city" placeholder="Enter a City"/>
-      <input id="enterXMLBar" type="text" name="xml" placeholder="Enter XML URL"/>
-      <input id="enterTagsBar" type="text" name="tags" placeholder="Enter Tags"/>
+    <form id="add" action="add" method="post">
+      <input id="city" type="text" name="city" placeholder="Enter a City"/>
+      <input id="xmlURL" type="text" name="xmlURL" placeholder="Enter XML URL"/>
+      <textarea id="elements" type="text" name="elements" placeholder="Enter Elements"></textarea>
       <input id="addCityButton" type="submit" name="addCityPressed" value="Add City"/>
     </form>
   </div>
-</div>
+</main>
 HTML;
     }
 

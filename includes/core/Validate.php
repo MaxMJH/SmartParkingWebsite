@@ -31,8 +31,52 @@ class Validate {
 
         if(strlen($city) >= 3 && strlen($city) <= 30) {
             $sanitisedCityName = filter_var($city, FILTER_SANITIZE_STRING);
+
+            if($this->isIllegal($sanitisedCityName)) {
+                return false;
+            }
         }
 
         return $sanitisedCityName;
+    }
+
+    public function validateXMLURL($xmlURL) {
+        $sanitisedXMLURL = false;
+
+        if(filter_var($xmlURL, FILTER_VALIDATE_URL)) {
+	    $sanitisedXMLURL = filter_var($xmlURL, FILTER_SANITIZE_URL);
+
+            if($this->isIllegal($sanitisedXMLURL)) {
+                return false;
+            }
+        }
+
+        return $sanitisedXMLURL;
+    }
+
+    public function validateElements($elements) {
+        $sanitisedElements = false;
+
+        if(strlen($elements) >= 3 && strlen($elements) <= 150) {
+            $sanitisedElements = filter_var($elements, FILTER_SANITIZE_STRING);
+
+            if($this->isIllegal($sanitisedElements)) {
+                return false;
+            }
+        }
+
+        return $sanitisedElements;
+    }
+
+    private function isIllegal($offendingString) {
+        $offendingChars = array(';', '&', '&&', '|', '||', '`', '(', ')', '#');
+
+	for($i = 0; $i < strlen($offendingString); $i++) {
+            if(in_array($offendingString[$i], $offendingChars)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

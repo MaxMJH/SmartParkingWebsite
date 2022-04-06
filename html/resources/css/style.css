@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis');
+
+html {
+  font-family: 'Dosis', sans-serif;
+}
+
 body {
   display: flex;
   flex-direction: row;
@@ -11,8 +17,9 @@ main {
   height: 100vh;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  overflow-y: scroll;
+  align-items: center;
+  flex-direction: row;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -190,67 +197,88 @@ form#search input {
   box-shadow: 5px 15px 10px #00000080;
 }
 
+/* Add Section */
+div#addInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+div#addInfo h1, div#addInfo h2, div#addInfo p {
+  color: #FFFFFF;
+  margin: 0;
+  width: 680px;
+}
+
+div#addInfo h2 {
+  margin-top: 43px;
+}
+
+div#addInfo ul {
+  width: 680px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
 div#add {
-  width: calc(478px - 95.6px);
-  height: calc(600px);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 50vw;
 }
 
-input#enterCityBar {
+form#add {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  margin: auto;
+  gap: 56px;
+}
+
+input#city {
+  width: 520px;
+  height: 70px;
   background-color: #FFFFFF;
-  width: calc(478px - 95.6px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(12px - 2.4px);
-  left: 0px;
-  border-radius: 24px;
   border: none;
-  font-size: 20px;
+  font-size: 1.563rem;
+  color: #003B51; 
+}
+
+input#xmlURL {
+  width: 520px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: none;
+  font-size: 1.563rem;
   color: #003B51;
 }
 
-input#enterXMLBar {
+textarea#elements {
+  width: 520px;
+  height: 400px;
   background-color: #FFFFFF;
-  width: calc(478px - 95.6px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(52px);
-  left: 0px;
-  border-radius: 24px;
   border: none;
-  font-size: 20px;
+  font-size: 1.563rem;
   color: #003B51;
+  resize: none;
 }
 
-input#enterTagsBar {
-  background-color: #FFFFFF;
-  width: calc(478px - 95.6px);
-  height: calc(478px - 95.6px);
-  position: fixed;
-  top: calc(94.4px);
-  left: 0px;
-  border-radius: 24px;
-  border: none;
-  font-size: 20px;
-  color: #003B51;
+input#city:focus, input#xmlURL:focus, textarea#elements:focus {
+  outline: none;
 }
+
+input#city:-webkit-autofill, input#xmlURL:-webkit-autofill, textarea#elements:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+} 
 
 input#addCityButton {
+  width: 520px;
+  height: 70px;
   background-color: #FFFFFF;
-  width: calc(239px - 47.8px);
-  height: calc(47px - 9.4px);
-  position: fixed;
-  top: calc(490px);
-  right: 0px;
-  border-radius: 24px;
   border: none;
-  font-size: 20px;
+  font-size: 1.563rem;
   color: #003B51;
 }
 
+/* Error Section */
 div#error {
   background-color: #FFFFFF;
   width: calc(600px - 120px);
