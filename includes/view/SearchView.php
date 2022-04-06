@@ -35,6 +35,16 @@ HTML;
               for($i = 0; $i < count($_SESSION['cities']); $i++) {
                   $this->htmlContent .= <<<HTML
     <input type="submit" name="city" value="{$_SESSION['cities'][$i]}"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+    <input type="submit" name="city" value="Placeholder"/>
+
 HTML;
               }
           }

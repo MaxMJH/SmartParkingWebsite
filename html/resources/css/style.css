@@ -12,6 +12,8 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /* Login Section */
@@ -160,6 +162,7 @@ input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#log
   background-color: transparent;
   font-size: 1.563rem;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 hr {
@@ -170,11 +173,13 @@ hr {
 /* Search Section */
 form#search {
   display: flex;
-  flex-direction: column;
-  width: calc(100% - 114px);
-  height: 100%;
-  margin: 113px 114px 0 114px;
-  gap: 267px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(100% - 228px);
+  height: calc(100% - 226px);
+  margin: 113px 114px;
+  gap: 114px;
 }
 
 form#search input {
@@ -182,6 +187,7 @@ form#search input {
   height: 300px;
   border: none;
   font-size: 1.563em;
+  box-shadow: 5px 15px 10px #00000080;
 }
 
 div#add {
