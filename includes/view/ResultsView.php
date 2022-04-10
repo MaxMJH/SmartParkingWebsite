@@ -19,61 +19,66 @@ class ResultsView extends PageTemplateView {
     public function createResultsViewContent() {
         $this->htmlContent = <<<HTML
   <main>
-    <div id="results">
-      <div id="fiveMinutes">
-        <div id="fiveMinutesTitle">Five Minutes</div>
-        <div id="fiveMinutesLine"></div>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Carpark ID</th>
-            <th>Record Time</th>
-            <th>Occupied Spaces</th>
-            <th>Is Open</th>
-          </tr>
+    <section id="results">
+      <div id="results">
+        <div id="fiveMinutes">
+          <div id="fiveMinutesTitle">Five Minutes</div>
+          <div id="fiveMinutesLine"></div>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Carpark ID</th>
+              <th>Record Time</th>
+              <th>Occupied Spaces</th>
+              <th>Is Open</th>
+            </tr>
 HTML;
 
         $this->setFiveMinutesTable();
         $this->htmlContent .= <<<HTML
 
-        </table
+          </table
+        </div>
       </div>
-    </div>
-    <div id="hourly">
-      <div id="hourlyTitle">Hourly</div>
-      <div id="hourlyLine"></div>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Carpark ID</th>
-          <th>Record Time</th>
-          <th>Average Occupied Spaces</th>
-        </tr>
+      <div id="hourly">
+        <div id="hourlyTitle">Hourly</div>
+        <div id="hourlyLine"></div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Carpark ID</th>
+            <th>Record Time</th>
+            <th>Average Occupied Spaces</th>
+          </tr>
 HTML;
 
         $this->setHourlyTable();
         $this->htmlContent .= <<<HTML
 
-      </table>
-    </div>
-    <div id="daily">
-      <div id="dailyTitle">Daily</div>
-      <div id="dailyLine"></div>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Carpark ID</th>
-          <th>Record Time</th>
-          <th>Average Occupied Spaces</th>
-        </tr>
+        </table>
+      </div>
+      <div id="daily">
+        <div id="dailyTitle">Daily</div>
+        <div id="dailyLine"></div>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Carpark ID</th>
+            <th>Record Time</th>
+            <th>Average Occupied Spaces</th>
+          </tr>
 HTML;
 
         $this->setDailyTable();
         $this->htmlContent .= <<<HTML
 
-        </table>
+          </table>
+        </div>
       </div>
-    </div>
+      <div id="carparks">
+        
+      </div>
+    </section>
   </main>
 
 HTML;
@@ -125,7 +130,7 @@ HTML;
 
     private function setDailyTable() {
         if(isset($_SESSION['daily'])) {
-			      for($i = 0; $i < count($_SESSION['daily']); $i++) {
+            for($i = 0; $i < count($_SESSION['daily']); $i++) {
                 $dailyID = $_SESSION['daily'][$i]['dailyID'];
                 $carparkID = $_SESSION['daily'][$i]['carparkID'];
                 $recordVersionTime = $_SESSION['daily'][$i]['recordVersionTime'];
@@ -144,7 +149,7 @@ HTML;
         }
     }
 
-	  public function getHtmlOutput() {
-		    return $this->htmlOutput;
-	  }
+    public function getHtmlOutput() {
+        return $this->htmlOutput;
+    }
 }
