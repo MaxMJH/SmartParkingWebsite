@@ -85,13 +85,15 @@ HTML;
     }
 
     private function setFiveMinutesTable() {
-        if(isset($_SESSION['fiveMinutes'])) {
-            for($i = 0; $i < count($_SESSION['fiveMinutes']); $i++) {
-                $fiveMinutesID = $_SESSION['fiveMinutes'][$i]['fiveMinutesID'];
-                $carparkID = $_SESSION['fiveMinutes'][$i]['carparkID'];
-                $recordVersionTime = $_SESSION['fiveMinutes'][$i]['recordVersionTime'];
-                $occupiedSpaces = $_SESSION['fiveMinutes'][$i]['occupiedSpaces'];
-                $isOpen = $_SESSION['fiveMinutes'][$i]['isOpen'] == 1 ? 'True' : 'False'; // PHP is odd...
+        if(isset($_SESSION['results'])) {
+            $fiveMinutes = unserialize($_SESSION['results'])->getFiveMinutes();
+
+            for($i = 0; $i < count($fiveMinutes); $i++) {
+                $fiveMinutesID = $fiveMinutes[$i]['fiveMinutesID'];
+                $carparkID = $fiveMinutes[$i]['carparkID'];
+                $recordVersionTime = $fiveMinutes[$i]['recordVersionTime'];
+                $occupiedSpaces = $fiveMinutes[$i]['occupiedSpaces'];
+                $isOpen = $fiveMinutes[$i]['isOpen'] == 1 ? 'True' : 'False'; // PHP is odd...
 
                 $this->htmlContent .= <<<HTML
 
@@ -108,12 +110,14 @@ HTML;
     }
 
     private function setHourlyTable() {
-        if(isset($_SESSION['hourly'])) {
-            for($i = 0; $i < count($_SESSION['hourly']); $i++) {
-                $hourlyID = $_SESSION['hourly'][$i]['hourlyID'];
-                $carparkID = $_SESSION['hourly'][$i]['carparkID'];
-                $recordVersionTime = $_SESSION['hourly'][$i]['recordVersionTime'];
-                $averageOccupiedSpaces = $_SESSION['hourly'][$i]['averageOccupiedSpaces'];
+        if(isset($_SESSION['results'])) {
+            $hourly = unserialize($_SESSION['results'])->getHourly();
+
+            for($i = 0; $i < count($hourly); $i++) {
+                $hourlyID = $hourly[$i]['hourlyID'];
+                $carparkID = $hourly[$i]['carparkID'];
+                $recordVersionTime = $hourly[$i]['recordVersionTime'];
+                $averageOccupiedSpaces = $hourly[$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
 
@@ -129,12 +133,14 @@ HTML;
     }
 
     private function setDailyTable() {
-        if(isset($_SESSION['daily'])) {
-            for($i = 0; $i < count($_SESSION['daily']); $i++) {
-                $dailyID = $_SESSION['daily'][$i]['dailyID'];
-                $carparkID = $_SESSION['daily'][$i]['carparkID'];
-                $recordVersionTime = $_SESSION['daily'][$i]['recordVersionTime'];
-                $averageOccupiedSpaces = $_SESSION['daily'][$i]['averageOccupiedSpaces'];
+        if(isset($_SESSION['results'])) {
+            $daily = unserialize($_SESSION['results'])->getDaily();
+
+            for($i = 0; $i < count($daily); $i++) {
+                $dailyID = $daily[$i]['dailyID'];
+                $carparkID = $daily[$i]['carparkID'];
+                $recordVersionTime = $daily[$i]['recordVersionTime'];
+                $averageOccupiedSpaces = $daily[$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
 

@@ -6,12 +6,16 @@ class PageTemplateView {
     protected $htmlTitle;
     protected $htmlContent;
     private $image;
+    private $user;
 
     public function __construct() {
         $this->htmlOutput = '';
         $this->htmlTitle = '';
         $this->htmlContent = '';
-        $this->image = 'data:' . 'image/jpg;base64,' . base64_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../includes/images/' . $_SESSION['profilePicture']));
+
+        $this->user = unserialize($_SESSION['user']);
+
+        $this->image = 'data:' . 'image/jpg;base64,' . base64_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../includes/images/' . $this->user->getProfilePicture()));
     }
 
     public function __destruct() {}
@@ -31,7 +35,7 @@ class PageTemplateView {
       <div class="welcome">
         <img src={$this->image} alt="Profile Picture">
         <h1>Welcome back,</h1>
-        <h2>{$_SESSION['firstName']} {$_SESSION['lastName']}</h2>
+        <h2>{$this->user->getFirstName()} {$this->user->getLastName()}</h2>
       </div>
       <div class="menuItems">
         <form action="add" method="post">

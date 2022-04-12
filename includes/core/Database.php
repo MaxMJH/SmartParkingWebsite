@@ -8,12 +8,12 @@ class Database {
     private $preparedStatement;
     private $result;
 
-    public function __construct($pdoDestination, $pdoUsername, $pdoPassword) {
+    public function __construct() {
         $this->preparedStatement = '';
         $this->result = array();
 
         try {
-            $this->database = new PDO($pdoDestination, $pdoUsername, $pdoPassword);
+            $this->connect();
         } catch(PDOException $exception) {
             $_SESSION['error'] = $exception->getMessage();
 
@@ -25,6 +25,14 @@ class Database {
     public function __destruct() {
         $this->database = null;
         $this->preparedStatement = null;
+    }
+
+    public function __wakeup() {
+        $this->connect();
+    }
+
+    public function __sleep() {
+        return array();
     }
 
     public function getResult() {
@@ -52,7 +60,7 @@ class Database {
             $this->result['queryOK'] = false;
             $this->result['result'] = $exception->getMessage();
 
-						$_SESSION['error'] = $exception->getMessage();
+            $_SESSION['error'] = $exception->getMessage();
 
             header('Location: error');
             exit;
@@ -61,6 +69,10 @@ class Database {
 
     private function getRowCount() {
         return $this->preparedStatement->rowCount();
+    }
+
+    public function connect() {
+        $this->database = new PDO("mysql:host=192.168.0.69;port=3306;dbname=smartpark_v2;charset=utf8mb4", "test", "test");
     }
 
     public function isConnected() {

@@ -3,19 +3,18 @@ namespace app\includes\controller;
 
 use app\includes\view\SearchView;
 use app\includes\model\SearchModel;
+use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
 use app\includes\core\Database;
 use app\includes\core\Queries;
 
 class SearchController {
     private $view;
-    private $model;
-    private $validatedInput;
-    private $errorMessage;
-    private $isError;
+    private $searchModel;
+    private $errorModel;
 
     public function __construct() {
-        if(!isset($_SESSION['userID']) || isset($_POST['logout'])) {
+        if(!isset($_SESSION['user']) || isset($_POST['logout'])) {
             session_unset();
             session_destroy();
             $_SESSION = array();
@@ -24,18 +23,12 @@ class SearchController {
             exit;
         }
 
-        $this->model = new SearchModel;
+        $this->searchModel = new SearchModel;
+        $this->errorModel = new ErrorModel;
         $this->setupCities();
         $this->view = new SearchView;
-        $this->validatedInput = '';
-        $this->errorMessage = '';
-        $this->isError = false;
 
         if(isset($_POST['city'])) {
-            // Unset CityID and CityName.
-            unset($_SESSION['cityID']);
-            unset($_SESSION['cityName']);
-
             $this->validate();
             $this->process();
         }
@@ -43,38 +36,36 @@ class SearchController {
 
     public function __destruct() {}
 
+    private function setupCities() {
+        $this->searchModel->setCities();
+
+        $_SESSION['cities'] = $this->searchModel->getCities();
+    }
+
     public function validate() {
         $validator = new Validate;
 
         $validatedCityName = $validator->validateCity($_POST['city']);
 
         if($validatedCityName !== false) {
-            $this->validatedInput = $validatedCityName;
+            $this->searchModel->setCityName($validatedCityName);
         } else {
-            $this->isError = true;
-            $this->errorMessage .= ' The city entered does not exist!';
+            $this->errorModel->addErrorMessage('The city entered does not exist!');
         }
     }
 
     public function process() {
-        $this->model->setCityID($_POST['city']);
+        $this->searchModel->setCityID($this->searchModel->getCityName());
 
-        $_SESSION['cityID'] = $this->model->getCityID();
-        $_SESSION['cityName'] = $_POST['city'];
+        $_SESSION['city'] = serialize($this->searchModel);
 
         header('Location: results');
         exit();
     }
 
-    public function setupCities() {
-        $this->model->setCities();
-
-        $_SESSION['cities'] = $this->model->getCities();
-    }
-
     public function getHtmlOutput() {
-        if($this->isError) {
-            $_SESSION['error'] = $this->errorMessage;
+        if($this->errorModel->hasErrors()) {
+            $_SESSION['error'] = serialize($this->errorModel);
 
             header('Location: error');
             exit();

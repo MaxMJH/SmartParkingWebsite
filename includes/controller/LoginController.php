@@ -4,21 +4,18 @@ namespace app\includes\controller;
 use app\includes\view\LoginView;
 use app\includes\core\Validate;
 use app\includes\model\LoginModel;
+use app\includes\model\ErrorModel;
 use app\includes\core\Encryption;
 
 class LoginController {
-    private $validatedInputs;
-    private $isError;
-    private $errorMessage;
     private $view;
-    private $model;
+    private $loginModel;
+    private $errorModel;
 
     public function __construct() {
-        $this->validatedInputs = array();
-        $this->isError = false;
-        $this->errorMessage = '';
         $this->view = new LoginView;
-        $this->model = new LoginModel;
+        $this->loginModel = new LoginModel;
+        $this->errorModel = new ErrorModel;
 
         if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {
             if(isset($_POST['username']) && isset($_POST['password'])) {
@@ -26,8 +23,7 @@ class LoginController {
                     $this->validate();
                     $this->process();
                 } else {
-                    $this->isError = true;
-                    $this->errorMessage = 'Fields cannot be empty!';
+                    $this->errorModel->addErrorMessage('Fields cannot be empty!');
                 }
             }
         }
@@ -42,50 +38,50 @@ class LoginController {
         $validatedPassword = $validator->validatePassword($_POST['password']);
 
         if($validatedEmailAddress !== false && $validatedPassword !== false) {
-            $this->validatedInputs['emailAddress'] = $validatedEmailAddress;
-            $this->validatedInputs['password'] = $validatedPassword;
+            $this->loginModel->setEmailAddress($validatedEmailAddress);
+            $this->loginModel->setPassword($validatedPassword);
         }
     }
 
     public function process() {
-        $this->model->populateModel($this->validatedInputs);
-
-        $saltAndPepper = $this->model->getSaltAndPepper();
+        $saltAndPepper = $this->loginModel->getSaltAndPepper();
 
         if($saltAndPepper['queryOK'] === true) {
             $salt = $saltAndPepper['result'][0]['salt'];
             $pepper = $saltAndPepper['result'][0]['pepper'];
-            $password = Encryption::hashPassword($salt, $this->validatedInputs['password'], $pepper);
+            $password = Encryption::hashPassword($salt, $this->loginModel->getPassword(), $pepper);
 
-            $this->validatedInputs['password'] = $password;
-            $this->model->populateModel($this->validatedInputs);
+            $this->loginModel->setPassword($password);
         }
 
-        $user = $this->model->getUser();
+        $user = $this->loginModel->getUser();
 
 	if($user['queryOK'] === true) {
             if($user['result'][0]['isAdmin'] === '1') {
-                $_SESSION['userID'] = $user['result'][0]['userID'];
-                $_SESSION['emailAddress'] = $user['result'][0]['emailAddress'];
-                $_SESSION['firstName'] = $user['result'][0]['firstName'];
-                $_SESSION['lastName'] = $user['result'][0]['lastName'];
-                $_SESSION['profilePicture'] = $user['result'][0]['profilePicture'];
+                $this->loginModel->setUserID($user['result'][0]['userID']);
+                $this->loginModel->setEmailAddress($user['result'][0]['emailAddress']);
+                $this->loginModel->setFirstName($user['result'][0]['firstName']);
+                $this->loginModel->setLastName($user['result'][0]['lastName']);
+                $this->loginModel->setProfilePicture($user['result'][0]['profilePicture']);
+
+                $_SESSION['user'] = serialize($this->loginModel);
 
                 header('Location: search');
                 exit;
             } else {
-                $this->isError = true;
-                $this->errorMessage = 'This user is not an admin!';
+                $this->errorModel->addErrorMessage('This user is not an admin!');
             }
         } else {
-            $this->isError = true;
-            $this->errorMessage = $user['result'];
+            $this->errorModel->addErrorMessage($user['result']);
         }
     }
 
     public function getHtmlOutput() {
-        if($this->isError) {
-            $this->view->setErrorMessage($this->errorMessage);
+        if($this->errorModel->hasErrors()) {
+            $_SESSION['error'] = serialize($this->errorModel);
+
+            header('Location: error');
+            exit();
         }
 
         $this->view->createLoginViewPage();

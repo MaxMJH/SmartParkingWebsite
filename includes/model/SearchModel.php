@@ -5,18 +5,23 @@ use app\includes\core\Database;
 use app\includes\core\Queries;
 
 class SearchModel {
+    /* Fields */
     private $database;
     private $cities;
     private $cityID;
+    private $cityName;
 
+    /* Constructor and Destructor */
     public function __construct() {
-        $this->database = new Database("mysql:host=192.168.0.69;port=3306;dbname=smartpark_v2;charset=utf8mb4", "test", "test");
+        $this->database = new Database;
         $this->cities = array();
         $this->cityID = -1;
+        $this->cityName = '';
     }
 
     public function __destruct() {}
 
+    /* Getters and Setters */
     public function getCities() {
         return $this->cities;
     }
@@ -31,6 +36,10 @@ class SearchModel {
         }
     }
 
+    public function getCityID() {
+        return $this->cityID;
+    }
+
     public function setCityID($cityName) {
         $parameters = [':cityName' => $cityName];
 
@@ -42,7 +51,11 @@ class SearchModel {
         }
     }
 
-    public function getCityID() {
-        return $this->cityID;
+    public function getCityName() {
+        return $this->cityName;
+    }
+
+    public function setCityName($cityName) {
+        $this->cityName = $cityName;
     }
 }

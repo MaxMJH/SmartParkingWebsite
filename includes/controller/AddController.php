@@ -2,16 +2,17 @@
 namespace app\includes\controller;
 
 use app\includes\view\AddView;
+use app\includes\model\AddModel;
+use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
 
 class AddController {
     private $view;
-    private $validatedInputs;
-    private $errorMessage;
-    private $isError;
+    private $addModel;
+    private $errorModel;
 
     public function __construct() {
-        if(!isset($_SESSION['userID']) || isset($_POST['logout'])) {
+        if(!isset($_SESSION['user']) || isset($_POST['logout'])) {
             session_unset();
             session_destroy();
             $_SESSION = array();
@@ -21,8 +22,8 @@ class AddController {
         }
 
         $this->view = new AddView;
-        $this->errorMessage = '';
-        $this->isError = false;
+        $this->addModel = new AddModel;
+        $this->errorModel = new ErrorModel;
 
         if(isset($_POST['addCityPressed']) && $_POST['addCityPressed'] == "Add City") {
             if(isset($_POST['city']) && !empty(trim($_POST['city'], " "))) {
@@ -33,8 +34,7 @@ class AddController {
                     }
                 }
             } else {
-                $this->isError = true;
-                $this->errorMessage .= ' Fields cannot be empty!';
+                $this->errorModel->addErrorMessage('Fields cannot be empty!');
             }
         }
     }
@@ -49,24 +49,24 @@ class AddController {
         $validatedElements = $validator->validateElements($_POST['elements']);
 
         if($validatedCityName !== false && $validatedXMLURL !== false && $validatedElements !== false) {
-            $this->validatedInputs['city'] = $validatedCityName;
-            $this->validatedInputs['xmlURL'] = $validatedXMLURL;
-            $this->validatedInputs['elements'] = $validatedElements;
+            $this->addModel->setCityName($validatedCityName);
+            $this->addModel->setXMLURL($validatedXMLURL);
+            $this->addModel->setElements($validatedElements);
         } else {
-            $this->isError = true;
-            $this->errorMessage .= ' Your inputs failed to validate!';
+            $this->errorModel->addErrorMessage('Your inputs failed to validate!');
         }
     }
 
     public function process() {
-        $execString = "java -jar /home/pi/XMLScraper/xmlscraper-0.0.1-SNAPSHOT.jar \"{$this->validatedInputs['city']}\" \"carPark\" \"{$this->validatedInputs['xmlURL']}\" {$this->validatedInputs['elements']} > /dev/null &";
+        $this->addModel->constructExecutionString();
 
-        exec($execString);
+        exec($this->addModel->getExecutionString());
     }
 
     public function getHtmlOutput() {
-        if($this->isError) {
-            $_SESSION['error'] = $this->errorMessage;
+        if($this->errorModel->hasErrors()) {
+            $_SESSION['error'] = serialize($this->errorModel);
+
             header('Location: error');
             exit();
         }

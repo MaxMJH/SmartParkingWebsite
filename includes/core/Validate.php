@@ -57,8 +57,8 @@ class Validate {
     public function validateElements($elements) {
         $sanitisedElements = false;
 
-        if(strlen($elements) >= 3 && strlen($elements) <= 150) {
-            $sanitisedElements = filter_var($elements, FILTER_SANITIZE_STRING);
+        if(strlen($elements) >= 3 && strlen($elements) <= 250) {
+            $sanitisedElements = filter_var($elements, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
             if($this->isIllegal($sanitisedElements)) {
                 return false;
