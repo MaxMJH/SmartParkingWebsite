@@ -29,23 +29,45 @@ class LoginModel {
     public function __destruct() {}
 
     /* Methods */
-    public function getSaltAndPepper() {
+    public function saltAndPepperPassword() {
         $parameters = [
             ':emailAddress' => $this->emailAddress
         ];
 
         $this->database->executePreparedStatement(Queries::getSaltAndPepper(), $parameters);
-        return $this->database->getResult();
+        $saltAndPepper = $this->database->getResult();
+
+        if($saltAndPepper['queryOK'] === true) {
+            $salt = $saltAndPepper['result'][0]['salt'];
+            $pepper = $saltAndPepper['result'][0]['pepper'];
+            $this->password = Encryption::hashPassword($salt, $this->password, $pepper);
+
+            return true;
+        }
+
+        return false;
     }
 
-    public function getUser() {
+    public function populateUser() {
         $parameters = [
             ':emailAddress' => $this->emailAddress,
             ':password' => $this->password
         ];
 
         $this->database->executePreparedStatement(Queries::getUser(), $parameters);
-        return $this->database->getResult();
+        $user = $this->database->getResult();
+
+        if($user['queryOK'] === true) {
+            $this->userID = $user['result'][0]['userID'];
+            $this->emailAddress = $user['result'][0]['emailAddress'];
+            $this->firstName = $user['result'][0]['firstName'];
+            $this->lastName = $user['result'][0]['lastName'];
+            $this->profilePicture = $user['result'][0]['profilePicture'];
+
+            return true;
+        }
+
+        return false;
     }
 
     /* Getters and Setters */

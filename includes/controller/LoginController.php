@@ -20,6 +20,12 @@ class LoginController {
         if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {
             if(isset($_POST['username']) && isset($_POST['password'])) {
                 if(!empty($_POST['username']) && !empty($_POST['password'])) {
+                    if(isset($_SESSION['user'])) {
+                        session_unset();
+                        session_destroy();
+                        $_SESSION = array();
+                    }
+
                     $this->validate();
                     $this->process();
                 } else {
@@ -44,36 +50,12 @@ class LoginController {
     }
 
     public function process() {
-        $saltAndPepper = $this->loginModel->getSaltAndPepper();
+        if($this->loginModel->saltAndPepperPassword($this->loginModel->getPassword()) && $this->loginModel->populateUser()) {
+            $_SESSION['user'] = serialize($this->loginModel);
 
-        if($saltAndPepper['queryOK'] === true) {
-            $salt = $saltAndPepper['result'][0]['salt'];
-            $pepper = $saltAndPepper['result'][0]['pepper'];
-            $password = Encryption::hashPassword($salt, $this->loginModel->getPassword(), $pepper);
-
-            $this->loginModel->setPassword($password);
-        }
-
-        $user = $this->loginModel->getUser();
-
-	if($user['queryOK'] === true) {
-            if($user['result'][0]['isAdmin'] === '1') {
-                $this->loginModel->setUserID($user['result'][0]['userID']);
-                $this->loginModel->setEmailAddress($user['result'][0]['emailAddress']);
-                $this->loginModel->setFirstName($user['result'][0]['firstName']);
-                $this->loginModel->setLastName($user['result'][0]['lastName']);
-                $this->loginModel->setProfilePicture($user['result'][0]['profilePicture']);
-
-                $_SESSION['user'] = serialize($this->loginModel);
-
-                header('Location: search');
-                exit;
-            } else {
-                $this->errorModel->addErrorMessage('This user is not an admin!');
-            }
-        } else {
-            $this->errorModel->addErrorMessage($user['result']);
-        }
+            header('Location: search');
+            exit();
+	}
     }
 
     public function getHtmlOutput() {

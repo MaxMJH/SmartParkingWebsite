@@ -6,6 +6,7 @@ use app\includes\controller\SearchController;
 use app\includes\controller\ErrorController;
 use app\includes\controller\ResultsController;
 use app\includes\controller\AddController;
+use app\includes\controller\SettingsController;
 
 class Router {
     private $routes;
@@ -45,6 +46,10 @@ class Router {
                 case 'controller/ErrorController.php':
                     require 'controller/ErrorController.php';
                     $controller = new ErrorController;
+                    break;
+                case 'controller/SettingsController.php':
+                    require 'controller/SettingsController.php';
+                    $controller = new SettingsController;
                     break;
             }
             return $controller->getHtmlOutput();

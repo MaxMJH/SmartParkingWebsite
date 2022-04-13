@@ -11,6 +11,11 @@ class Queries {
         return $query;
     }
 
+    public static function updateUser() {
+        $query = 'UPDATE User SET User.emailAddress = :emailAddress, User.firstName = :firstName, User.lastName = :lastName, User.password = :password WHERE User.userID = :userID;';
+        return $query;
+    }
+
     public static function getSaltAndPepper() {
         $query = 'SELECT User.salt, User.pepper FROM User WHERE User.emailAddress = :emailAddress;';
         return $query;

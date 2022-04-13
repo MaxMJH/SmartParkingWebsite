@@ -16,6 +16,26 @@ class Validate {
         return $sanitisedUsername;
     }
 
+    public function validateFirstName($firstName) {
+        $sanitisedFirstName = false;
+
+        if(strlen($firstName) >= 3 && strlen($firstName) <= 25) {
+            $sanitisedFirstName = filter_var($firstName, FILTER_SANITIZE_STRING);
+        }
+
+        return $sanitisedFirstName;
+    }
+
+    public function validateLastName($lastName) {
+        $sanitisedLastName = false;
+
+        if(strlen($lastName) >= 3 && strlen($lastName) <= 25) {
+            $sanitisedLastName = filter_var($lastName, FILTER_SANITIZE_STRING);
+        }
+
+        return $sanitisedLastName;
+    }
+
     public function validatePassword($password) {
         $sanitisedPassword = false;
 

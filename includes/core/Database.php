@@ -44,14 +44,14 @@ class Database {
             $this->preparedStatement = $this->database->prepare($query);
             $this->preparedStatement->execute($parameters);
 
-            if($this->getRowCount() >= 1) {
+            if($this->preparedStatement->rowCount() >= 1) {
                 $this->result['queryOK'] = true;
                 $this->result['result'] = $this->preparedStatement->fetchall();
             } else {
                 $this->result['queryOK'] = false;
 
                 if($this->preparedStatement->errorCode() == 00000) {
-                    $this->result['result'] = 'The value you entered does not exist!';
+                    $this->result['result'] = 'aaaaThe value you entered does not exist!';
                 } else {
                     $this->result['result'] = $this->preparedStatement->errorCode();
                 }
@@ -65,10 +65,6 @@ class Database {
             header('Location: error');
             exit;
         }
-    }
-
-    private function getRowCount() {
-        return $this->preparedStatement->rowCount();
     }
 
     public function connect() {
