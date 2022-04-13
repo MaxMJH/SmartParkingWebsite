@@ -198,6 +198,11 @@ form#search input {
   cursor: pointer;
 }
 
+form#search h1 {
+  margin: auto;
+  color: #FFFFFF;
+}
+
 /* Add Section */
 div#addInfo {
   display: flex;
@@ -328,7 +333,7 @@ section#results {
   width: 100%;
 }
 
-div#results {
+div#parkingData {
   width: 100%;
   height: calc(60% - 20px);	
   display: flex;
@@ -337,7 +342,7 @@ div#results {
   gap: 10px;
 }
 
-div#fiveMinutes, div#hourly, div#daily {
+div#fiveMinutes, div#hourly, div#daily, div#carparks {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -355,18 +360,20 @@ div#daily {
   margin-right: 10px;
 }
 
-div#fiveMinutesTitle, div#hourlyTitle, div#dailyTitle {
+section#results h2 {
   font-size: 20px;
   color: #003B51;
+  margin: 0;
+  font-weight: normal;
 }
 
-div#fiveMinutesLine, div#hourlyLine, div#dailyLine {
+section#results hr {
   background-color: #F1F1F1;
-  width: calc(438px - 87.6px);
-  height: 1px;
-  position: relative;
-  left: calc(50% - 175.2px);
+  width: 100%;
+  height: 2px;
   border-radius: 3px;
+  border: none;
+  margin: 0;
 }
 
 table {
@@ -389,7 +396,7 @@ table tbody {
 }
 
 div#carparks {
-  height: calc(40% - 20px);
+  height: calc(40% - 10px);
   width: calc(100% - 20px);
   margin-left: 10px;
   background: #FFFFFF;

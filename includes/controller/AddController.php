@@ -49,7 +49,7 @@ class AddController {
         $validatedElements = $validator->validateElements($_POST['elements']);
 
         if($validatedCityName !== false && $validatedXMLURL !== false && $validatedElements !== false) {
-            $this->addModel->setCityName($validatedCityName);
+            $this->addModel->setCity($validatedCityName);
             $this->addModel->setXMLURL($validatedXMLURL);
             $this->addModel->setElements($validatedElements);
         } else {

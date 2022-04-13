@@ -31,8 +31,10 @@ class SearchModel {
 
         $data = $this->database->getResult();
 
-        for($i = 0; $i < count($data['result']); $i++) {
-            array_push($this->cities, $data['result'][$i]['cityName']);
+        if($data['queryOK'] === true) {
+            for($i = 0; $i < count($data['result']); $i++) {
+                array_push($this->cities, $data['result'][$i]['cityName']);
+            }
         }
     }
 

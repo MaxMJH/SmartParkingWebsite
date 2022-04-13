@@ -37,6 +37,7 @@ class ResultsController {
 	$this->resultsModel->setFiveMinutes();
         $this->resultsModel->setHourly();
         $this->resultsModel->setDaily();
+        $this->resultsModel->setCarparks();
 
         $_SESSION['results'] = serialize($this->resultsModel);
     }

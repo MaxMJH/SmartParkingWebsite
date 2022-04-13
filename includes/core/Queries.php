@@ -45,4 +45,9 @@ class Queries {
         $query = 'SELECT Daily.dailyID, Daily.carparkID, Daily.recordVersionTime, Daily.averageOccupiedSpaces FROM Daily INNER JOIN Carpark ON Daily.carparkID = Carpark.carparkID INNER JOIN City ON Carpark.cityID = City.cityID WHERE City.cityID = :cityID;';
         return $query;
     }
+
+    public static function getCarparks() {
+        $query = 'SELECT Carpark.carparkID, Carpark.carparkName, Carpark.latitude, Carpark.longitude, Carpark.totalSpaces FROM Carpark WHERE Carpark.cityID = :cityID;';
+        return $query;
+    }
 }

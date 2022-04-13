@@ -20,10 +20,10 @@ class ResultsView extends PageTemplateView {
         $this->htmlContent = <<<HTML
   <main>
     <section id="results">
-      <div id="results">
+      <div id="parkingData">
         <div id="fiveMinutes">
-          <div id="fiveMinutesTitle">Five Minutes</div>
-          <div id="fiveMinutesLine"></div>
+          <h2>Five Minutes</h2>
+          <hr>
           <table>
             <tr>
               <th>ID</th>
@@ -41,8 +41,8 @@ HTML;
         </div>
       </div>
       <div id="hourly">
-        <div id="hourlyTitle">Hourly</div>
-        <div id="hourlyLine"></div>
+        <h2>Hourly</h2>
+        <hr>
         <table>
           <tr>
             <th>ID</th>
@@ -58,8 +58,8 @@ HTML;
         </table>
       </div>
       <div id="daily">
-        <div id="dailyTitle">Daily</div>
-        <div id="dailyLine"></div>
+        <h2>Daily</h2>
+        <hr>
         <table>
           <tr>
             <th>ID</th>
@@ -76,7 +76,22 @@ HTML;
         </div>
       </div>
       <div id="carparks">
-        
+        <h2>Carparks</h2>
+        <hr>
+        <table>
+          <tr>
+            <th>Carpark ID</th>
+            <th>Carpark Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Total Spaces</th>
+          </tr>
+HTML;
+
+        $this->setCarparksTable();
+        $this->htmlContent .= <<<HTML
+
+        </table>
       </div>
     </section>
   </main>
@@ -149,6 +164,31 @@ HTML;
             <td>{$carparkID}</td>
             <td>{$recordVersionTime}</td>
             <td>{$averageOccupiedSpaces}</td>
+          </tr>
+HTML;
+            }
+        }
+    }
+
+    private function setCarparksTable() {
+        if(isset($_SESSION['results'])) {
+            $carparks = unserialize($_SESSION['results'])->getCarparks();
+
+            for($i = 0; $i < count($carparks); $i++) {
+                $carparkID = $carparks[$i]['carparkID'];
+                $carparkName = $carparks[$i]['carparkName'];
+                $latitude = $carparks[$i]['latitude'];
+                $longitude = $carparks[$i]['longitude'];
+                $totalSpaces = $carparks[$i]['totalSpaces'];
+
+                $this->htmlContent .= <<<HTML
+
+          <tr>
+            <td>{$carparkID}</td>
+            <td>{$carparkName}</td>
+            <td>{$latitude}</td>
+            <td>{$longitude}</td>
+            <td>{$totalSpaces}</td>
           </tr>
 HTML;
             }

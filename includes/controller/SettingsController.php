@@ -53,6 +53,8 @@ class SettingsController {
                 if($validatedNewPassword == $validatedConfirmNewPassword) {
                     $this->user->setPassword($validatedNewPassword);
                     $this->user->saltAndPepperPassword();
+                } else {
+                    $this->errorModel->addErrorMessage('The passwords do not match!');
                 }
 
                 $this->user->setFirstName($validatedFirstName);

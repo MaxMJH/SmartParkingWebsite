@@ -11,6 +11,7 @@ class ResultsModel {
     private $fiveMinutes;
     private $hourly;
     private $daily;
+    private $carparks;
 
     /* Constructor and Destructor */
     public function __construct() {
@@ -19,6 +20,7 @@ class ResultsModel {
         $this->fiveMinutes = array();
         $this->hourly = array();
         $this->daily = array();
+        $this->carparks = array();
     }
 
     public function __destruct() {}
@@ -83,6 +85,23 @@ class ResultsModel {
         if($result['queryOK'] === true) {
             for($i = 0; $i < count($result['result']); $i++) {
                 array_push($this->daily, $result['result'][$i]);
+            }
+        }
+    }
+
+    public function getCarparks() {
+        return $this->carparks;
+    }
+
+    public function setCarparks() {
+        $parameters = [':cityID' => $this->cityID];
+
+        $this->database->executePreparedStatement(Queries::getCarparks(), $parameters);
+        $result = $this->database->getResult();
+
+        if($result['queryOK'] === true) {
+            for($i = 0; $i < count($result['result']); $i++) {
+                array_push($this->carparks, $result['result'][$i]);
             }
         }
     }
