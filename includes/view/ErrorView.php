@@ -21,16 +21,17 @@ class ErrorView extends PageTemplateView {
 
     public function createErrorViewContent() {
         $this->htmlContent = <<<HTML
-<div id="container">
-  <div id="error">
-    <div id="errorTitle">Error</div>
-    <div id="errorLine"></div>
-    <div id="errorBox">Error - {$this->errorMessage}</div>
-    <form action="search" method="post">
-      <input id="returnButton" type="submit" value="Return"/>
-    </form>
-  </div>
-</div>
+    <main>
+      <div id="error">
+        <h2>Error</h2>
+        <hr>
+        <div id="errorBox">Error - {$this->errorMessage}</div>
+        <form action="search" method="post">
+          <input id="returnButton" type="submit" value="Return"/>
+        </form>
+      </div>
+    </main>
+
 HTML;
     }
 

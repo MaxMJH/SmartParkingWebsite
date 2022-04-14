@@ -88,6 +88,16 @@ class Validate {
         return $sanitisedElements;
     }
 
+    public function validateProcessID($processID) {
+        $sanitisedProcessID = false;
+
+        if(filter_var($processID, FILTER_VALIDATE_INT)) {
+            $sanitisedProcessID = filter_var($processID, FILTER_SANITIZE_NUMBER_INT);
+        }
+
+        return $sanitisedProcessID;
+    }
+
     private function isIllegal($offendingString) {
         $offendingChars = array(';', '&', '&&', '|', '||', '`', '(', ')', '#');
 

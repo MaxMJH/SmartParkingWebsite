@@ -9,3 +9,4 @@ $router->defineRoute('add', 'controller/AddController.php');
 $router->defineRoute('error', 'controller/ErrorController.php');
 $router->defineRoute('results', 'controller/ResultsController.php');
 $router->defineRoute('settings', 'controller/SettingsController.php');
+$router->defineRoute('scrapers', 'controller/ScraperController.php');

@@ -58,9 +58,14 @@ class AddController {
     }
 
     public function process() {
-        $this->addModel->constructExecutionString();
+        if($this->addModel->scraperIsActive() === false) {
+            $this->addModel->constructExecutionString();
 
-        exec($this->addModel->getExecutionString());
+            exec($this->addModel->getExecutionString());
+            $this->addModel->generateScraperRecord();
+        } else {
+            $this->errorModel->addErrorMessage('This city already exists! If you need to add new carparks, first end the scraper attached to the city, then try and add it again!');
+        }
     }
 
     public function getHtmlOutput() {
@@ -71,7 +76,7 @@ class AddController {
             exit();
         }
 
-        $this->view->createSearchViewPage();
+        $this->view->createAddViewPage();
         return $this->view->getHtmlOutput();
     }
 }

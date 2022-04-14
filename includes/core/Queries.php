@@ -50,4 +50,24 @@ class Queries {
         $query = 'SELECT Carpark.carparkID, Carpark.carparkName, Carpark.latitude, Carpark.longitude, Carpark.totalSpaces FROM Carpark WHERE Carpark.cityID = :cityID;';
         return $query;
     }
+
+    public static function addScraper() {
+        $query = 'INSERT INTO Scraper (Scraper.processID, Scraper.cityName) VALUES (:processID, :cityName);';
+        return $query;
+    }
+
+    public static function archiveScraper() {
+        $query = 'UPDATE Scraper SET Scraper.isActive = 0 WHERE Scraper.processID = :processID;';
+        return $query;
+    }
+
+    public static function scraperisActive() {
+        $query = 'SELECT Scraper.isActive FROM Scraper WHERE Scraper.cityName = :cityName AND Scraper.isActive = 1;';
+        return $query;
+    }
+
+    public static function getScrapers() {
+        $query = 'SELECT Scraper.processID, Scraper.cityName FROM Scraper;';
+        return $query;
+    }
 }

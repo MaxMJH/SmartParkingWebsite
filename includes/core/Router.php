@@ -7,6 +7,7 @@ use app\includes\controller\ErrorController;
 use app\includes\controller\ResultsController;
 use app\includes\controller\AddController;
 use app\includes\controller\SettingsController;
+use app\includes\controller\ScraperController;
 
 class Router {
     private $routes;
@@ -50,6 +51,10 @@ class Router {
                 case 'controller/SettingsController.php':
                     require 'controller/SettingsController.php';
                     $controller = new SettingsController;
+                    break;
+                case 'controller/ScraperController.php':
+                    require 'controller/ScraperController.php';
+                    $controller = new ScraperController;
                     break;
             }
             return $controller->getHtmlOutput();

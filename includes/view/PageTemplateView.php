@@ -39,15 +39,19 @@ class PageTemplateView {
       </div>
       <div class="menuItems">
         <form action="add" method="post">
-          <input id="addButtonMenu" type="submit" name="addPressed" value="Add City">
+          <input id="addButtonMenu" type="submit" name="addPressed" value="Add City"/>
         </form>
         <hr>
         <form action="search" method="post">
-          <input id="searchButtonMenu" type="submit" name="search" value="City Search">
+          <input id="searchButtonMenu" type="submit" name="search" value="City Search"/>
+        </form>
+        <hr>
+        <form action="scrapers" method="post">
+          <input id="scrapersButtonMenu" type="submit" name="viewScrapers" value="View Scrapers"/>
         </form>
         <hr>
         <form action="settings" method="post">
-          <input id="settingsButtonMenu" type="submit" name="settings" value="Settings">
+          <input id="settingsButtonMenu" type="submit" name="settings" value="Settings"/>
         </form>
       </div>
       <form method="post">
