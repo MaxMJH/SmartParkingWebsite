@@ -26,7 +26,7 @@ class ErrorView extends PageTemplateView {
         <h2>Error</h2>
         <hr>
         <div id="errorBox">Error - {$this->errorMessage}</div>
-        <form action="search" method="post">
+        <form action="{$_SESSION['referrer']}" method="post">
           <input id="returnButton" type="submit" value="Return"/>
         </form>
       </div>

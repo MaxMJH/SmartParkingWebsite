@@ -65,6 +65,7 @@ class ScraperController {
     public function getHtmlOutput() {
         if($this->errorModel->hasErrors()) {
             $_SESSION['error'] = serialize($this->errorModel);
+            $_SESSION['referrer'] = 'scrapers';
 
             header('Location: error');
             exit();

@@ -66,6 +66,7 @@ class SearchController {
     public function getHtmlOutput() {
         if($this->errorModel->hasErrors()) {
             $_SESSION['error'] = serialize($this->errorModel);
+            $_SESSION['referrer'] = 'search';
 
             header('Location: error');
             exit();

@@ -81,6 +81,7 @@ class SettingsController {
     public function getHtmlOutput() {
         if($this->errorModel->hasErrors()) {
             $_SESSION['error'] = serialize($this->errorModel);
+            $_SESSION['referrer'] = 'settings';
 
             header('Location: error');
             exit();
