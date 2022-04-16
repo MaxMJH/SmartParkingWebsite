@@ -39,15 +39,18 @@ HTML;
         if(count($_SESSION['cities']) > 0) {
             for($i = 0; $i < count($_SESSION['cities']); $i++) {
                 $this->htmlContent .= <<<HTML
-        <div class="city">
-          <input type="radio" name="city" value="{$_SESSION['cities'][$i]}"/>
-          <label for="city">{$_SESSION['cities'][$i]}</label>
-        </div>
-      </div>
-      <input id="removeCityButton" type="submit" name="removePressed" value="Remove City"/>
+          <div class="city">
+            <input type="radio" name="city" value="{$_SESSION['cities'][$i]}"/>
+            <label for="city">{$_SESSION['cities'][$i]}</label>
+          </div>
 
 HTML;
             }
+        $this->htmlContent .= <<<HTML
+        </div>
+        <input id="removeCityButton" type="submit" name="removePressed" value="Remove City"/>
+
+HTML;
         } else {
             $this->htmlContent .= <<<HTML
           <h1>There are currently no carparks available!</h1>
