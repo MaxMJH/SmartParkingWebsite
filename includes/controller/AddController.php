@@ -62,6 +62,10 @@ class AddController {
             $this->addModel->constructExecutionString();
 
             exec($this->addModel->getExecutionString());
+
+            // As the XMLScraper has to parse an entire document, adding the City and Carparks to the db will take a "long" time, so add a delay.
+            sleep(2);
+
             $this->addModel->generateScraperRecord();
         } else {
             $this->errorModel->addErrorMessage('This city already exists! If you need to add new carparks, first end the scraper attached to the city, then try and add it again!');

@@ -42,6 +42,10 @@ class PageTemplateView {
           <input id="addButtonMenu" type="submit" name="addPressed" value="Add City"/>
         </form>
         <hr>
+        <form action="remove" method="post">
+          <input id="removeButtonMenu" type="submit" name="removePressed" value="Remove City"/>
+        </form>
+        <hr>
         <form action="search" method="post">
           <input id="searchButtonMenu" type="submit" name="search" value="City Search"/>
         </form>

@@ -17,6 +17,7 @@ class SearchModel {
         $this->cities = array();
         $this->cityID = -1;
         $this->cityName = '';
+        $this->setCities();
     }
 
     public function __destruct() {}
@@ -36,6 +37,7 @@ class SearchModel {
                 array_push($this->cities, $data['result'][$i]['cityName']);
             }
         }
+	$_SESSION['cities'] = $this->cities;
     }
 
     public function getCityID() {

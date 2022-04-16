@@ -163,7 +163,7 @@ aside form {
   text-align: center;
 }
 
-input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu {
+input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu {
   border: none;
   padding: 0;
   background-color: transparent;
@@ -178,7 +178,7 @@ hr {
 }
 
 /* Search Section */
-form#search {
+form#search, form#remove {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -198,7 +198,7 @@ form#search input {
   cursor: pointer;
 }
 
-form#search h1 {
+form#search h1, div#cities h1 {
   margin: auto;
   color: #FFFFFF;
 }
@@ -469,4 +469,53 @@ div#scrapers h2 {
 form#scrapers {
   width: 100%;
   height: 100%;
+}
+
+form#remove input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+form#remove label {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  font-size: 1.563em;
+  cursor: pointer;
+  justify-content: center;
+}
+
+form#remove input[type="radio"]:checked + label {
+  background-color: #B6B6B6;
+}
+
+input#removeCityButton {
+  width: 520px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.563rem;
+  color: #003B51;
+}
+
+div#cities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 114px
+}
+
+div.city {
+  width: 300px;
+  height: 300px;
+  box-shadow: 5px 15px 10px #00000080;
+  cursor: pointer;
+  justify-content: center;
+  background: #FFFFFF;  
 }

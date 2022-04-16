@@ -1,18 +1,18 @@
 <?php
 namespace app\includes\controller;
 
-use app\includes\view\SearchView;
-use app\includes\model\SearchModel;
+use app\includes\view\RemoveView;
+use app\includes\model\RemoveModel;
 use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
-use app\includes\core\Database;
-use app\includes\core\Queries;
 
-class SearchController {
+class RemoveController {
+    /* Fields */
     private $view;
-    private $searchModel;
+    private $removeModel;
     private $errorModel;
 
+    /* Constructor and Destructor */
     public function __construct() {
         if(!isset($_SESSION['user']) || isset($_POST['logout'])) {
             session_unset();
@@ -20,52 +20,52 @@ class SearchController {
             $_SESSION = array();
 
             header('Location: /');
-            exit;
+            exit();
         }
 
-        $this->searchModel = new SearchModel;
+        $this->removeModel = new RemoveModel;
         $this->errorModel = new ErrorModel;
-        $this->view = new SearchView;
 
-        if(isset($_POST['city'])) {
+        if(isset($_POST['city']) && (isset($_POST['removePressed']) && $_POST['removePressed'] == "Remove City")) {
             $this->validate();
             $this->process();
         }
+
+        $this->view = new RemoveView;
     }
 
     public function __destruct() {}
 
+    /* Methods */
     public function validate() {
         $validator = new Validate;
 
         $validatedCityName = $validator->validateCity($_POST['city']);
 
         if($validatedCityName !== false) {
-            $this->searchModel->setCityName($validatedCityName);
+            $this->removeModel->setCityName($validatedCityName);
         } else {
             $this->errorModel->addErrorMessage('The city entered does not exist!');
         }
     }
 
     public function process() {
-        $this->searchModel->setCityID($this->searchModel->getCityName());
-
-        $_SESSION['city'] = serialize($this->searchModel);
-
-        header('Location: results');
-        exit();
+        $this->removeModel->removeCity();
     }
 
     public function getHtmlOutput() {
         if($this->errorModel->hasErrors()) {
             $_SESSION['error'] = serialize($this->errorModel);
-            $_SESSION['referrer'] = 'search';
+            // TODO: add referrer as a field in error model.
+            $_SESSION['referrer'] = 'remove';
 
             header('Location: error');
             exit();
         }
 
-        $this->view->createSearchViewPage();
+        $this->view->createRemoveViewPage();
         return $this->view->getHtmlOutput();
     }
 }
+
+

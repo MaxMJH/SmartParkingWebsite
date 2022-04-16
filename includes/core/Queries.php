@@ -26,6 +26,16 @@ class Queries {
         return $query;
     }
 
+    public static function getCityID() {
+        $query = 'SELECT City.cityID FROM City WHERE City.cityName = :cityName;';
+        return $query;
+    }
+
+    public static function removeCity() {
+        $query = 'DELETE FROM City WHERE City.cityID = :cityID;';
+        return $query;
+    }
+
     public static function getCities() {
         $query = 'SELECT City.cityID, City.cityName FROM City;';
         return $query;
@@ -52,7 +62,7 @@ class Queries {
     }
 
     public static function addScraper() {
-        $query = 'INSERT INTO Scraper (Scraper.processID, Scraper.cityName) VALUES (:processID, :cityName);';
+        $query = 'INSERT INTO Scraper (Scraper.processID, Scraper.cityName, Scraper.cityID) VALUES (:processID, :cityName, :cityID);';
         return $query;
     }
 
@@ -67,7 +77,12 @@ class Queries {
     }
 
     public static function getScrapers() {
-        $query = 'SELECT Scraper.processID, Scraper.cityName FROM Scraper;';
+        $query = 'SELECT Scraper.processID, Scraper.cityName FROM Scraper WHERE Scraper.isActive = 1;';
+        return $query;
+    }
+
+    public static function getProcessID() {
+        $query = 'SELECT Scraper.processID FROM Scraper WHERE Scraper.cityID = :cityID and Scraper.isActive = 1;';
         return $query;
     }
 }

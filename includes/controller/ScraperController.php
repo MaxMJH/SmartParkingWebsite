@@ -43,11 +43,13 @@ class ScraperController {
         $validator = new Validate;
 
         $validatedProcessID = $validator->validateProcessID($_POST['processID']);
+        $validatedCityName = $validator->validateCity($_POST['cityName']);
 
-        if($validatedProcessID !== false) {
+        if($validatedProcessID !== false && $validatedCityName !== false) {
             $this->scraperModel->setCurrentProcessID($validatedProcessID);
+            $this->scraperModel->setCurrentCityName($validatedCityName);
         } else {
-            $this->errorModel->addErrorMessage('Unable to validate process ID!');
+            $this->errorModel->addErrorMessage('Unable to validate!');
         }
     }
 

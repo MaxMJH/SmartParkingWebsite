@@ -10,6 +10,7 @@ class ScraperModel {
     private $scraperCityNames;
     private $scraperProcessIDS;
     private $currentProcessID;
+    private $currentCityName;
 
     /* Constructor and Destructor */
     public function __construct() {
@@ -17,6 +18,7 @@ class ScraperModel {
         $this->scraperCityNames = array();
         $this->scraperProcessIDS = array();
         $this->currentProcessID = -1;
+        $this->currentCityName = '';
     }
 
     public function __destruct() {}
@@ -29,6 +31,9 @@ class ScraperModel {
             $parameters = [
                 ':processID' => $this->currentProcessID
             ];
+
+            unset($this->scraperCityNames[array_search($this->currentCityName, $this->scraperCityNames)]);
+            unset($this->scraperProcessIDS[array_search($this->currentProcessID, $this->scraperProcessIDS)]);
 
             $this->database->executePreparedStatement(Queries::archiveScraper(), $parameters);
             return true;
@@ -43,6 +48,9 @@ class ScraperModel {
         $data = $this->database->getResult();
 
         if($data['queryOK'] === true) {
+            $this->scraperCityNames = array();
+            $this->scraperProcessIDS = array();
+
             for($i = 0; $i < count($data['result']); $i++) {
                 $cityName = $data['result'][$i]['cityName'];
                 $processID = $data['result'][$i]['processID'];
@@ -84,5 +92,13 @@ class ScraperModel {
 
     public function setCurrentProcessID($processID) {
         $this->currentProcessID = $processID;
+    }
+
+    public function getCurrentCityName() {
+        return $this->currentCityName;
+    }
+
+    public function setCurrentCityName($cityName) {
+        $this->currentCityName = $cityName;
     }
 }

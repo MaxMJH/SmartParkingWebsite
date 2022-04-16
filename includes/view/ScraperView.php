@@ -58,6 +58,7 @@ HTML;
             <td>{$cityName}</td>
             <td>
               <input type="hidden" name="processID" value="{$processID}"/>
+              <input type="hidden" name="cityName" value="{$cityName}"/>
               <input id="endProcessButton" type="submit" name="endProcessPressed" value="End Process"/>
             </td>
           </tr>

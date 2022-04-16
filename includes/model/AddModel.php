@@ -49,14 +49,25 @@ class AddModel {
         exec("ps aux | grep www-data | grep xmlscraper | grep {$this->city}", $output);
 
         if(count($output) - 1 == 1) {
-            $processID = preg_split('/ +/', $output[0])[1];
-
             $parameters = [
-                ':processID' => $processID,
                 ':cityName' => $this->city
             ];
 
-            $this->database->executePreparedStatement(Queries::addScraper(), $parameters);
+            $this->database->executePreparedStatement(Queries::getCityID(), $parameters);
+
+            $data = $this->database->getResult();
+
+            if($data['queryOK'] === true) {
+                $processID = preg_split('/ +/', $output[0])[1];
+
+                $parameters = [
+                    ':processID' => $processID,
+                    ':cityName' => $this->city,
+                    ':cityID' => $data['result'][0]['cityID']
+                ];
+
+                $this->database->executePreparedStatement(Queries::addScraper(), $parameters);
+            }
         }
     }
 

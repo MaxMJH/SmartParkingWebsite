@@ -6,6 +6,7 @@ use app\includes\controller\SearchController;
 use app\includes\controller\ErrorController;
 use app\includes\controller\ResultsController;
 use app\includes\controller\AddController;
+use app\includes\controller\RemoveController;
 use app\includes\controller\SettingsController;
 use app\includes\controller\ScraperController;
 
@@ -39,6 +40,10 @@ class Router {
                 case 'controller/AddController.php':
                     require 'controller/AddController.php';
                     $controller = new AddController;
+                    break;
+                case 'controller/RemoveController.php':
+                    require 'controller/RemoveController.php';
+                    $controller = new RemoveController;
                     break;
                 case 'controller/ResultsController.php':
                     require 'controller/ResultsController.php';
