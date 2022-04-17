@@ -1,8 +1,10 @@
 <?php
 namespace app\includes\core;
 
+// As this is the first script called, it is important to start the session here.
 session_start();
 
+// Define all needed routes for the site to function.
 $router->defineRoute('/', 'controller/LoginController.php');
 $router->defineRoute('search', 'controller/SearchController.php');
 $router->defineRoute('add', 'controller/AddController.php');
