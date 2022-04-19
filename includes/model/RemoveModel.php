@@ -44,12 +44,12 @@ class RemoveModel {
             if($data['queryOK'] === true) {
                 $processID = $data['result'][0]['processID'];
 
-		unset($_SESSION['cities'][array_search($this->cityName, $_SESSION['cities'])]);
-
                 exec("kill {$processID}");
-
-                $this->database->executePreparedStatement(Queries::removeCity(), $parameters);
             }
+
+            unset($_SESSION['cities'][array_search($this->cityName, $_SESSION['cities'])]);
+            $_SESSION['cities'] = array_values($_SESSION['cities']);
+            $this->database->executePreparedStatement(Queries::removeCity(), $parameters);
         }
     }
 
