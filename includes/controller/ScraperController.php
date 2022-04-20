@@ -74,11 +74,9 @@ class ScraperController {
         // Initialise the class' properties.
         $this->scraperModel = new ScraperModel;
         $this->errorModel = new ErrorModel;
-        $this->scraperModel->populateCurrentScrapers();
-        $_SESSION['scraper'] = serialize($this->scraperModel);
 
         // Only process the relevant inputs if the End Process button is pressed.
-        if(isset($_POST['endProcessPressed']) && $_POST['endProcessPressed'] == "End Process") {
+        if(isset($_POST['endProcessPressed']) && !empty($_POST['endProcessPressed'])) {
             // Validate and Process the inputs.
             $this->validate();
             $this->process();
@@ -113,15 +111,22 @@ class ScraperController {
      */
     public function validate()
     {
-        // Store the returned values of the POST data being passed to various validation methods.
-        $validatedProcessID = Validate::validateProcessID($_POST['processID']);
-        $validatedCityName = Validate::validateCity($_POST['cityName']);
+        $explodedData = explode("_", $_POST['endProcessPressed']);
 
-        // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
-        if($validatedProcessID !== false && $validatedCityName !== false) {
-            // Add the validated POST variables to the Scraper Model.
-            $this->scraperModel->setCurrentProcessID($validatedProcessID);
-            $this->scraperModel->setCurrentCityName($validatedCityName);
+        if(count($explodedData) == 2) {
+            // Store the returned values of the POST data being passed to various validation methods.
+            $validatedProcessID = Validate::validateProcessID($explodedData[1]);
+            $validatedCityName = Validate::validateCity($explodedData[0]);
+
+            // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
+            if($validatedProcessID !== false && $validatedCityName !== false) {
+                // Add the validated POST variables to the Scraper Model.
+                $this->scraperModel->setCurrentProcessID($validatedProcessID);
+                $this->scraperModel->setCurrentCityName($validatedCityName);
+            } else {
+                // Add an error message to the class' Error Model.
+                $this->errorModel->addErrorMessage('Unable to validate!');
+            }
         } else {
             // Add an error message to the class' Error Model.
             $this->errorModel->addErrorMessage('Unable to validate!');
@@ -142,13 +147,7 @@ class ScraperController {
     public function process()
     {
         // Check to see if the process has actually been killed.
-        if($this->scraperModel->killProcess()) {
-            // If the scraper has been killed, serialise the model.
-            $_SESSION['scraper'] = serialize($this->scraperModel);
-
-            header('Location: scrapers');
-            exit();
-        } else {
+        if(!$this->scraperModel->killProcess()) {
             // Add an error message to the class' Error Model.
             $this->errorModel->addErrorMessage('Unable to kill process!');
         }

@@ -44,6 +44,7 @@ HTML;
 
     private function listProcesses() {
         $scraper = unserialize($_SESSION['scraper']);
+
         $processIDS = $scraper->getScraperProcessIDS();
         $cityNames = $scraper->getScraperCityNames();
 
@@ -57,9 +58,7 @@ HTML;
             <td>{$processID}</td>
             <td>{$cityName}</td>
             <td>
-              <input type="hidden" name="processID" value="{$processID}"/>
-              <input type="hidden" name="cityName" value="{$cityName}"/>
-              <input id="endProcessButton" type="submit" name="endProcessPressed" value="End Process"/>
+              <button id="endProcessButton" type="submit" name="endProcessPressed" value="{$cityName}_{$processID}">End Process</button>
             </td>
           </tr>
 

@@ -19,6 +19,7 @@ class ScraperModel {
         $this->scraperProcessIDS = array();
         $this->currentProcessID = -1;
         $this->currentCityName = '';
+        $this->populateCurrentScrapers();
     }
 
     public function __destruct() {}
@@ -34,6 +35,11 @@ class ScraperModel {
 
             unset($this->scraperCityNames[array_search($this->currentCityName, $this->scraperCityNames)]);
             unset($this->scraperProcessIDS[array_search($this->currentProcessID, $this->scraperProcessIDS)]);
+
+            $this->scraperCityNames = array_values($this->scraperCityNames);
+            $this->scraperProcessIDS = array_values($this->scraperProcessIDS);
+
+            $_SESSION['scraper'] = serialize($this);
 
             $this->database->executePreparedStatement(Queries::archiveScraper(), $parameters);
             return true;
@@ -74,6 +80,8 @@ class ScraperModel {
                 // For every exec ran with output, the output needs to be cleared before used again.
                 $output = '';
             }
+
+            $_SESSION['scraper'] = serialize($this);
         }
     }
 
