@@ -38,7 +38,6 @@ HTML;
         </form>
       </div>
     </main>
-
 HTML;
     }
 
@@ -53,7 +52,6 @@ HTML;
             $cityName = $cityNames[$i];
 
             $this->htmlContent .= <<<HTML
-
           <tr>
             <td>{$processID}</td>
             <td>{$cityName}</td>
@@ -61,7 +59,6 @@ HTML;
               <button id="endProcessButton" type="submit" name="endProcessPressed" value="{$cityName}_{$processID}">End Process</button>
             </td>
           </tr>
-
 HTML;
         }
     }

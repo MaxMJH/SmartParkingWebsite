@@ -60,7 +60,7 @@ class Queries
      */
     public static function updateUser()
     {
-        $query = 'UPDATE User SET User.emailAddress = :emailAddress, User.firstName = :firstName, User.lastName = :lastName, User.password = :password WHERE User.userID = :userID;';
+        $query = 'UPDATE User SET User.emailAddress = :emailAddress, User.firstName = :firstName, User.lastName = :lastName, User.password = :password, User.isAdmin = :isAdmin WHERE User.userID = :userID;';
         return $query;
     }
 
@@ -273,6 +273,36 @@ class Queries
     public static function getProcessID()
     {
         $query = 'SELECT Scraper.processID FROM Scraper WHERE Scraper.cityID = :cityID and Scraper.isActive = 1;';
+        return $query;
+    }
+
+    /**
+     * Returns a string containing a query.
+     *
+     * This query aims to return all users within the database.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function getUsers()
+    {
+        $query = 'SELECT User.userID, User.emailAddress, User.firstName, User.lastName, User.salt, User.password, User.pepper, User.profilePicture, User.isAdmin FROM User WHERE NOT User.userID = :userID;';
+        return $query;
+    }
+
+    /**
+     * Returns a string containing a query.
+     *
+     * This query aims to delete a specific user from the database.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function removeUser()
+    {
+        $query = 'DELETE FROM User WHERE User.userID = :userID;';
         return $query;
     }
 }

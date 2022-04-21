@@ -71,7 +71,7 @@ class LoginController
         if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {
             if(isset($_POST['username']) && isset($_POST['password']) &&
                !empty($_POST['username']) && !empty($_POST['password'])) {
-                    // If the user is already logged in, destroy the session.
+                // If the user is already logged in, destroy the session.
                 if(isset($_SESSION['user'])) {
                     session_unset();
                     session_destroy();
@@ -144,13 +144,17 @@ class LoginController
     {
         // Check to see if both the email and password entered (once salt, peppered and hashed) match a record in the database.
         if($this->loginModel->saltAndPepperPassword($this->loginModel->getPassword()) && $this->loginModel->populateUser()) {
-            // Serialise the LoginModel so that other components can use it at a later date.
-            $_SESSION['user'] = serialize($this->loginModel);
+            if($this->loginModel->getIsAdmin()) {
+                // Serialise the LoginModel so that other components can use it at a later date.
+                $_SESSION['user'] = serialize($this->loginModel);
 
-            // Redirect the user to the search page.
-            header('Location: search');
-            exit();
-	      }
+                // Redirect the user to the search page.
+                header('Location: search');
+                exit();
+            } else {
+                $this->errorModel->addErrorMessage('User is not an admin!');
+            }
+        }
     }
 
     /**

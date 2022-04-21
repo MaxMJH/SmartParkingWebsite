@@ -163,7 +163,7 @@ aside form {
   text-align: center;
 }
 
-input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu {
+input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu, input#userButtonMenu {
   border: none;
   padding: 0;
   background-color: transparent;
@@ -389,7 +389,7 @@ div#carparks {
 }
 
 /* Settings Section */
-form#settings {
+form#settings, form#usersedit {
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -416,7 +416,6 @@ div#firstName input, div#lastName input, div#userPassword input, div#confirmUser
 }
 
 div#emailAddress input {
-  width: 100%;
   height: 70px;
   font-size: 1.563rem;
   color: #003B51;
@@ -432,7 +431,7 @@ input#userFirstName:-webkit-autofill, input#userLastName:-webkit-autofill, input
   transition: background-color 5000s ease-in-out 0s;
 }
 
-input#updateButton {
+input#updateButton, input#changeImage {
   width: 260px;
   height: 70px;
   font-size: 1.563rem;
@@ -449,7 +448,7 @@ div#firstName, div#lastName, div#emailAddress, div#userPassword, div#confirmUser
 }
 
 /* Scrapers Section */
-div#scrapers {
+div#scrapers, div#users {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -459,14 +458,14 @@ div#scrapers {
   box-shadow: 0px 5px 6px #0000002b;
 }
 
-div#scrapers h2 {
+div#scrapers h2, div#users h2 {
   font-size: 20px;
   color: #003B51;
   margin: 0;
   font-weight: normal;
 }
 
-form#scrapers {
+form#scrapers, form#users {
   width: 100%;
   height: 100%;
 }
@@ -518,4 +517,30 @@ div.city {
   cursor: pointer;
   justify-content: center;
   background: #FFFFFF;  
+}
+
+div#admin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+div#isAdmin {
+  display: flex;
+  flex-direction: row;
+}
+
+div#isAdmin label {
+  font-size: 1.563rem;
+  color: #FFFFFF;
+  margin: auto;
+}
+
+div#isAdmin input {
+  width: 50px;
+  height: 70px;
+  font-size: 1.563rem;
+  color: #003B51;
+  border: none;
+  border-radius: 5px;
 }

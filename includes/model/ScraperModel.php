@@ -81,8 +81,9 @@ class ScraperModel {
                 $output = '';
             }
 
-            $_SESSION['scraper'] = serialize($this);
+            //$_SESSION['scraper'] = serialize($this);
         }
+        $_SESSION['scraper'] = serialize($this);
     }
 
     /* Getters and Setters */

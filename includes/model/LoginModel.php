@@ -10,20 +10,26 @@ class LoginModel {
     private $database;
     private $userID;
     private $emailAddress;
+    private $salt;
     private $password;
+    private $pepper;
     private $firstName;
     private $lastName;
     private $profilePicture;
+    private $isAdmin;
 
     /* Constructor and Destructor */
     public function __construct() {
         $this->database = new Database;
         $this->userID = -1;
         $this->emailAddress = '';
+        $this->salt = '';
         $this->password = '';
+        $this->pepper = '';
         $this->firstName = '';
         $this->lastName = '';
         $this->profilePicture = '';
+        $this->isAdmin = false;
     }
 
     public function __destruct() {}
@@ -63,6 +69,7 @@ class LoginModel {
             $this->firstName = $user['result'][0]['firstName'];
             $this->lastName = $user['result'][0]['lastName'];
             $this->profilePicture = $user['result'][0]['profilePicture'];
+            $this->isAdmin = $user['result'][0]['isAdmin'];
 
             return true;
         }
@@ -87,12 +94,28 @@ class LoginModel {
         $this->emailAddress = $emailAddress;
     }
 
+    public function getSalt() {
+        return $this->salt;
+    }
+
+    public function setSalt($salt) {
+        $this->salt = $salt;
+    }
+
     public function getPassword() {
         return $this->password;
     }
 
     public function setPassword($password) {
         $this->password = $password;
+    }
+
+    public function getPepper() {
+        return $this->pepper;
+    }
+
+    public function setPepper($pepper) {
+        $this->pepper = $pepper;
     }
 
     public function getFirstName() {
@@ -117,5 +140,13 @@ class LoginModel {
 
     public function setProfilePicture($profilePicture) {
         $this->profilePicture = $profilePicture;
+    }
+
+    public function getIsAdmin() {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin($isAdmin) {
+        $this->isAdmin = $isAdmin;
     }
 }

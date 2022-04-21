@@ -149,6 +149,31 @@ class Validate
     }
 
     /**
+     * Validates a city's ID.
+     *
+     * This method aims to validate a city's ID by checking if
+     * the ID is actually an integer.
+     *
+     * @since 0.0.1
+     *
+     * @param string $cityID A string which contains a city's ID.
+     * @return bool|int A false boolean will be returned if the city's ID failed to verify, or an integer containing the city's ID.
+     */
+    public static function validateCityID($cityID) {
+        // Initally set the filtered city ID to false, indicating that it failed to filter.
+        $filteredCityID = false;
+
+        // Check if the city ID is actually an integer.
+        if(filter_var($cityID, FILTER_VALIDATE_INT)) {
+            // Set the city ID to an actual int.
+            $filteredCityID = filter_var($cityID, FILTER_VALIDATE_INT);
+        }
+
+        // Return either false or the result of the filtered city ID.
+        return $filteredCityID;
+    }
+
+    /**
      * Validates a XML URL.
      *
      * This method aims to validate a XML URL by first checking if
@@ -168,7 +193,7 @@ class Validate
         // First check if the XML URL is in a valid form.
         if(filter_var($xmlURL, FILTER_VALIDATE_URL)) {
             // Then sanitise the URL to remove any malicious characters.
-	          $sanitisedXMLURL = filter_var($xmlURL, FILTER_SANITIZE_URL);
+            $sanitisedXMLURL = filter_var($xmlURL, FILTER_SANITIZE_URL);
 
             // As this XML URL is being used in an execution string, check to see if any command injection symbols are present.
             if(Validate::isIllegal($sanitisedXMLURL)) {

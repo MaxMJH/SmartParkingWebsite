@@ -9,6 +9,8 @@ use app\includes\controller\AddController;
 use app\includes\controller\RemoveController;
 use app\includes\controller\SettingsController;
 use app\includes\controller\ScraperController;
+use app\includes\controller\UserController;
+use app\includes\controller\EditUserController;
 
 /**
  * Main class which handles all Routing methods necessary for the web application to function.
@@ -129,6 +131,14 @@ class Router
                 case 'controller/ScraperController.php':
                     require 'controller/ScraperController.php';
                     $controller = new ScraperController;
+                    break;
+                case 'controller/UserController.php':
+                    require 'controller/UserController.php';
+                    $controller = new UserController;
+                    break;
+                case 'controller/EditUserController.php':
+                    require 'controller/EditUserController.php';
+                    $controller = new EditUserController;
                     break;
             }
             // Return the respective controller's HTML output.

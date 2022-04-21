@@ -1,30 +1,36 @@
 <?php
 namespace app\includes\view;
 
-class SettingsView extends PageTemplateView {
+class EditUserView extends PageTemplateView {
     public function __construct() {
         parent::__construct();
-        $this->createSettingsViewContent();
+        $this->createEditUserViewContent();
     }
 
     public function __destruct() {}
 
-    public function createSettingsViewPage() {
+    public function createEditUserViewPage() {
         $this->htmlTitle = 'Smarter Parking Admin Panel';
         $this->createPageHeader();
         $this->createPageContent();
         $this->createPageFooter();
     }
 
-    private function createSettingsViewContent() {
-        $user = unserialize($_SESSION['user']);
+    private function createEditUserViewContent() {
+        $user = unserialize($_SESSION['edit-user'])->getLoginModel();
 
-        $image = 'data:' . 'image/jpg;base64,' . base64_encode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../includes/images/' . $user->getProfilePicture()));
+        $isAdmin = '';
+
+        if($user->getIsAdmin()) {
+            $isAdmin = '<input id="adminCheckbox" type="checkbox" name="isAdmin" value="isAdmin" checked/>';
+        } else {
+            $isAdmin = '<input id="adminCheckbox" type="checkbox" name="isAdmin" value="isAdmin"/>';
+        }
 
         $this->htmlContent = <<<HTML
     <main>
-      <div id="settings">
-        <form id="settings" action="settings" method="post">
+      <div id="usersedit">
+        <form id="usersedit" action="users-edit" method="post">
           <div id="firstLastNames">
             <div id="firstName">
               <label for="userFirstName">First Name</label>
@@ -49,11 +55,16 @@ class SettingsView extends PageTemplateView {
               <input id="confirmUserPassword" type="password" name="confirmNewPassword" placeholder="Confirm new password"/>
             </div>
           </div>
+          <div id="admin">
+            <div id="isAdmin">
+              <label for="adminCheckbox">Is Admin</label>
+              {$isAdmin}
+            </div>
+          </div>
           <input id="updateButton" type="submit" name="updateButton" value="Update"/>
         </form>
       </div>
     </main>
-
 HTML;
     }
 

@@ -57,6 +57,10 @@ class PageTemplateView {
         <form action="settings" method="post">
           <input id="settingsButtonMenu" type="submit" name="settings" value="Settings"/>
         </form>
+        <hr>
+        <form action="users" method="post">
+          <input id="userButtonMenu" type="submit" name="user" value="Users"/>
+        </form>
       </div>
       <form method="post">
         <input id="logoutButtonMenu" type="submit" name="logout" value="Logout"/>

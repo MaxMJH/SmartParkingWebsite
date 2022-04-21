@@ -22,6 +22,7 @@ class SettingsModel {
             ':firstName' => $userModel->getFirstName(),
             ':lastName' => $userModel->getLastName(),
             ':password' => $userModel->getPassword(),
+            ':isAdmin' => (int)$userModel->getIsAdmin(),
             ':userID' => (int)$userModel->getUserID()
         ];
 
