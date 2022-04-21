@@ -51,6 +51,11 @@ class ErrorController
             exit();
         }
 
+        if(!isset($_SESSION['error'])) {
+            header('Location: search');
+            exit();
+        }
+
         $this->view = new ErrorView;
     }
 

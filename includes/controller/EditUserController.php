@@ -93,6 +93,11 @@ class EditUserController
             $this->setUser();
         }
 
+        if(!isset($_SESSION['edit-user'])) {
+            header('Location: users');
+            exit();
+        }
+
         if(isset($_POST['updateButton']) && $_POST['updateButton'] == 'Update') {
             $this->validate();
             $this->process();

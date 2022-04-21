@@ -327,7 +327,7 @@ div#parkingData {
   gap: 10px;
 }
 
-div#fiveMinutes, div#hourly, div#daily, div#carparks {
+div#fiveMinutes, div#hourly, div#daily, div#carparks, div#reviews {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -380,9 +380,9 @@ table tbody {
   height: 100%;
 }
 
-div#carparks {
-  height: calc(40% - 10px);
-  width: calc(100% - 20px);
+div#carparks, div#reviews {
+  height: 100%;
+  width: calc(50% - 15px);
   margin-left: 10px;
   background: #FFFFFF;
   box-shadow: 0px 5px 6px #0000002b;
@@ -543,4 +543,9 @@ div#isAdmin input {
   color: #003B51;
   border: none;
   border-radius: 5px;
+}
+
+div#carparksAndReviews {
+  display: flex;
+  height: calc(40% - 10px);
 }

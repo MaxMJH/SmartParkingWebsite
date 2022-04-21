@@ -305,4 +305,19 @@ class Queries
         $query = 'DELETE FROM User WHERE User.userID = :userID;';
         return $query;
     }
+
+    /*
+     * Returns a string containing a query.
+     *
+     * This query aims to get all reviews of a specific city from the database.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function getReviews()
+    {
+        $query = 'SELECT Review.reviewID, Review.review, Review.carparkID FROM Review INNER JOIN Carpark ON Review.carparkID = Carpark.carparkID WHERE Carpark.cityID = :cityID;';
+        return $query;
+    }
 }

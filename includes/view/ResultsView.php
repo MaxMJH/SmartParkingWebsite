@@ -75,23 +75,41 @@ HTML;
           </table>
         </div>
       </div>
-      <div id="carparks">
-        <h2>Carparks</h2>
-        <hr>
-        <table>
-          <tr>
-            <th>Carpark ID</th>
-            <th>Carpark Name</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Total Spaces</th>
-          </tr>
+      <div id="carparksAndReviews">
+        <div id="carparks">
+          <h2>Carparks</h2>
+          <hr>
+          <table>
+            <tr>
+              <th>Carpark ID</th>
+              <th>Carpark Name</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Total Spaces</th>
+            </tr>
 HTML;
 
         $this->setCarparksTable();
         $this->htmlContent .= <<<HTML
 
-        </table>
+          </table>
+        </div>
+        <div id="reviews">
+          <h2>Reviews</h2>
+          <hr>
+          <table>
+            <tr>
+              <th>Review ID</th>
+              <th>Review</th>
+              <th>Carpark ID</th>
+            </tr>
+HTML;
+
+        $this->setReviewsTable();
+        $this->htmlContent .= <<<HTML
+
+          </table>
+        </div>
       </div>
     </section>
   </main>
@@ -189,6 +207,27 @@ HTML;
             <td>{$latitude}</td>
             <td>{$longitude}</td>
             <td>{$totalSpaces}</td>
+          </tr>
+HTML;
+            }
+        }
+    }
+
+    private function setReviewsTable() {
+        if(isset($_SESSION['results'])) {
+            $reviews = unserialize($_SESSION['results'])->getReviews();
+
+            for($i = 0; $i < count($reviews); $i++) {
+                $reviewID = $reviews[$i]['reviewID'];
+                $review = $reviews[$i]['review'];
+                $carparkID = $reviews[$i]['carparkID'];
+
+                $this->htmlContent .= <<<HTML
+
+          <tr>
+            <td>{$reviewID}</td>
+            <td>{$review}</td>
+            <td>{$carparkID}</td>
           </tr>
 HTML;
             }

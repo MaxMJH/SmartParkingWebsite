@@ -113,10 +113,11 @@ class ResultsController
         $this->resultsModel->setCityID($this->searchModel->getCityID());
 
         // Populate the relevant arrays to be used by the view.
-	      $this->resultsModel->setFiveMinutes();
+	$this->resultsModel->setFiveMinutes();
         $this->resultsModel->setHourly();
         $this->resultsModel->setDaily();
         $this->resultsModel->setCarparks();
+        $this->resultsModel->setReviews();
 
         // Serialise the newly populate Results Model.
         $_SESSION['results'] = serialize($this->resultsModel);

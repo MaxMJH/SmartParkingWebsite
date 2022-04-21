@@ -12,6 +12,7 @@ class ResultsModel {
     private $hourly;
     private $daily;
     private $carparks;
+    private $reviews;
 
     /* Constructor and Destructor */
     public function __construct() {
@@ -21,6 +22,7 @@ class ResultsModel {
         $this->hourly = array();
         $this->daily = array();
         $this->carparks = array();
+        $this->reviews = array();
     }
 
     public function __destruct() {}
@@ -102,6 +104,23 @@ class ResultsModel {
         if($result['queryOK'] === true) {
             for($i = 0; $i < count($result['result']); $i++) {
                 array_push($this->carparks, $result['result'][$i]);
+            }
+        }
+    }
+
+    public function getReviews() {
+        return $this->reviews;
+    }
+
+    public function setReviews() {
+        $parameters = [':cityID' => $this->cityID];
+
+        $this->database->executePreparedStatement(Queries::getReviews(), $parameters);
+        $result = $this->database->getResult();
+
+        if($result['queryOK'] === true) {
+            for($i = 0; $i < count($result['result']); $i++) {
+                array_push($this->reviews, $result['result'][$i]);
             }
         }
     }

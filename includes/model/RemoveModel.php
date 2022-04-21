@@ -51,6 +51,8 @@ class RemoveModel {
             $_SESSION['cities'] = array_values($_SESSION['cities']);
             $this->database->executePreparedStatement(Queries::removeCity(), $parameters);
         }
+
+        unset($_SESSION['city']);
     }
 
     /* Getters and Setters */
