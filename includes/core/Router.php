@@ -11,6 +11,7 @@ use app\includes\controller\SettingsController;
 use app\includes\controller\ScraperController;
 use app\includes\controller\UserController;
 use app\includes\controller\EditUserController;
+use app\includes\controller\ReviewController;
 
 /**
  * Main class which handles all Routing methods necessary for the web application to function.
@@ -139,6 +140,10 @@ class Router
                 case 'controller/EditUserController.php':
                     require 'controller/EditUserController.php';
                     $controller = new EditUserController;
+                    break;
+                case 'controller/ReviewController.php':
+                    require 'controller/ReviewController.php';
+                    $controller = new ReviewController;
                     break;
             }
             // Return the respective controller's HTML output.

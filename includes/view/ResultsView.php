@@ -129,7 +129,6 @@ HTML;
                 $isOpen = $fiveMinutes[$i]['isOpen'] == 1 ? 'True' : 'False'; // PHP is odd...
 
                 $this->htmlContent .= <<<HTML
-
           <tr>
             <td>{$fiveMinutesID}</td>
             <td>{$carparkID}</td>

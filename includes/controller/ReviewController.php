@@ -1,42 +1,41 @@
 <?php
 namespace app\includes\controller;
 
-use app\includes\view\ScraperView;
-use app\includes\model\ScraperModel;
+use app\includes\view\ReviewView;
+use app\includes\model\ReviewModel;
 use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
 
 /**
- * Controller for the Scraper section of the website.
+ * Controller for the Review section of the website.
  *
  * This class uses the MVC design pattern to control the way the admin interacts
- * with the website. Using this class, the admin can view the current XML Scrapers
- * and also end their processes if necessary.
+ * with the website. Using this class, the admin can view all reviews as well as delete them.
  *
  * @since 0.0.1
  */
-class ScraperController {
+class ReviewController {
     /* Fields */
     /**
-     * Variable used to store the view of the Scraper component.
+     * Variable used to store the view of the Review component.
      *
      * @since 0.0.1
      *
-     * @var ScraperView $view Instance of the ScraperView class.
+     * @var ReviewView $view Instance of the ReviewView class.
      */
     private $view;
 
     /**
-     * Variable used to store the scraper model of the Scraper component.
+     * Variable used to store the review model of the Review component.
      *
      * @since 0.0.1
      *
-     * @var ScraperModel $scraperModel Instance of the ScraperModel class.
+     * @var ReviewModel $reviewModel Instance of the ReviewModel class.
      */
-    private $scraperModel;
+    private $reviewModel;
 
     /**
-     * Variable used to store the error model of the Scraper component.
+     * Variable used to store the error model of the Review component.
      *
      * @since 0.0.1
      *
@@ -46,10 +45,10 @@ class ScraperController {
 
     /* Constructor and Destructor */
     /**
-     * The constructor of the ScraperController class.
+     * The constructor of the ReviewController class.
      *
      * The constructor intialises the required properties to ensure that the
-     * controller functions in the correct and specified manner (in this instance, viewing current XML Scraper processes).
+     * controller functions in the correct and specified manner (in this instance, viewing and removing reviews).
      * The constructor also prevents any non-session (non-logged in) admins from entering
      * this specific section of the website.
      *
@@ -72,21 +71,21 @@ class ScraperController {
         }
 
         // Initialise the class' properties.
-        $this->scraperModel = new ScraperModel;
+        $this->reviewModel = new ReviewModel;
         $this->errorModel = new ErrorModel;
 
         // Only process the relevant inputs if the End Process button is pressed.
-        if(isset($_POST['endProcessPressed']) && !empty($_POST['endProcessPressed'])) {
+        if(isset($_POST['removeReviewPressed']) && !empty($_POST['removeReviewPressed'])) {
             // Validate and Process the inputs.
             $this->validate();
             $this->process();
         }
 
-        $this->view = new ScraperView;
+        $this->view = new ReviewView;
     }
 
     /**
-     * The destructor of the ScraperController class.
+     * The destructor of the ReviewController class.
      *
      * The destructor frees up resources occupied by an instantiation of this class.
      *
@@ -111,22 +110,13 @@ class ScraperController {
      */
     public function validate()
     {
-        $explodedData = explode("_", $_POST['endProcessPressed']);
+        // Store the returned values of the POST data being passed to various validation methods.
+        $validatedReviewID = Validate::validateID($_POST['removeReviewPressed']);
 
-        if(count($explodedData) == 2) {
-            // Store the returned values of the POST data being passed to various validation methods.
-            $validatedProcessID = Validate::validateID($explodedData[1]);
-            $validatedCityName = Validate::validateCity($explodedData[0]);
-
-            // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
-            if($validatedProcessID !== false && $validatedCityName !== false) {
-                // Add the validated POST variables to the Scraper Model.
-                $this->scraperModel->setCurrentProcessID($validatedProcessID);
-                $this->scraperModel->setCurrentCityName($validatedCityName);
-            } else {
-                // Add an error message to the class' Error Model.
-                $this->errorModel->addErrorMessage('Unable to validate!');
-            }
+        // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
+        if($validatedReviewID !== false) {
+            // Add the validated POST variables to the Review Model.
+            $this->reviewModel->setCurrentReviewID($validatedReviewID);
         } else {
             // Add an error message to the class' Error Model.
             $this->errorModel->addErrorMessage('Unable to validate!');
@@ -137,27 +127,27 @@ class ScraperController {
      * Class method which aims to process the user's validated input.
      *
      * This class method aims to process the user's validated input by using defined class
-     * methods of the class ScraperModel. The method aims to kill the process of the specified
-     * process ID of the XML Scraper.
+     * methods of the class ReviewModel. The method aims to remove a selected review from
+     * the database..
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\ScraperModel
+     * @see app\includes\model\ReviewModel
      */
     public function process()
     {
         // Check to see if the process has actually been killed.
-        if(!$this->scraperModel->killProcess()) {
+        if(!$this->reviewModel->removeReview()) {
             // Add an error message to the class' Error Model.
-            $this->errorModel->addErrorMessage('Unable to kill process!');
+            $this->errorModel->addErrorMessage('Unable to remove review!');
         }
     }
 
     /**
-     * Class method which aims to return the HTML content of the Scraper component.
+     * Class method which aims to return the HTML content of the Review component.
      *
-     * This class method aims to return the HTML content of the Scraper component by
-     * calling relevant classes on the ScraperView. If there are any errors present
+     * This class method aims to return the HTML content of the Review component by
+     * calling relevant classes on the ReviewView. If there are any errors present
      * throughout the Process and Validate methods, the user will be redirected
      * to the Error page, rather than the expected page.
      *
@@ -170,20 +160,20 @@ class ScraperController {
      */
     public function getHtmlOutput()
     {
-        // Check to see if any errors have appeared throughout the Scraper components' life.
+        // Check to see if any errors have appeared throughout the Review components' life.
         if($this->errorModel->hasErrors()) {
             // Store the Error Model in the global $_SESSION and serialize it.
             $_SESSION['error'] = serialize($this->errorModel);
 
             // Used to return the user back to the page in which the error occured.
-            $_SESSION['referrer'] = 'scrapers';
+            $_SESSION['referrer'] = 'reviews';
 
             header('Location: error');
             exit();
         }
 
         // Create the HTML output.
-        $this->view->createScraperViewPage();
+        $this->view->createReviewViewPage();
         return $this->view->getHtmlOutput();
     }
 }

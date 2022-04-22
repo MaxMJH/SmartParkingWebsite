@@ -163,7 +163,7 @@ aside form {
   text-align: center;
 }
 
-input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu, input#userButtonMenu {
+input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu, input#userButtonMenu, input#reviewsButtonMenu {
   border: none;
   padding: 0;
   background-color: transparent;
@@ -448,7 +448,7 @@ div#firstName, div#lastName, div#emailAddress, div#userPassword, div#confirmUser
 }
 
 /* Scrapers Section */
-div#scrapers, div#users {
+div#scrapers, div#users, div#review {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -458,14 +458,14 @@ div#scrapers, div#users {
   box-shadow: 0px 5px 6px #0000002b;
 }
 
-div#scrapers h2, div#users h2 {
+div#scrapers h2, div#users h2, div#review h2 {
   font-size: 20px;
   color: #003B51;
   margin: 0;
   font-weight: normal;
 }
 
-form#scrapers, form#users {
+form#scrapers, form#users, form#review {
   width: 100%;
   height: 100%;
 }

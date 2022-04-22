@@ -15,3 +15,4 @@ $router->defineRoute('settings', 'controller/SettingsController.php');
 $router->defineRoute('scrapers', 'controller/ScraperController.php');
 $router->defineRoute('users', 'controller/UserController.php');
 $router->defineRoute('users-edit', 'controller/EditUserController.php');
+$router->defineRoute('reviews', 'controller/ReviewController.php');

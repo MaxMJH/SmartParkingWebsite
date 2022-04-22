@@ -239,30 +239,30 @@ class Validate
     }
 
     /**
-     * Validates a process ID.
+     * Validates an ID.
      *
-     * This method aims to validate a process ID by first checking that the
-     * process ID is in a valid format and then finally sanitising it using PHP's
+     * This method aims to validate an ID by first checking that the
+     * ID is in a valid format and then finally sanitising it using PHP's
      * FILTER_SANITIZE_NUMBER_INT constant.
      *
      * @since 0.0.1
      *
-     * @param string $processID A string which contains a process ID.
-     * @return bool|int A false boolean will be returned if the process ID failed to verify, or a sanitised int containing the process ID.
+     * @param string $ID A string which contains an ID.
+     * @return bool|int A false boolean will be returned if the ID failed to verify, or a sanitised int containing the ID.
      */
-    public static function validateProcessID($processID)
+    public static function validateID($ID)
     {
-        // Initially set the sanitised process ID to false, indicating that it failed to sanitise.
-        $sanitisedProcessID = false;
+        // Initially set the sanitised ID to false, indicating that it failed to sanitise.
+        $sanitisedID = false;
 
-        // First check if the process is in a valid form (integer).
-        if(filter_var($processID, FILTER_VALIDATE_INT)) {
-            // Then sanitise the process ID to remove any malicious characters.
-            $sanitisedProcessID = filter_var($processID, FILTER_SANITIZE_NUMBER_INT);
+        // First check if the ID is in a valid form (integer).
+        if(filter_var($ID, FILTER_VALIDATE_INT)) {
+            // Then sanitise the ID to remove any malicious characters.
+            $sanitisedID = filter_var($ID, FILTER_SANITIZE_NUMBER_INT);
         }
 
         // Return either false or the result of the sanitisation of the integer.
-        return $sanitisedProcessID;
+        return $sanitisedID;
     }
 
     /**

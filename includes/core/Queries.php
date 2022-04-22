@@ -320,4 +320,34 @@ class Queries
         $query = 'SELECT Review.reviewID, Review.review, Review.carparkID FROM Review INNER JOIN Carpark ON Review.carparkID = Carpark.carparkID WHERE Carpark.cityID = :cityID;';
         return $query;
     }
+
+    /**
+     * Returns a string containing a query.
+     *
+     * This query aims to get all reviews from the database.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function getAllReviews()
+    {
+        $query = 'SELECT Review.reviewID, City.cityName, Carpark.carparkName, Review.review FROM Review INNER JOIN Carpark ON Review.carparkID = Carpark.carparkID INNER JOIN City ON Carpark.cityID = City.cityID;';
+        return $query;
+    }
+
+    /**
+     * Returns a string containing a query.
+     *
+     * This query aims to get remove a review from the database.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function removeReview()
+    {
+        $query = 'DELETE FROM Review WHERE Review.reviewID = :reviewID;';
+        return $query;
+    }
 }
