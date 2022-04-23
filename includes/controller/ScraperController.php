@@ -15,7 +15,8 @@ use app\includes\core\Validate;
  *
  * @since 0.0.1
  */
-class ScraperController {
+class ScraperController
+{
     /* Fields */
     /**
      * Variable used to store the view of the Scraper component.
@@ -40,7 +41,7 @@ class ScraperController {
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -49,7 +50,7 @@ class ScraperController {
      * The constructor of the ScraperController class.
      *
      * The constructor intialises the required properties to ensure that the
-     * controller functions in the correct and specified manner (in this instance, viewing current XML Scraper processes).
+     * controller functions in the correct and specified manner (in this instance, viewing and deleting XML Scraper processes).
      * The constructor also prevents any non-session (non-logged in) admins from entering
      * this specific section of the website.
      *
@@ -163,7 +164,8 @@ class ScraperController {
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\ScraperModel
+     * @see app\includes\model\ErrorModel
+     * @see app\icnludes\view\ScraperView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Scraper components' HTML.

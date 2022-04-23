@@ -48,7 +48,6 @@ class Database
      * The constructor also attempts a connection to the database and provides an error if unable to connect.
      *
      * @since 0.0.1
-     * @global array $_SESSION Global which stores session data.
      */
     public function __construct()
     {
@@ -119,8 +118,6 @@ class Database
      * }
      *
      * @since 0.0.1
-     *
-     * @global array $_SESSION Global which stores session data.
      *
      * @param string $query String representing the query of which is to be used to manipulate the database.
      * @param array $parameters An array which contains the parameters needed for the query.

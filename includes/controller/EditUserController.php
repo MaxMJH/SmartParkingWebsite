@@ -52,7 +52,7 @@ class EditUserController
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -181,6 +181,7 @@ class EditUserController
             }
         }
 
+        // Determine whether or not the user's privileges should be elevated or not.
         if(isset($_POST['isAdmin']) && $_POST['isAdmin'] === "isAdmin") {
             $this->editUserModel->getLoginModel()->setIsAdmin(true);
         } else {
@@ -188,37 +189,59 @@ class EditUserController
         }
     }
 
+    /**
+     * Class method which aims to process the user's validated input.
+     *
+     * This class method aims to process the user's validated input by using defined class
+     * methods of the class EditUserModel. The method aims to take all validated data inputted by
+     * an admin and attempt to update said values in the database. If the data fails to update
+     * then such error will be conveyed to the admin.
+     *
+     * @since 0.0.1
+     *
+     * @see app\includes\model\EditUserModel
+     */
     public function process()
     {
+        // Attempt to update the user's information.
         if($this->editUserModel->updateUser()) {
             $_SESSION['edit-user'] = serialize($this->editUserModel);
 
+            // If updated successfully, redirect the user back to the 'Users' page.
             header('Location: users');
             exit();
         } else {
+            // Notify the admin that the inputted values failed to update for a specific user.
             $this->errorModel->addErrorMessage('Failed to update user!');
         }
     }
 
     /**
-     * Class method which aims to process the user's validated input.
+     * Class method which aims to put a specific user in editing focus.
      *
-     * This class method aims to process the user's validated input by using defined class
-     * methods of the class SettingsModel. The method aims to update the newly eneted information
-     * if it is valid. Once updated, the serialised login model is re-serialised so that the data
-     * is updated, allowing the admin to carry on rather than having to restart the session.
+     * This method aims to setup the user which the admin wishes to edit. Firstly,
+     * from the 'Users' page, all registered users (besides the logged in admin) are
+     * fetched from the $_SESSION global and each of their ID's are checked against the
+     * $_POST data. If both are a match, the LoginModel is then set allowing for the
+     * EditUserView to display the correct user details.
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\SettingsModel
      * @see app\includes\model\LoginModel
+     * @see app\includes\core\Validate
+     * @see app\includes\model\EditUserModel
+     * @global array $_SESSION Global which stores the SESSION data.
+     * @global array $_POST Global which stores the POST data.
      */
     public function setUser()
     {
+        // Get all registered users.
         $users = unserialize($_SESSION['users'])->getUsers();
 
+        // Iterate through all users to check if the requested edited user actually exists.
         for($i = 0; $i < count($users); $i++) {
-            if($users[$i]->getUserID() == $_POST['editUserPressed']) {
+            if($users[$i]->getUserID() == Validate::validateID($_POST['editUserPressed'])) {
+                // If the user does exist, set the LoginModel for the EditUserModel so that the user can be edited.
                 $this->editUserModel->setLoginModel($users[$i]);
                 $_SESSION['edit-user'] = serialize($this->editUserModel);
             }
@@ -235,7 +258,8 @@ class EditUserController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\SettingsModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\EditUserView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the EditUser components' HTML.

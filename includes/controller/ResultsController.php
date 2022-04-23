@@ -79,7 +79,7 @@ class ResultsController
         // Initialise the class' properties.
         $this->resultsModel = new ResultsModel;
         $this->searchModel = unserialize($_SESSION['city']);
-	      $this->processResultsTable();
+        $this->processResultsTable();
         $this->view = new ResultsView;
     }
 
@@ -113,7 +113,7 @@ class ResultsController
         $this->resultsModel->setCityID($this->searchModel->getCityID());
 
         // Populate the relevant arrays to be used by the view.
-	$this->resultsModel->setFiveMinutes();
+        $this->resultsModel->setFiveMinutes();
         $this->resultsModel->setHourly();
         $this->resultsModel->setDaily();
         $this->resultsModel->setCarparks();
@@ -131,7 +131,7 @@ class ResultsController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\ResultsModel
+     * @see app\includes\view\ResultsView
      *
      * @return string String representation of the Results components' HTML.
      */

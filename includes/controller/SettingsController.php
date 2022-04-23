@@ -3,7 +3,6 @@ namespace app\includes\controller;
 
 use app\includes\view\SettingsView;
 use app\includes\model\SettingsModel;
-use app\includes\model\LoginModel;
 use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
 use app\includes\core\Encryption;
@@ -52,7 +51,7 @@ class SettingsController
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -61,7 +60,7 @@ class SettingsController
      * The constructor of the SettingsController class.
      *
      * The constructor intialises the required properties to ensure that the
-     * controller functions in the correct and specified manner (in this instance, altering admin data).
+     * controller functions in the correct and specified manner (in this instance, altering their own data).
      * The constructor also prevents any non-session (non-logged in) admins from entering
      * this specific section of the website.
      *
@@ -184,16 +183,22 @@ class SettingsController
      *
      * @see app\includes\model\SettingsModel
      * @see app\includes\model\LoginModel
+     * @see app\includes\model\ErrorModel
      */
     public function process()
     {
-        // Attempt to update the admin's information.
-        if($this->settingsModel->updateUser($this->loginModel) === true) {
-            // Re-serialise the login model.
-            $_SESSION['user'] = serialize($this->loginModel);
+        if(!$this->settingsModel->emailAddressExists($this->loginModel)) {
+            // Attempt to update the admin's information.
+            if($this->settingsModel->updateUser($this->loginModel) === true) {
+                // Re-serialise the login model.
+                $_SESSION['user'] = serialize($this->loginModel);
+            } else {
+                // Add an error message to the class' Error Model.
+                $this->errorModel->addErrorMessage('Unable to update user details!');
+            }
         } else {
             // Add an error message to the class' Error Model.
-            $this->errorModel->addErrorMessage('Unable to update user details!');
+            $this->errorModel->addErrorMessage('The email address already exists!');
         }
     }
 
@@ -207,7 +212,8 @@ class SettingsController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\SettingsModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\SettingsView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Settings components' HTML.

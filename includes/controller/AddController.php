@@ -25,15 +25,15 @@ class AddController
      *
      * @var AddView $view Instance of the AddView class.
      */
-    private $view;
+     private $view;
 
-    /**
-     * Variable used to store the add model of the Add City component.
-     *
-     * @since 0.0.1
-     *
-     * @var AddModel $addModel Instance of the AddModel class.
-     */
+     /**
+      * Variable used to store the add model of the Add City component.
+      *
+      * @since 0.0.1
+      *
+      * @var AddModel $addModel Instance of the AddModel class.
+      */
     private $addModel;
 
     /**
@@ -41,7 +41,7 @@ class AddController
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -160,8 +160,11 @@ class AddController
             // As the XMLScraper has to parse an entire document, adding the City and Carparks to the db will take a "long" time, so add a delay.
             sleep(2);
 
-            // Add the XML Scraper's process ID to the database.
-            $this->addModel->generateScraperRecord();
+            // Attempt to add the XML Scraper's process ID to the database.
+            if(!$this->addModel->generateScraperRecord()) {
+                // Add an error message to the class' Error Model.
+                $this->errorModel->addErrorMessage('Unable to add Scraper to the database!');
+            }
         } else {
             // Add an error message to the class' Error Model.
             $this->errorModel->addErrorMessage('This city already exists! If you need to add new carparks, first end the scraper attached to the city, then try and add it again!');
@@ -178,7 +181,8 @@ class AddController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\AddModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\AddView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Add components' HTML.

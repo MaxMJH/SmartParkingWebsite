@@ -43,7 +43,7 @@ class Encryption
      * @param string $salt Used to salt the beginning of the plaintext password.
      * @param string $password The plain text password that needs to be salt, peppered and hashed.
      * @param string $pepper Used to pepper the ending of the plaintext password.
-     * @param string The hashed version of the salt and peppered plaintext password.
+     * @return string The hashed version of the salt and peppered plaintext password.
      */
     public static function hashPassword($salt, $password, $pepper)
     {

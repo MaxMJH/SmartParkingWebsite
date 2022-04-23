@@ -339,7 +339,7 @@ class Queries
     /**
      * Returns a string containing a query.
      *
-     * This query aims to get remove a review from the database.
+     * This query aims to remove a review from the database.
      *
      * @since 0.0.1
      *
@@ -348,6 +348,21 @@ class Queries
     public static function removeReview()
     {
         $query = 'DELETE FROM Review WHERE Review.reviewID = :reviewID;';
+        return $query;
+    }
+
+    /**
+     * Returns a string containing a query.
+     *
+     * This query aims to see if an email address already exists.
+     *
+     * @since 0.0.1
+     *
+     * @return string A query.
+     */
+    public static function emailAddressExists()
+    {
+        $query = 'SELECT User.emailAddress FROM User WHERE User.emailAddress = :emailAddress;';
         return $query;
     }
 }

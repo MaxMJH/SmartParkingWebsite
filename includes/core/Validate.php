@@ -284,7 +284,7 @@ class Validate
         $offendingChars = array(';', '&', '&&', '|', '||', '`', '(', ')', '#');
 
         // Go through each character in the string to see if any matches with the offeding characters array.
-	      for($i = 0; $i < strlen($offendingString); $i++) {
+        for($i = 0; $i < strlen($offendingString); $i++) {
             if(in_array($offendingString[$i], $offendingChars)) {
                 return true;
             }

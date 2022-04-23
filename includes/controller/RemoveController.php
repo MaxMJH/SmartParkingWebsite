@@ -41,7 +41,7 @@ class RemoveController
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -152,7 +152,8 @@ class RemoveController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\RemoveModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\RemoveView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Remove components' HTML.

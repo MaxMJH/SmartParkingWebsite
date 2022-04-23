@@ -14,7 +14,8 @@ use app\includes\core\Validate;
  *
  * @since 0.0.1
  */
-class ReviewController {
+class ReviewController
+{
     /* Fields */
     /**
      * Variable used to store the view of the Review component.
@@ -39,7 +40,7 @@ class ReviewController {
      *
      * @since 0.0.1
      *
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -74,7 +75,7 @@ class ReviewController {
         $this->reviewModel = new ReviewModel;
         $this->errorModel = new ErrorModel;
 
-        // Only process the relevant inputs if the End Process button is pressed.
+        // Only process the relevant inputs if the Remove Review button is pressed.
         if(isset($_POST['removeReviewPressed']) && !empty($_POST['removeReviewPressed'])) {
             // Validate and Process the inputs.
             $this->validate();
@@ -128,11 +129,12 @@ class ReviewController {
      *
      * This class method aims to process the user's validated input by using defined class
      * methods of the class ReviewModel. The method aims to remove a selected review from
-     * the database..
+     * the database.
      *
      * @since 0.0.1
      *
      * @see app\includes\model\ReviewModel
+     * @see app\includes\model\ErrorModel
      */
     public function process()
     {
@@ -153,7 +155,8 @@ class ReviewController {
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\ScraperModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\ReviewView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Scraper components' HTML.

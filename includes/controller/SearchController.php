@@ -5,8 +5,6 @@ use app\includes\view\SearchView;
 use app\includes\model\SearchModel;
 use app\includes\model\ErrorModel;
 use app\includes\core\Validate;
-use app\includes\core\Database;
-use app\includes\core\Queries;
 
 /**
  * Controller for the Search section of the website.
@@ -38,10 +36,10 @@ class SearchController
     private $searchModel;
 
     /**
-     * Variable used to store the error model of the Add City component.
+     * Variable used to store the error model of the Search component.
      *
      * @since 0.0.1
-     * @var ErrorModel $view Instance of the ErrorModel class.
+     * @var ErrorModel $errorModel Instance of the ErrorModel class.
      */
     private $errorModel;
 
@@ -128,15 +126,13 @@ class SearchController
      * Class method which aims to process the user's validated input.
      *
      * This class method aims to process the user's validated input by using defined class
-     * methods of the class AddModel. The method aims to add the city to the database
-     * (if it does not already exist) as well as start an instance of the XML Scraper.
-     * If a process of the XML Scraper is already running for a specific City, the admin
-     * will be notified of such issue. Once the XML Scraper has been started, a record of its
-     * process ID and city name is stored in the database.
+     * methods of the class SearchModel. Depending on which city an admin has pressed, if
+     * the city name is valid and exists within the database, the selected city and its data
+     * will be stored and the user redirected to the 'Results' page to view such information.
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\AddModel
+     * @see app\includes\model\SearchModel
      */
     public function process()
     {
@@ -160,16 +156,17 @@ class SearchController
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\SearchModel
+     * @see app\includes\model\ErrorModel
+     * @see app\includes\view\SearchView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Search components' HTML.
      */
     public function getHtmlOutput()
     {
-        // Check to see if any errors have appeared throughout the Scraper components' life.
+        // Check to see if any errors have appeared throughout the Search components' life.
         if($this->errorModel->hasErrors()) {
-            // Store the Error Model in the global $_SESSION and serialize it.
+            // Store the Error Model in the global $_SESSION and serialise it.
             $_SESSION['error'] = serialize($this->errorModel);
 
             // Used to return the user back to the page in which the error occured.

@@ -4,7 +4,6 @@ namespace app\includes\controller;
 use app\includes\view\LoginView;
 use app\includes\core\Validate;
 use app\includes\model\LoginModel;
-use app\includes\model\ErrorModel;
 use app\includes\core\Encryption;
 
 /**
@@ -37,15 +36,6 @@ class LoginController
      */
     private $loginModel;
 
-    /**
-     * Variable used to store the error model of the Login component.
-     *
-     * @since 0.0.1
-     *
-     * @var ErrorModel $view Instance of the ErrorModel class.
-     */
-    private $errorModel;
-
     /* Constructor and Destructor */
     /**
      * The constructor of the LoginController class.
@@ -69,8 +59,10 @@ class LoginController
 
         // Only process the relevant inputs if the Login button is pressed. Also ensure that none of the inputs are empty.
         if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {
-            if(isset($_POST['username']) && isset($_POST['password']) &&
-               !empty($_POST['username']) && !empty($_POST['password'])) {
+            if(isset($_POST['username']) &&
+               isset($_POST['password']) &&
+               !empty($_POST['username']) &&
+               !empty($_POST['password'])) {
                 // If the user is already logged in, destroy the session.
                 if(isset($_SESSION['user'])) {
                     session_unset();
@@ -81,9 +73,6 @@ class LoginController
                 // Validate and Process the inputs.
                 $this->validate();
                 $this->process();
-            } else {
-                // Add an error message to the class' Error Model.
-                $this->errorModel->addErrorMessage('Fields cannot be empty!');
             }
         }
     }
@@ -110,6 +99,7 @@ class LoginController
      * @since 0.0.1
      *
      * @see app\includes\core\Validate
+     * @see app\includes\model\LoginModel
      * @global array $_POST Global which stores the POST data.
      */
     public function validate()
@@ -151,8 +141,6 @@ class LoginController
                 // Redirect the user to the search page.
                 header('Location: search');
                 exit();
-            } else {
-                $this->errorModel->addErrorMessage('User is not an admin!');
             }
         }
     }
@@ -161,28 +149,17 @@ class LoginController
      * Class method which aims to return the HTML content of the Login component.
      *
      * This class method aims to return the HTML content of the Login component by
-     * calling relevant classes on the LoginView. If there are any errors present
-     * throughout the Process and Validate methods, the user will be redirected
-     * to the Error page, rather than the expected page.
+     * calling relevant classes on the LoginView.
      *
      * @since 0.0.1
      *
-     * @see app\includes\model\LoginModel
+     * @see app\includes\view\LoginView
      * @global array $_SESSION Global which stores session data.
      *
      * @return string String representation of the Login components' HTML.
      */
     public function getHtmlOutput()
     {
-        // Check to see if any errors have appeared throughout the Add components' life.
-        if($this->errorModel->hasErrors()) {
-            // Store the Error Model in the global $_SESSION and serialize it.
-            $_SESSION['error'] = serialize($this->errorModel);
-
-            header('Location: error');
-            exit();
-        }
-
         // Create the HTML output.
         $this->view->createLoginViewPage();
         return $this->view->getHtmlOutput();
