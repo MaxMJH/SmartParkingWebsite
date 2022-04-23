@@ -96,6 +96,35 @@ class EditUserModel
         return false;
     }
 
+    /**
+     * Class method which aims to see if an email address exists.
+     *
+     * This class method aims to see if a specified email address already exists
+     * within the database. If so, true is returned, if not, false.
+     *
+     * @since 0.0.1
+     *
+     * @param string $emailAddress The email address to be checked against the database.
+     * @return boolean true if the email address already exists, false if not.
+     */
+    public function emailAddressExists($emailAddress)
+    {
+        // Set the parameters to be inserted into the prepared statement's query.
+        $parameters = [
+            ':emailAddress' => $emailAddress
+        ];
+
+        // Execute the prepared statement by allocating parameters to a specific query.
+        $this->database->executePreparedStatement(Queries::emailAddressExists(), $parameters);
+        $result = $this->database->getResult();
+
+        if($result['queryOK'] === true) {
+            return true;
+        }
+
+        return false;
+    }
+
     /* Getters and Setters */
     /**
      * Class method which aims to return the EditUserModel's loginModel property.

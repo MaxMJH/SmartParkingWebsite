@@ -123,10 +123,19 @@ class SettingsController
      */
     public function validate()
     {
+        $validatedEmailAddress = Validate::validateUsername($_POST['emailAddress']);
+        $emailExists = false;
+
+        if($this->loginModel->getEmailAddress() != $validatedEmailAddress) {
+            if($this->settingsModel->emailAddressExists($validatedEmailAddress)) {
+                $this->errorModel->addErrorMessage('The email you have entered already exists!');
+                $emailExists = true;
+            }
+        }
+
         // Store the returned values of the POST data being passed to various validation methods.
         $validatedFirstName = Validate::validateName($_POST['firstName']);
         $validatedLastName = Validate::validateName($_POST['lastName']);
-        $validatedEmailAddress = Validate::validateUsername($_POST['emailAddress']);
 
         // Check to see if the admin wants to change their password.
         if(!empty($_POST['newPassword']) || !empty($_POST['confirmNewPassword'])) {
@@ -139,7 +148,8 @@ class SettingsController
                $validatedLastName !== false &&
                $validatedEmailAddress !== false &&
                $validatedNewPassword !== false &&
-               $validatedConfirmNewPassword !== false) {
+               $validatedConfirmNewPassword !== false &&
+               $emailExists !== true) {
                 // Check to see if the two password inputs are the same.
                 if($validatedNewPassword == $validatedConfirmNewPassword) {
                     // Add the validated POST variables to the Login Model.
@@ -153,17 +163,20 @@ class SettingsController
                 }
 
                 // Add the validated POST variables to the Login Model.
+                $this->loginModel->setEmailAddress($validatedEmailAddress);
                 $this->loginModel->setFirstName($validatedFirstName);
                 $this->loginModel->setLastName($validatedLastName);
-                $this->loginModel->setEmailAddress($validatedEmailAddress);
             }
         } else {
             // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
-            if($validatedFirstName !== false && $validatedLastName !== false && $validatedEmailAddress !== false) {
+            if($validatedFirstName !== false &&
+               $validatedLastName !== false &&
+               $validatedEmailAddress !== false &&
+               $emailExists !== true) {
                 // Add the validated POST variables to the Login Model.
+                $this->loginModel->setEmailAddress($validatedEmailAddress);
                 $this->loginModel->setFirstName($validatedFirstName);
                 $this->loginModel->setLastName($validatedLastName);
-                $this->loginModel->setEmailAddress($validatedEmailAddress);
             } else {
                 // Add an error message to the class' Error Model.
                 $this->errorModel->addErrorMessage('The data entered failed to validate!');
@@ -187,18 +200,13 @@ class SettingsController
      */
     public function process()
     {
-        if(!$this->settingsModel->emailAddressExists($this->loginModel)) {
-            // Attempt to update the admin's information.
-            if($this->settingsModel->updateUser($this->loginModel) === true) {
-                // Re-serialise the login model.
-                $_SESSION['user'] = serialize($this->loginModel);
-            } else {
-                // Add an error message to the class' Error Model.
-                $this->errorModel->addErrorMessage('Unable to update user details!');
-            }
+        // Attempt to update the admin's information.
+        if($this->settingsModel->updateUser($this->loginModel) === true) {
+            // Re-serialise the login model.
+            $_SESSION['user'] = serialize($this->loginModel);
         } else {
             // Add an error message to the class' Error Model.
-            $this->errorModel->addErrorMessage('The email address already exists!');
+            $this->errorModel->addErrorMessage('Unable to update user details!');
         }
     }
 

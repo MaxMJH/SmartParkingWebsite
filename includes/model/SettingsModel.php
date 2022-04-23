@@ -91,28 +91,24 @@ class SettingsModel
      *
      * @since 0.0.1
      *
-     * @param LoginModel $loginModel Used to read user data.
+     * @param string $emailAddress The email address to be checked against the database.
      * @return boolean true if the email address already exists, false if not.
      */
-    public function emailAddressExists($loginModel)
+    public function emailAddressExists($emailAddress)
     {
         // Set the parameters to be inserted into the prepared statement's query.
         $parameters = [
-            ':emailAddress' => $loginModel->getEmailAddress(),
+            ':emailAddress' => $emailAddress
         ];
 
         // Execute the prepared statement by allocating parameters to a specific query.
         $this->database->executePreparedStatement(Queries::emailAddressExists(), $parameters);
-        $result = $this->database->getResult()
+        $result = $this->database->getResult();
 
         if($result['queryOK'] === true) {
-            if($result['result'][0]['emailAddress'] == $loginModel->getEmailAddress()) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

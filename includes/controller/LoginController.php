@@ -55,7 +55,6 @@ class LoginController
         // Initialise the class' properties.
         $this->view = new LoginView;
         $this->loginModel = new LoginModel;
-        $this->errorModel = new ErrorModel;
 
         // Only process the relevant inputs if the Login button is pressed. Also ensure that none of the inputs are empty.
         if(isset($_POST['submit']) && $_POST['submit'] == 'Login') {

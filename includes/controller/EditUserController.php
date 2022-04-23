@@ -134,10 +134,19 @@ class EditUserController
     {
         $this->editUserModel = unserialize($_SESSION['edit-user']);
 
+        $validatedEmailAddress = Validate::validateUsername($_POST['emailAddress']);
+        $emailExists = false;
+
+        if($this->editUserModel->getLoginModel()->getEmailAddress() != $validatedEmailAddress) {
+            if($this->editUserModel->emailAddressExists($validatedEmailAddress)) {
+                $this->errorModel->addErrorMessage('The email you have entered already exists');
+                $emailExists = true;
+            }
+        }
+
         // Store the returned values of the POST data being passed to various validation methods.
         $validatedFirstName = Validate::validateName($_POST['firstName']);
         $validatedLastName = Validate::validateName($_POST['lastName']);
-        $validatedEmailAddress = Validate::validateUsername($_POST['emailAddress']);
 
         // Check to see if the admin wants to change their password.
         if(!empty($_POST['newPassword']) || !empty($_POST['confirmNewPassword'])) {
@@ -150,7 +159,8 @@ class EditUserController
                $validatedLastName !== false &&
                $validatedEmailAddress !== false &&
                $validatedNewPassword !== false &&
-               $validatedConfirmNewPassword !== false) {
+               $validatedConfirmNewPassword !== false &&
+               $emailExists !== true) {
                 // Check to see if the two password inputs are the same.
                 if($validatedNewPassword == $validatedConfirmNewPassword) {
                     // Add the validated POST variables to the Login Model.
@@ -164,17 +174,20 @@ class EditUserController
                 }
 
                 // Add the validated POST variables to the Login Model.
+                $this->editUserModel->getLoginModel()->setEmailAddress($validatedEmailAddress);
                 $this->editUserModel->getLoginModel()->setFirstName($validatedFirstName);
                 $this->editUserModel->getLoginModel()->setLastName($validatedLastName);
-                $this->editUserModel->getLoginModel()->setEmailAddress($validatedEmailAddress);
             }
         } else {
             // If any of the POST data fails to validate, false is returned, therefore check if that is the case.
-            if($validatedFirstName !== false && $validatedLastName !== false && $validatedEmailAddress !== false) {
+            if($validatedFirstName !== false &&
+               $validatedLastName !== false &&
+               $validatedEmailAddress !== false &&
+               $emailExists !== true) {
                 // Add the validated POST variables to the Login Model.
+                $this->editUserModel->getLoginModel()->setEmailAddress($validatedEmailAddress);
                 $this->editUserModel->getLoginModel()->setFirstName($validatedFirstName);
                 $this->editUserModel->getLoginModel()->setLastName($validatedLastName);
-                $this->editUserModel->getLoginModel()->setEmailAddress($validatedEmailAddress);
             } else {
                 // Add an error message to the class' Error Model.
                 $this->errorModel->addErrorMessage('The data entered failed to validate!');
