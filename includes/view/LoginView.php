@@ -2,19 +2,12 @@
 namespace app\includes\view;
 
 class LoginView extends PageTemplateView {
-    private $errorMessage;
-
     public function __construct() {
         $this->htmlTitle = '';
         $this->htmlOutput = '';
-        $this->errorMessage = '';
     }
 
     public function __destruct() {}
-
-    public function setErrorMessage($errorMessage) {
-        $this->errorMessage = $errorMessage;
-    }
 
     public function createLoginViewPage() {
         $this->htmlTitle = 'Smarter Parking Admin Panel';
@@ -47,7 +40,6 @@ class LoginView extends PageTemplateView {
             <div class="line"></div>
             <input id="password" type="password" name="password" placeholder="Password"/>
           </div>
-          <div id="loginError">{$this->errorMessage}</div>
           <input id="loginButton" type="submit" name="submit" value="Login"/>
         </form>
       </section>

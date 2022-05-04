@@ -172,8 +172,17 @@ class Database
      */
     public function connect()
     {
-        // TODO: Move to a file which is not read by GitHub, also change credentials.
-        $this->database = new PDO("mysql:host=192.168.0.69;port=3306;dbname=smartpark_v2;charset=utf8mb4", "test", "test");
+        $ini = parse_ini_file(php_ini_loaded_file(), true);
+        $dns = $ini['DatabaseConnection']['DB_DRIVER'] .
+               ':host=' . $ini['DatabaseConnection']['DB_HOST'] .
+               ';port=' . $ini['DatabaseConnection']['DB_PORT'] .
+               ';dbname=' . $ini['DatabaseConnection']['DB_NAME'] .
+               ';charset=' . $ini['DatabaseConnection']['DB_CHARSET'];
+
+        $username = $ini['DatabaseConnection']['DB_USERNAME'];
+        $password = $ini['DatabaseConnection']['DB_PASSWORD'];
+
+        $this->database = new PDO($dns, $username, $password);
     }
 
     /**
