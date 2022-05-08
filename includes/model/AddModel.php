@@ -164,6 +164,8 @@ class AddModel
                 ':cityName' => $this->city
             ];
 
+            sleep(3);
+
             // Execute the prepared statement by allocating parameters to a specific query.
             $this->database->executePreparedStatement(Queries::getCityID(), $parameters);
             $data = $this->database->getResult();
