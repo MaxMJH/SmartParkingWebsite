@@ -25,3 +25,4 @@ class TestEncryption extends TestCase {
         $this->assertFalse($hashedPassword == '14725aa27e0d7e618a0b91f94de5dec8ebaefe5f39d776f4ef54ec0a598a54b0');
     }
 }
+

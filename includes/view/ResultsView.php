@@ -18,101 +18,100 @@ class ResultsView extends PageTemplateView {
 
     public function createResultsViewContent() {
         $this->htmlContent = <<<HTML
-  <main>
-    <section id="results">
-      <div id="parkingData">
-        <div id="fiveMinutes">
-          <h2>Five Minutes</h2>
-          <hr>
-          <table>
-            <tr>
-              <th>ID</th>
-              <th>Carpark ID</th>
-              <th>Record Time</th>
-              <th>Occupied Spaces</th>
-              <th>Is Open</th>
-            </tr>
+    <main>
+      <section id="results">
+        <div id="parkingData">
+          <div id="fiveMinutes">
+            <h2>Five Minutes</h2>
+            <hr>
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Carpark ID</th>
+                <th>Record Time</th>
+                <th>Occupied Spaces</th>
+                <th>Is Open</th>
+              </tr>
+
 HTML;
 
         $this->setFiveMinutesTable();
         $this->htmlContent .= <<<HTML
+            </table>
+          </div>
+          <div id="hourly">
+            <h2>Hourly</h2>
+            <hr>
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Carpark ID</th>
+                <th>Record Time</th>
+                <th>Average Occupied Spaces</th>
+              </tr>
 
-          </table>
-        </div>
-      </div>
-      <div id="hourly">
-        <h2>Hourly</h2>
-        <hr>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Carpark ID</th>
-            <th>Record Time</th>
-            <th>Average Occupied Spaces</th>
-          </tr>
 HTML;
 
         $this->setHourlyTable();
         $this->htmlContent .= <<<HTML
+            </table>
+          </div>
+          <div id="daily">
+            <h2>Daily</h2>
+            <hr>
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Carpark ID</th>
+                <th>Record Time</th>
+                <th>Average Occupied Spaces</th>
+              </tr>
 
-        </table>
-      </div>
-      <div id="daily">
-        <h2>Daily</h2>
-        <hr>
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Carpark ID</th>
-            <th>Record Time</th>
-            <th>Average Occupied Spaces</th>
-          </tr>
 HTML;
 
         $this->setDailyTable();
         $this->htmlContent .= <<<HTML
-
-          </table>
+            </table>
+          </div>
         </div>
-      </div>
-      <div id="carparksAndReviews">
-        <div id="carparks">
-          <h2>Carparks</h2>
-          <hr>
-          <table>
-            <tr>
-              <th>Carpark ID</th>
-              <th>Carpark Name</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-              <th>Total Spaces</th>
-            </tr>
+        <div id="carparksAndReviews">
+          <div id="carparks">
+            <h2>Carparks</h2>
+            <hr>
+            <table>
+              <tr>
+                <th>Carpark ID</th>
+                <th>Carpark Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Total Spaces</th>
+              </tr>
+
 HTML;
 
         $this->setCarparksTable();
         $this->htmlContent .= <<<HTML
+            </table>
+          </div>
+          <div id="reviews">
+            <h2>Reviews</h2>
+            <hr>
+            <table>
+              <tr>
+                <th>Review ID</th>
+                <th>Review</th>
+                <th>Carpark ID</th>
+              </tr>
 
-          </table>
-        </div>
-        <div id="reviews">
-          <h2>Reviews</h2>
-          <hr>
-          <table>
-            <tr>
-              <th>Review ID</th>
-              <th>Review</th>
-              <th>Carpark ID</th>
-            </tr>
 HTML;
 
         $this->setReviewsTable();
         $this->htmlContent .= <<<HTML
-
-          </table>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
 HTML;
     }
@@ -129,13 +128,14 @@ HTML;
                 $isOpen = $fiveMinutes[$i]['isOpen'] == 1 ? 'True' : 'False'; // PHP is odd...
 
                 $this->htmlContent .= <<<HTML
-          <tr>
-            <td>{$fiveMinutesID}</td>
-            <td>{$carparkID}</td>
-            <td>{$recordVersionTime}</td>
-            <td>{$occupiedSpaces}</td>
-            <td>{$isOpen}</td>
-          </tr>
+              <tr>
+                <td>{$fiveMinutesID}</td>
+                <td>{$carparkID}</td>
+                <td>{$recordVersionTime}</td>
+                <td>{$occupiedSpaces}</td>
+                <td>{$isOpen}</td>
+              </tr>
+
 HTML;
             }
         }
@@ -152,13 +152,13 @@ HTML;
                 $averageOccupiedSpaces = $hourly[$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
+              <tr>
+                <td>{$hourlyID}</td>
+                <td>{$carparkID}</td>
+                <td>{$recordVersionTime}</td>
+                <td>{$averageOccupiedSpaces}</td>
+              </tr>
 
-          <tr>
-            <td>{$hourlyID}</td>
-            <td>{$carparkID}</td>
-            <td>{$recordVersionTime}</td>
-            <td>{$averageOccupiedSpaces}</td>
-          </tr>
 HTML;
             }
         }
@@ -175,13 +175,13 @@ HTML;
                 $averageOccupiedSpaces = $daily[$i]['averageOccupiedSpaces'];
 
                 $this->htmlContent .= <<<HTML
+              <tr>
+                <td>{$dailyID}</td>
+                <td>{$carparkID}</td>
+                <td>{$recordVersionTime}</td>
+                <td>{$averageOccupiedSpaces}</td>
+              </tr>
 
-          <tr>
-            <td>{$dailyID}</td>
-            <td>{$carparkID}</td>
-            <td>{$recordVersionTime}</td>
-            <td>{$averageOccupiedSpaces}</td>
-          </tr>
 HTML;
             }
         }
@@ -199,14 +199,14 @@ HTML;
                 $totalSpaces = $carparks[$i]['totalSpaces'];
 
                 $this->htmlContent .= <<<HTML
+              <tr>
+                <td>{$carparkID}</td>
+                <td>{$carparkName}</td>
+                <td>{$latitude}</td>
+                <td>{$longitude}</td>
+                <td>{$totalSpaces}</td>
+              </tr>
 
-          <tr>
-            <td>{$carparkID}</td>
-            <td>{$carparkName}</td>
-            <td>{$latitude}</td>
-            <td>{$longitude}</td>
-            <td>{$totalSpaces}</td>
-          </tr>
 HTML;
             }
         }
@@ -222,12 +222,12 @@ HTML;
                 $carparkID = $reviews[$i]['carparkID'];
 
                 $this->htmlContent .= <<<HTML
+              <tr>
+                <td>{$reviewID}</td>
+                <td>{$review}</td>
+                <td>{$carparkID}</td>
+              </tr>
 
-          <tr>
-            <td>{$reviewID}</td>
-            <td>{$review}</td>
-            <td>{$carparkID}</td>
-          </tr>
 HTML;
             }
         }

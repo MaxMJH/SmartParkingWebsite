@@ -65,6 +65,7 @@ class EditUserView extends PageTemplateView {
         </form>
       </div>
     </main>
+
 HTML;
     }
 

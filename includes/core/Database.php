@@ -220,3 +220,4 @@ class Database
         return $this->result;
     }
 }
+

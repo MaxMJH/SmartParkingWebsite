@@ -32,7 +32,7 @@ class UserView extends PageTemplateView {
               <th>Edit</th>
               <th>Delete</th>
             </tr>
-            
+
 HTML;
 
         $this->listUsers();
@@ -42,6 +42,7 @@ HTML;
         </form>
       </div>
     </main>
+
 HTML;
     }
 
@@ -54,18 +55,18 @@ HTML;
             $userID = $user->getUserID();
 
             $this->htmlContent .= <<<HTML
-          <tr>
-            <td>{$userID}</td>
-            <td>{$user->getFirstName()}</td>
-            <td>{$user->getLastName()}</td>
-            <td>{$user->getEmailAddress()}</td>
-            <td>
-              <button id="editUserButton" type="submit" formaction="users-edit" name="editUserPressed" value="{$user->getUserID()}">Edit User</button>
-            </td>
-            <td>
-              <button id="deleteUserButton" type="submit" name="deleteUserPressed" value="{$user->getUserID()}">Delete User</button>
-            </td>
-          </tr>
+            <tr>
+              <td>{$userID}</td>
+              <td>{$user->getFirstName()}</td>
+              <td>{$user->getLastName()}</td>
+              <td>{$user->getEmailAddress()}</td>
+              <td>
+                <button id="editUserButton" type="submit" formaction="users-edit" name="editUserPressed" value="{$user->getUserID()}">Edit User</button>
+              </td>
+              <td>
+                <button id="deleteUserButton" type="submit" name="deleteUserPressed" value="{$user->getUserID()}">Delete User</button>
+              </td>
+            </tr>
 
 HTML;
         }

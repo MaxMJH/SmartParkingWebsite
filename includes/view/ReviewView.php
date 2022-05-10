@@ -31,6 +31,7 @@ class ReviewView extends PageTemplateView {
               <th>Review</th>
               <th>Remove Review</th>
             </tr>
+
 HTML;
 
         $this->listReviews();
@@ -40,6 +41,7 @@ HTML;
         </form>
       </div>
     </main>
+
 HTML;
     }
 
@@ -48,16 +50,16 @@ HTML;
 
         for($i = 0; $i < count($reviews->getReviewIDS()); $i++) {
             $this->htmlContent .= <<<HTML
-          <tr>
-            <td>{$reviews->getReviewIDS()[$i]}</td>
-            <td>{$reviews->getCities()[$i]}</td>
-            <td>{$reviews->getCarparks()[$i]}</td>
-            <td>{$reviews->getReviews()[$i]}</td>
-            <td>
-              <button id="removeReviewButton" type="submit" name="removeReviewPressed" value="{$reviews->getReviewIDS()[$i]}">Remove Review</button>
-            </td>
-          </tr>
-          
+            <tr>
+              <td>{$reviews->getReviewIDS()[$i]}</td>
+              <td>{$reviews->getCities()[$i]}</td>
+              <td>{$reviews->getCarparks()[$i]}</td>
+              <td>{$reviews->getReviews()[$i]}</td>
+              <td>
+                <button id="removeReviewButton" type="submit" name="removeReviewPressed" value="{$reviews->getReviewIDS()[$i]}">Remove Review</button>
+              </td>
+            </tr>
+
 HTML;
         }
     }

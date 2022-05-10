@@ -401,12 +401,12 @@ div#firstLastNames, div#passwords {
   gap: 124px;
 }
 
-div#firstName label, div#lastName label, div#emailAddress label, div#userPassword label, div#confirmUserPassword label {
+div#firstName label, div#lastName label, div#emailAddress label, div#userPasswordDiv label, div#confirmUserPasswordDiv label {
   font-size: 1.563rem;
   color: #FFFFFF;
 }
 
-div#firstName input, div#lastName input, div#userPassword input, div#confirmUserPassword input {
+div#firstName input, div#lastName input, div#userPasswordDiv input, div#confirmUserPasswordDiv input {
   width: 260px;
   height: 70px;
   font-size: 1.563rem;
