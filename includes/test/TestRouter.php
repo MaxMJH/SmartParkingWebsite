@@ -16,9 +16,15 @@ class TestRouter extends TestCase {
         $router->defineRoute('/', 'controller/LoginController.php');
         $router->defineRoute('search', 'controller/SearchController.php');
         $router->defineRoute('add', 'controller/AddController.php');
+        $router->defineRoute('remove', 'controller/RemoveController.php');
         $router->defineRoute('error', 'controller/ErrorController.php');
         $router->defineRoute('results', 'controller/ResultsController.php');
+        $router->defineRoute('settings', 'controller/SettingsController.php');
+        $router->defineRoute('scrapers', 'controller/ScraperController.php');
+        $router->defineRoute('users', 'controller/UserController.php');
+        $router->defineRoute('users-edit', 'controller/EditUserController.php');
+        $router->defineRoute('reviews', 'controller/ReviewController.php');
 
-        $this->assertSame(count($router->getRoutes()), 5);
+        $this->assertSame(count($router->getRoutes()), 11);
     }
 }
