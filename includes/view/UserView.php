@@ -22,7 +22,7 @@ class UserView extends PageTemplateView {
       <div id="users">
         <h2>Users</h2>
         <hr>
-        <form id="users" action="users" method="post">
+        <form id="usersForm" action="users" method="post">
           <table>
             <tr>
               <th>User ID</th>
@@ -32,6 +32,7 @@ class UserView extends PageTemplateView {
               <th>Edit</th>
               <th>Delete</th>
             </tr>
+            
 HTML;
 
         $this->listUsers();
@@ -65,6 +66,7 @@ HTML;
               <button id="deleteUserButton" type="submit" name="deleteUserPressed" value="{$user->getUserID()}">Delete User</button>
             </td>
           </tr>
+
 HTML;
         }
     }

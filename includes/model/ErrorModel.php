@@ -59,7 +59,7 @@ class ErrorModel
      */
     public function addErrorMessage($errorMessage)
     {
-        $this->errorMessage .= " {$errorMessage}";
+        $this->errorMessage .= "{$errorMessage} ";
     }
 
     /**

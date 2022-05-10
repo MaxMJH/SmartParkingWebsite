@@ -231,7 +231,7 @@ div#add {
   width: 50vw;
 }
 
-form#add {
+form#addForm {
   display: flex;
   flex-direction: column;
   width: 520px;
@@ -246,7 +246,7 @@ input#city, input#xmlURL, textarea#elements {
   border: none;
   border-radius: 5px;
   font-size: 1.563rem;
-  color: #003B51; 
+  color: #003B51;
 }
 
 textarea#elements {
@@ -260,7 +260,7 @@ input#city:focus, input#xmlURL:focus, textarea#elements:focus {
 
 input#city:-webkit-autofill, input#xmlURL:-webkit-autofill, textarea#elements:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
-} 
+}
 
 input#addCityButton {
   width: 520px;
@@ -320,7 +320,7 @@ section#results {
 
 div#parkingData {
   width: 100%;
-  height: calc(60% - 20px);	
+  height: calc(60% - 20px);
   display: flex;
   justify-content: space-around;
   margin: 10px 0;
@@ -389,7 +389,7 @@ div#carparks, div#reviews {
 }
 
 /* Settings Section */
-form#settings, form#usersedit {
+form#settingsForm, form#userseditForm {
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -442,7 +442,7 @@ input#updateButton, input#changeImage {
   cursor: pointer;
 }
 
-div#firstName, div#lastName, div#emailAddress, div#userPassword, div#confirmUserPassword {
+div#firstName, div#lastName, div#emailAddress, div#userPasswordDiv, div#confirmUserPasswordDiv {
   display: flex;
   flex-direction: column;
 }
@@ -465,7 +465,7 @@ div#scrapers h2, div#users h2, div#review h2 {
   font-weight: normal;
 }
 
-form#scrapers, form#users, form#review {
+form#scrapersForm, form#usersForm, form#reviewForm {
   width: 100%;
   height: 100%;
 }
@@ -516,7 +516,7 @@ div.city {
   box-shadow: 5px 15px 10px #00000080;
   cursor: pointer;
   justify-content: center;
-  background: #FFFFFF;  
+  background: #FFFFFF;
 }
 
 div#admin {

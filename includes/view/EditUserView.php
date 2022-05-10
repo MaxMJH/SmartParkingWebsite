@@ -30,7 +30,7 @@ class EditUserView extends PageTemplateView {
         $this->htmlContent = <<<HTML
     <main>
       <div id="usersedit">
-        <form id="usersedit" action="users-edit" method="post">
+        <form id="userseditForm" action="users-edit" method="post">
           <div id="firstLastNames">
             <div id="firstName">
               <label for="userFirstName">First Name</label>
@@ -46,11 +46,11 @@ class EditUserView extends PageTemplateView {
             <input id="userEmailAddress" type="text" name="emailAddress" value="{$user->getEmailAddress()}"/>
           </div>
           <div id="passwords">
-            <div id="userPassword">
+            <div id="userPasswordDiv">
               <label for="userPassword">New Password</label>
               <input id="userPassword" type="password" name="newPassword" placeholder="Enter new password"/>
             </div>
-            <div id="confirmUserPassword">
+            <div id="confirmUserPasswordDiv">
               <label for="confirmUserPassword">Confirm Password</label>
               <input id="confirmUserPassword" type="password" name="confirmNewPassword" placeholder="Confirm new password"/>
             </div>

@@ -33,7 +33,7 @@ class AddView extends PageTemplateView {
         </ul>
       </div>
       <div id="add">
-        <form id="add" action="add" method="post">
+        <form id="addForm" action="add" method="post">
           <input id="city" type="text" name="city" placeholder="Enter a City"/>
           <input id="xmlURL" type="text" name="xmlURL" placeholder="Enter XML URL"/>
           <textarea id="elements" type="text" name="elements" placeholder="Enter Elements">"id" "value" "parkingRecordVersionTime" "parkingNumberOfSpaces" "latitude" "longitude" "parkingNumberOfOccupiedSpaces" "parkingSiteOpeningStatus"</textarea>

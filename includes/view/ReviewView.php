@@ -22,7 +22,7 @@ class ReviewView extends PageTemplateView {
       <div id="review">
         <h2>Reviews</h2>
         <hr>
-        <form id="review" action="reviews" method="post">
+        <form id="reviewForm" action="reviews" method="post">
           <table>
             <tr>
               <th>Review ID</th>
@@ -57,6 +57,7 @@ HTML;
               <button id="removeReviewButton" type="submit" name="removeReviewPressed" value="{$reviews->getReviewIDS()[$i]}">Remove Review</button>
             </td>
           </tr>
+          
 HTML;
         }
     }

@@ -24,7 +24,7 @@ class SettingsView extends PageTemplateView {
         $this->htmlContent = <<<HTML
     <main>
       <div id="settings">
-        <form id="settings" action="settings" method="post">
+        <form id="settingsForm" action="settings" method="post">
           <div id="firstLastNames">
             <div id="firstName">
               <label for="userFirstName">First Name</label>
@@ -40,11 +40,11 @@ class SettingsView extends PageTemplateView {
             <input id="userEmailAddress" type="text" name="emailAddress" value="{$user->getEmailAddress()}"/>
           </div>
           <div id="passwords">
-            <div id="userPassword">
+            <div id="userPasswordDiv">
               <label for="userPassword">New Password</label>
               <input id="userPassword" type="password" name="newPassword" placeholder="Enter new password"/>
             </div>
-            <div id="confirmUserPassword">
+            <div id="confirmUserPasswordDiv">
               <label for="confirmUserPassword">Confirm Password</label>
               <input id="confirmUserPassword" type="password" name="confirmNewPassword" placeholder="Confirm new password"/>
             </div>

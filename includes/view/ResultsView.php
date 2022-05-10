@@ -37,7 +37,7 @@ HTML;
         $this->setFiveMinutesTable();
         $this->htmlContent .= <<<HTML
 
-          </table
+          </table>
         </div>
       </div>
       <div id="hourly">

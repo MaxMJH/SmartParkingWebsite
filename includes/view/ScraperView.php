@@ -22,13 +22,14 @@ class ScraperView extends PageTemplateView {
       <div id="scrapers">
         <h2>Active Scrapers</h2>
         <hr>
-        <form id="scrapers" action="scrapers" method="post">
+        <form id="scrapersForm" action="scrapers" method="post">
           <table>
             <tr>
               <th>Process ID</th>
               <th>City Name</th>
               <th>End Process</th>
             </tr>
+
 HTML;
 
         $this->listProcesses();
@@ -59,6 +60,7 @@ HTML;
               <button id="endProcessButton" type="submit" name="endProcessPressed" value="{$cityName}_{$processID}">End Process</button>
             </td>
           </tr>
+
 HTML;
         }
     }
