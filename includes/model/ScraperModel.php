@@ -166,9 +166,8 @@ class ScraperModel
 
                 // Check to see if the process is actually running. If not, archive the process.
                 exec("ps aux | grep www-data | grep xmlscraper | grep {$cityName}", $output);
-                $process = preg_split('/ +/', $output[0]);
 
-                if($process[13] == 'aux') {
+                if(!isset($output[1])) {
                     // This means that the process is not running, so take the processID and archive it.
                     $parameters = [
                         ':processID' => $processID
