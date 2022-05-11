@@ -1,0 +1,551 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis');
+
+html {
+  font-family: 'Dosis', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  background-image: linear-gradient(#012837, #061920);
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Login Section */
+section#loginPanel {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(#0096CE, #0F4457);
+  width: 31.25vw;
+  height: 37.037vh;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 5px 15px 10px #00000080;
+}
+
+section#loginPanel h1 {
+  width: 100%;
+  margin: 0;
+  margin-top: 1.563vw;
+  margin-bottom: 1.563vw;
+  text-align: center;
+  font-weight: normal;
+  font-size: 1.563rem;
+  color: #FFFFFF;
+}
+
+section#loginPanel form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.778vh;
+}
+
+div.line {
+  background-color: #707070;
+  width: 0.156vw;
+}
+
+img#userImage, img#passwordImage {
+  width: 2.448vw;
+  height: 4.352vh;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.885vh;
+  margin-right: 0.885vh;
+}
+
+div#usernameSection, div#passwordSection {
+  display: flex;
+  background-color: #FFFFFF;
+  width: 27.083vw;
+  height: 6.481vh;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+input#username:focus, input#password:focus {
+  outline: none;
+}
+
+input#username:-webkit-autofill, input#password:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input#username, input#password {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 1.563rem;
+  color: #003B51;
+}
+
+div#loginError {
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 20px;
+  display: none;
+}
+
+input#loginButton:focus {
+  outline: none;
+}
+
+input#loginButton {
+  background-color: #FFFFFF;
+  width: 27.083vw;
+  height: 6.481vh;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.563rem;
+  color: #003B51;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+}
+
+/* Page Aside */
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 13.385vw;
+  height: 100vh;
+  background-color: #303030;
+}
+
+div.welcome {
+  display: flex;
+  margin-top: 1.481vh;
+  justify-content: center;
+  flex-direction: column;
+}
+
+div.welcome img {
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  border-radius: 100%;
+}
+
+div.welcome h1, div.welcome h2 {
+  margin: 0;
+  font-size: 1.563em;
+  color: #FFFFFF;
+  font-weight: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+div.menuItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+aside form {
+  margin: 1.481vh auto 1.481vh auto;
+  width: 75%;
+  text-align: center;
+}
+
+input#addButtonMenu, input#searchButtonMenu, input#settingsButtonMenu, input#logoutButtonMenu, input#scrapersButtonMenu, input#removeButtonMenu, input#userButtonMenu, input#reviewsButtonMenu {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  font-size: 1.563rem;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+hr {
+  margin: 0 auto;
+  width: 75%;
+}
+
+/* Search Section */
+form#search, form#remove {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(100% - 228px);
+  height: calc(100% - 226px);
+  margin: 113px 114px;
+  gap: 114px;
+}
+
+form#search input {
+  width: 300px;
+  height: 300px;
+  border: none;
+  font-size: 1.563em;
+  box-shadow: 5px 15px 10px #00000080;
+  cursor: pointer;
+}
+
+form#search h1, div#cities h1 {
+  margin: auto;
+  color: #FFFFFF;
+}
+
+/* Add Section */
+div#addInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+div#addInfo h1, div#addInfo h2, div#addInfo p {
+  color: #FFFFFF;
+  margin: 0;
+  width: 680px;
+}
+
+div#addInfo h2 {
+  margin-top: 43px;
+}
+
+div#addInfo ul {
+  width: 680px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+div#add {
+  width: 50vw;
+}
+
+form#addForm {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  margin: auto;
+  gap: 56px;
+}
+
+input#city, input#xmlURL, textarea#elements {
+  width: 520px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.563rem;
+  color: #003B51;
+}
+
+textarea#elements {
+  height: 400px;
+  resize: none;
+}
+
+input#city:focus, input#xmlURL:focus, textarea#elements:focus {
+  outline: none;
+}
+
+input#city:-webkit-autofill, input#xmlURL:-webkit-autofill, textarea#elements:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input#addCityButton {
+  width: 520px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.563rem;
+  color: #003B51;
+}
+
+/* Error Section */
+div#error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;
+  width: calc(600px - 120px);
+  height: auto;
+  box-shadow: 0px 10px 4px #0000002b;
+}
+
+div#error h2 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 20px;
+  color: #003B51;
+}
+
+div#error hr {
+  margin: 0;
+  width: 75%;
+}
+
+div#errorBox {
+  background-color: #FFFFFF;
+  width: calc(564px - 112.8px);
+  height: calc(265px - 53px);
+}
+
+input#returnButton {
+  background-color: #FFFFFF;
+  width: calc(239px - 47.8px);
+  height: calc(47px - 9.4px);
+  border-radius: 24px;
+  border: none;
+  box-shadow: 0px 3px 6px #0000002b;
+  font-size: 20px;
+  color: #003B51;
+}
+
+/* Results Section */
+section#results {
+  height: 100%;
+  width: 100%;
+}
+
+div#parkingData {
+  width: 100%;
+  height: calc(60% - 20px);
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+div#fiveMinutes, div#hourly, div#daily, div#carparks, div#reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 6px #0000002b;
+}
+
+div#fiveMinutes {
+  margin-left: 10px;
+}
+
+div#daily {
+  margin-right: 10px;
+}
+
+section#results h2 {
+  font-size: 20px;
+  color: #003B51;
+  margin: 0;
+  font-weight: normal;
+}
+
+section#results hr {
+  background-color: #F1F1F1;
+  width: 100%;
+  height: 2px;
+  border-radius: 3px;
+  border: none;
+  margin: 0;
+}
+
+table {
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+table th {
+  width: 1%;
+}
+
+table td {
+  text-align: center;
+}
+
+table tbody {
+  height: 100%;
+}
+
+div#carparks, div#reviews {
+  height: 100%;
+  width: calc(50% - 15px);
+  margin-left: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 6px #0000002b;
+}
+
+/* Settings Section */
+form#settingsForm, form#userseditForm {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+div#firstLastNames, div#passwords {
+  display: flex;
+  flex-direction: row;
+  gap: 124px;
+}
+
+div#firstName label, div#lastName label, div#emailAddress label, div#userPasswordDiv label, div#confirmUserPasswordDiv label {
+  font-size: 1.563rem;
+  color: #FFFFFF;
+}
+
+div#firstName input, div#lastName input, div#userPasswordDiv input, div#confirmUserPasswordDiv input {
+  width: 260px;
+  height: 70px;
+  font-size: 1.563rem;
+  color: #003B51;
+  border: none;
+  border-radius: 5px;
+}
+
+div#emailAddress input {
+  height: 70px;
+  font-size: 1.563rem;
+  color: #003B51;
+  border: none;
+  border-radius: 5px;
+}
+
+input#userFirstName:focus, input#userLastName:focus, input#userEmailAddress:focus, input#userPassword:focus, input#confirmUserPassword:focus {
+  outline: none;
+}
+
+input#userFirstName:-webkit-autofill, input#userLastName:-webkit-autofill, input#userEmailAddress:-webkit-autofill, input#userPassword:-webkit-autofill, input#confirmUserPassword:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input#updateButton, input#changeImage {
+  width: 260px;
+  height: 70px;
+  font-size: 1.563rem;
+  color: #003B51;
+  border: none;
+  border-radius: 5px;
+  margin: auto;
+  cursor: pointer;
+}
+
+div#firstName, div#lastName, div#emailAddress, div#userPasswordDiv, div#confirmUserPasswordDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrapers Section */
+div#scrapers, div#users, div#review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 6px #0000002b;
+}
+
+div#scrapers h2, div#users h2, div#review h2 {
+  font-size: 20px;
+  color: #003B51;
+  margin: 0;
+  font-weight: normal;
+}
+
+form#scrapersForm, form#usersForm, form#reviewForm {
+  width: 100%;
+  height: 100%;
+}
+
+form#remove input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+form#remove label {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  font-size: 1.563em;
+  cursor: pointer;
+  justify-content: center;
+}
+
+form#remove input[type="radio"]:checked + label {
+  background-color: #B6B6B6;
+}
+
+input#removeCityButton {
+  width: 520px;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.563rem;
+  color: #003B51;
+}
+
+div#cities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 114px
+}
+
+div.city {
+  width: 300px;
+  height: 300px;
+  box-shadow: 5px 15px 10px #00000080;
+  cursor: pointer;
+  justify-content: center;
+  background: #FFFFFF;
+}
+
+div#admin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+div#isAdmin {
+  display: flex;
+  flex-direction: row;
+}
+
+div#isAdmin label {
+  font-size: 1.563rem;
+  color: #FFFFFF;
+  margin: auto;
+}
+
+div#isAdmin input {
+  width: 50px;
+  height: 70px;
+  font-size: 1.563rem;
+  color: #003B51;
+  border: none;
+  border-radius: 5px;
+}
+
+div#carparksAndReviews {
+  display: flex;
+  height: calc(40% - 10px);
+}

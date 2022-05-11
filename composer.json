@@ -1,0 +1,11 @@
+{
+    "name": "root/www",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+	}
+    },
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
