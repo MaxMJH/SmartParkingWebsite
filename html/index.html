@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>Login Pane</title>
+    <link href="/resources/css/index.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <img id="logo" src="/resources/images/logo2.png" alt="Logo">
+    <section id="loginPanel">
+      <h1>LOGIN PANEL</h1>
+      <form method="POST">
+        <p>EMAIL</p>
+        <input id="emailAddress" type="email" name="emailAddress"/>
+        <p>PASSWORD</p>
+        <input id="password" type="password" name="password"/>
+        <input id="loginButton" type="submit" name="submit" value="LOGIN">
+      </form>    
+    </section>
+    <section id="forgotPassword">
+      <p>Forgot Password?</p>
+    </section>
+    <section id="signUp">
+      <button type="button" id="signUpButton">SIGN UP</button>
+    </section>
+    <script type="text/javascript">
+      // Gotta love the keyboard push! Thanks to user13442212 from stackoverflow. 
+      var viewport = document.querySelector('meta[name=viewport]');
+      viewport.setAttribute('content', viewport.content + ', height=' + window.innerHeight);
+    </script>
+  </body>
+</html>
